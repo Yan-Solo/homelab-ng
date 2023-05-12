@@ -1,0 +1,45 @@
+---
+version: "3"
+
+tasks:
+  hypervisor_init:
+    desc: Setup proxmox hypervisor_init
+    dir: ./infra/ansible/
+    cmds:
+      - ansible-playbook setup-hypervisors.yaml
+
+  terraform_vm_init:
+    desc: Configure and start up required VMs
+    dir: ./infra/terraform/
+    cmds:
+      - terraform init
+      - terraform apply -auto-approve
+
+  terraform_vm_destroy:
+    desc: Delete VMs
+    dir: ./infra/terraform/
+    cmds:
+      - terraform destroy -auto-approve
+
+  talos_init:
+    desc: Configure talos on the VM
+    dir: ./infra/talos/
+    cmds:
+      - talhelper genconfig
+      - talosctl apply-config --insecure --file clusterconfig/echel-master1.yaml --nodes {{.CLI_ARGS}} 
+      - echo "Sleeping to let talos get installed" && sleep 120 
+      - talosctl --talosconfig clusterconfig/talosconfig config endpoint 192.168.0.31
+      - talosctl --talosconfig clusterconfig/talosconfig config node 192.168.0.31
+      - talosctl --talosconfig clusterconfig/talosconfig bootstrap 
+      - echo "Sleeping to let talos get bootstrapped" ; sleep 120
+      - talosctl --talosconfig clusterconfig/talosconfig kubeconfig ~/.kube/config
+
+  argocd_init:
+    desc: Install ArgoCD using helm
+    dir: ./infra/argocd/
+    cmds:
+      - helm repo add argo https://argoproj.github.io/argo-helm
+      - helm upgrade --install argocd argo/argo-cd --create-namespace --namespace argocd --version 5.33.0 --values argocd-values.yaml
+      - kubectl apply -f argocd-seedapp.yaml
+      - kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+

@@ -1,0 +1,30 @@
+# values.yaml
+
+# Specify the namespace where ArgoCD will be installed
+namespace: argocd
+
+# Configure the ArgoCD server
+server:
+  # Enable or disable the ArgoCD server component
+  enabled: true
+
+# Configure the ArgoCD repository server
+repoServer:
+  # Enable or disable the ArgoCD repository server component
+  enabled: true
+
+# Configure the ArgoCD application controller
+applicationController:
+  # Enable or disable the ArgoCD application controller component
+  enabled: true
+
+# Configure the ArgoCD server ingress
+serverIngress:
+  # Enable or disable the ArgoCD server ingress
+  enabled: true
+  # Specify the host for the ArgoCD server ingress
+  hosts:
+    - host: argocd.intropin.be
+      paths: ["/"]
+
+

@@ -1,0 +1,6 @@
+---
+- name: Configure the hypervisor
+  hosts: hypervisors
+  become: true
+  roles:
+    - common
