@@ -1,0 +1,52 @@
+app-template:
+
+  image:
+    repository: ghcr.io/confusedpolarbear/jellyfin-intro-skipper
+    tag: 10.8.10
+
+  service:
+    main:
+      ports:
+        http:
+          port: 8096
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "jellyfin"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host jellyfin.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: 8096
+      tls:
+        - secretName: jellyfin-letsencrypt-certificate
+          hosts: [*host]
+
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: "Always"
+
+  persistence:
+    config:
+      enabled: false
+    cache:
+      enabled: false
+    transcodes:
+      enabled: false
+
+  probes:
+    liveness:
+      spec:
+        exec:
+          command:
+          - /usr/bin/env
+          - bash
+          - -c
+          - test -w /config/data/jellyfin.db

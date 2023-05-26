@@ -12,5 +12,5 @@ spec:
   project: default
   source:
     path: apps
-    repoURL: https://github.com/Yan-Solo/homelab
+    repoURL: https://github.com/Yan-Solo/homelab-ng
     targetRevision: HEAD
