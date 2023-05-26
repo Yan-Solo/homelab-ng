@@ -13,3 +13,9 @@ data:
         - 0.0.0.0/0
       base_url: home-assistant.intropin.ba
       server_port: 8123
+
+    sensor:
+      - platform: dsmr
+        host: 192.168.1.13
+        port: 23
+        dsmr_version: 5
