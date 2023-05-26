@@ -10,9 +10,6 @@ data:
     http:
       use_x_forwarded_for: true
       trusted_proxies: 
-        - 10.103.235.177
-        - 127.0.0.1
-        - 192.168.0.60
-        - 10.244.0.45
+        - 0.0.0.0/0
       base_url: home-assistant.intropin.ba
       server_port: 8123
