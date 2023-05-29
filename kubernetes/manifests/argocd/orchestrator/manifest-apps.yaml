@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/Yan-Solo/homelab-ng.git
         revision: HEAD
         directories:
-          - path: "kubernetes/manifests/*"
+          - path: "kubernetes/manifests/*/*"
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
@@ -23,7 +23,7 @@ spec:
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: "{{path.basename}}"
+        namespace: "{{path[2]}}"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
@@ -31,4 +31,3 @@ spec:
         automated:
           prune: true
           selfHeal: true
-
