@@ -17,6 +17,6 @@ authelia:
         - secretName: authelia-letsencrypt-certificate
           hosts: [*host]
   configMap:
-    session:
-      redis:
-        enabled: false
+    enabled: false
+    existingConfigMap: authelia-cm
+    key: configuration.yaml
