@@ -42,6 +42,6 @@ data:
      encryption_key: a_very_important_secret # Now required
      local:
        path: /config/db.sqlite3
-  notifier:
-    filesystem:
-      filename: /config/notification.txt
+    notifier:
+      filesystem:
+        filename: /config/notification.txt
