@@ -37,6 +37,9 @@ app-template:
   persistence:
     config:
       enabled: true
+      type: emptyDir
+    configuration:
+      enabled: true
       type: custom
       volumeSpec:
         configMap:
