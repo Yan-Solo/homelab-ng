@@ -10,6 +10,8 @@ app-template:
         http:
           port: &port 9091
 
+  env:
+    AUTHELIA_LOG_LEVEL: info
   ingress:
     main:
       enabled: true
