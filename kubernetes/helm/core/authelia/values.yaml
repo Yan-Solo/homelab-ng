@@ -2,7 +2,7 @@ app-template:
   image:
     repository: ghcr.io/authelia/authelia
     tag: v4.38.0-beta2
-  args: ["--config", "/config/configuration.yml", "--config.experimental.filters", "expand-env"]
+  args: ["--config", "/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
   enableServiceLinks: false
   service:
     main:
