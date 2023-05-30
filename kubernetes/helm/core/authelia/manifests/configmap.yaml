@@ -10,7 +10,6 @@ data:
     port: 9091
     log:
       level: debug
-    theme: dark
     default_redirection_url: https://auth.intropin.be
     totp:
       issuer: authelia.com
