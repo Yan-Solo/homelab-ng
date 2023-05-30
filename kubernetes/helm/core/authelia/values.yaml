@@ -17,6 +17,12 @@ authelia:
         - secretName: authelia-letsencrypt-certificate
           hosts: [*host]
   configMap:
-    enabled: false
-    existingConfigMap: authelia-cm
-    key: configuration.yaml
+    enabled: true
+    storage:
+      mysql.enabled: false
+      postgres.enabled: false
+      local.enabled: true
+    notifier:
+      filesystem.enabled: true
+      smtp.enabled: true
+
