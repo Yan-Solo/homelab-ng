@@ -23,7 +23,7 @@ data:
         parallelism: 8
         memory: 64
     access_control:
-      default_policy: deny
+      default_policy: one_factor
       rules:
         - domain: home-assistant.intropin.be
           policy: one_factor
