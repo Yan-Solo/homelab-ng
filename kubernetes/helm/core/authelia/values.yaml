@@ -57,7 +57,7 @@ app-template:
     limits:
       memory: 200Mi
   podSecurityContext:
-    runAsUser: 0
-    runAsGroup: 0
-    fsGroup: 0
-    fsGroupChangePolicy: OnRootMismatch
+    fsGroup: 568
+    fsGroupChangePolicy: Always
+    runAsGroup: 568
+    runAsUser: 568
