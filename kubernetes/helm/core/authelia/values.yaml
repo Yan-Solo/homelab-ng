@@ -25,4 +25,5 @@ authelia:
     notifier:
       filesystem.enabled: true
       smtp.enabled: true
-
+    sessions:
+      redis.enabled: false
