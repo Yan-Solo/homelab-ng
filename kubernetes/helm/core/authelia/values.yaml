@@ -41,7 +41,7 @@ app-template:
       subPath: configuration.yml
       mountPath: /config/configuration.yaml
       readOnly: false
-      defaultMode: 777
+      defaultMode: 0777
     userdb:
       enabled: true
       type: configMap
@@ -49,7 +49,7 @@ app-template:
       subPath: users_database.yaml
       mountPath: /config/users_database.yaml
       readOnly: false
-      defaultMode: 777
+      defaultMode: 0777
   resources:
     requests:
       cpu: 5m
