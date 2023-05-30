@@ -27,3 +27,6 @@ authelia:
       smtp.enabled: true
     session:
       redis.enabled: false
+    authentication_backend:
+      ldap.enabled: false
+      file.enabled: true
