@@ -1,4 +1,4 @@
-authelia:
+app-template:
   image:
     repository: ghcr.io/authelia/authelia
     tag: v4.38.0-beta2
