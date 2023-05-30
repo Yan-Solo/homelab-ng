@@ -35,6 +35,7 @@ data:
       expiration: 3600  # 1 hour
       inactivity: 300  # 5 minutes
       domain: intropin.be # Should match whatever your root protected domain is
+      cookies: secure
     regulation:
       max_retries: 3
       find_time: 120
