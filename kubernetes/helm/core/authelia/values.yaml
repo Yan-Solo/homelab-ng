@@ -38,14 +38,12 @@ app-template:
       enabled: true
       type: configMap
       name: authelia-cm
-      subPath: configuration.yml
       mountPath: /config/configuration.yaml
       readOnly: false
     userdb:
       enabled: true
       type: configMap
       name: authelia-userdb
-      subPath: users_database.yaml
       mountPath: /config/users_database.yaml
       readOnly: false
   podSecurityContext:
