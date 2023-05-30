@@ -3,7 +3,6 @@ app-template:
     repository: ghcr.io/authelia/authelia
     tag: v4.38.0-beta2
   args: ["--config", "/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
-  env:
   enableServiceLinks: false
   service:
     main:
