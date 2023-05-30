@@ -33,19 +33,26 @@ app-template:
       tls:
         - secretName: auth-letsencrypt-certificate
           hosts: [*host]
+
   persistence:
     config:
       enabled: true
-      type: configMap
-      name: authelia-cm
-      mountPath: /config/configuration.yaml
-      readOnly: false
+      type: custom
+      volumeSpec:
+        configMap:
+          name: authelia-cm
+      subPath:
+        - path: configuration.yaml
+          mountPath: /config/configuration.yaml
     userdb:
       enabled: true
-      type: configMap
-      name: authelia-userdb
-      mountPath: /config/users_database.yaml
-      readOnly: false
+      type: custom
+      volumeSpec:
+        configMap:
+          name: authelia-userdb
+      subPath:
+        - path: users_database.yaml
+          mountPath: /config/users_database.yaml
   podSecurityContext:
     fsGroup: 568
     fsGroupChangePolicy: Always
