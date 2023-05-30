@@ -16,3 +16,7 @@ authelia:
       tls:
         - secretName: authelia-letsencrypt-certificate
           hosts: [*host]
+  configMap:
+    session:
+      redis:
+        enabled: false
