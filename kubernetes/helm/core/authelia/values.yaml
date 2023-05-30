@@ -18,7 +18,7 @@ authelia:
     main:
       ports:
         http:
-          port: 80
+          port: 8080
 
   ingress:
     main:
@@ -37,7 +37,7 @@ authelia:
             - path: /
               pathType: Prefix
               service:
-                port: 8123
+                port: 8080
       tls:
         - secretName: auth-letsencrypt-certificate
           hosts: [*host]
