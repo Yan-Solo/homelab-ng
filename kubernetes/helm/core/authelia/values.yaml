@@ -11,8 +11,7 @@ app-template:
           port: &port 9091
 
   env:
-    AUTHELIA_LOG_LEVEL: info
-    AUTHELIA_AUTHENTICATION_BACKEND: file
+    AUTHELIA_LOG_LEVEL: debug
   ingress:
     main:
       enabled: true
