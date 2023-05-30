@@ -1,32 +1,91 @@
 authelia:
-  domain: intropin.be
+  image:
+    repository: ghcr.io/authelia/authelia
+    tag: v4.38.0-beta2
+  args: ["--config", "/config/configuration.yaml", "--config.experimental.filters", "expand-env"]
+  env:
+    AUTHELIA_DEFAULT_REDIRECTION_URL: https://auth.intropin.be
+    AUTHELIA_DUO_API_DISABLE: "true"
+    AUTHELIA_LOG_LEVEL: info
+    AUTHELIA_SERVER_DISABLE_HEALTHCHECK: "true"
+    AUTHELIA_SERVER_PORT: &port 80
+    AUTHELIA_SESSION_DOMAIN: intropin.be
+    AUTHELIA_THEME: grey
+    AUTHELIA_TOTP_ISSUER: authelia.com
+    AUTHELIA_WEBAUTHN_DISABLE: "true"
+  enableServiceLinks: false
+  service:
+    main:
+      ports:
+        http:
+          port: *port
+        metrics:
+          enabled: true
+          port: 8080
+  serviceMonitor:
+    main:
+      enabled: true
+      endpoints:
+        - port: metrics
+          scheme: http
+          path: /metrics
+          interval: 1m
+          scrapeTimeout: 10s
+  probes:
+    liveness: &probes
+      enabled: true
+      custom: true
+      spec:
+        httpGet:
+          path: /api/health
+          port: *port
+        initialDelaySeconds: 0
+        periodSeconds: 10
+        timeoutSeconds: 1
+        failureThreshold: 3
+    readiness: *probes
+    startup:
+      enabled: false
+ 
   ingress:
     main:
       enabled: true
       annotations:
-        nginx.org/websocket-services: "authelia"
+        nginx.org/websocket-services: "home-assistant"
         cert-manager.io/cluster-issuer: "issuer"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          add_header Cache-Control "no-store";
+          add_header Pragma "no-cache";
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-XSS-Protection "1; mode=block";
       hosts:
-        - host: &host authelia.intropin.be
+        - host: &host home-assistant.intropin.be
           paths:
             - path: /
               pathType: Prefix
               service:
                 port: 8123
       tls:
-        - secretName: authelia-letsencrypt-certificate
+        - secretName: home-assistant-letsencrypt-certificate
           hosts: [*host]
-  configMap:
-    enabled: true
-    storage:
-      mysql.enabled: false
-      postgres.enabled: false
-      local.enabled: true
-    notifier:
-      filesystem.enabled: true
-      smtp.enabled: true
-    session:
-      redis.enabled: false
-    authentication_backend:
-      ldap.enabled: false
-      file.enabled: true
+  persistence:
+    config:
+      enabled: true
+      type: configMap
+      name: authelia-cm
+      subPath: configuration.yml
+      mountPath: /config/configuration.yaml
+      readOnly: false
+    userdb:
+      enabled: true
+      type: configMap
+      name: authelia-userdb
+      subPath: users_database.yaml
+      mountPath: /config/users_database.yaml
+      readOnly: false
+  resources:
+    requests:
+      cpu: 5m
+      memory: 10Mi
+    limits:
+      memory: 200Mi
