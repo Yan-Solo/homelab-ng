@@ -12,6 +12,7 @@ app-template:
 
   env:
     AUTHELIA_LOG_LEVEL: info
+    AUTHELIA_AUTHENTICATION_BACKEND: file
   ingress:
     main:
       enabled: true
