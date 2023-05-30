@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/Yan-Solo/homelab-ng.git
         revision: HEAD
         directories:
-          - path: "kubernetes/manifests/*/*"
+          - path: "kubernetes/manifests/*"
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
