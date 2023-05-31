@@ -1,0 +1,41 @@
+app-template:
+  image:
+    repository: ghcr.io/onedr0p/sonarr
+    tag: 3.0.9.1549
+
+  service:
+    main:
+      ports:
+        http:
+          port: &port 8989
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "sonarr"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host sonarr.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: *port
+      tls:
+        - secretName: sonarr-letsencrypt-certificate
+          hosts: [*host]
+
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: "Always"
+
+  persistence:
+    config:
+      enabled: true
+      type: emptyDir
+    media:
+      enabled: true
+      type: emptyDir
