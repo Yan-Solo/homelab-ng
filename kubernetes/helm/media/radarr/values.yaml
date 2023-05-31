@@ -7,7 +7,7 @@ app-template:
     main:
       ports:
         http:
-          port: &port 8989
+          port: &port 7878
 
   ingress:
     main:
