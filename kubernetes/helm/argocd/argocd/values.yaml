@@ -36,7 +36,12 @@ argo-cd:
           - openid
           - profile
           - email
+          - groups
         oidc.tls.insecure.skip.verify: true
+    secret:
+      extra:
+        clientID: "argocd"  
+        clientSecret: "insecure_secret"
 
   rbac:
     policy.csv: |
