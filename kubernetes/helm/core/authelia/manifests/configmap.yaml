@@ -38,7 +38,7 @@ data:
           public: false
           authorization_policy: two_factor
           redirect_uris:
-            - https://argocd.example.com/auth/callback
+            - https://argocd.intropin.be/auth/callback
           scopes:
             - openid
             - groups
