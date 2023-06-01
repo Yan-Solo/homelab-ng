@@ -31,7 +31,7 @@ argo-cd:
         name: Authelia
         issuer: "https://auth.intropin.be"
         clientID: $argocd-secret:clientID
-        clientSecret: %argocd-secret:clientSecret
+        clientSecret: $argocd-secret:clientSecret
         requestedScopes:
           - openid
           - profile
