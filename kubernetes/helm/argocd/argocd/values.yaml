@@ -29,9 +29,9 @@ argo-cd:
         ignoreResourceStatusField: crd
       oidc.config: |
         name: Authelia
-        issuer: "https://auth.intropin.be"
-        clientID: "argocd"
-        clientSecret: "insecure_secret"
+        issuer: https://auth.intropin.be
+        clientID: argocd
+        clientSecret: insecure_secret
         requestedScopes:
           - openid
           - profile
