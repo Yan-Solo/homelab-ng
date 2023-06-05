@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: metallb-helm-values
+  namespace: core
 data:
   values.yaml: |
     metallb:
