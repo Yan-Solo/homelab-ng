@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metallb-helm-values
+data:
+  values.yaml: |
+    metallb:
+      controller:
+        priorityClassName: system-cluster-critical
+    
+      speaker:
+        priorityClassName: system-cluster-critical
