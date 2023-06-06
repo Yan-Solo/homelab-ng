@@ -29,7 +29,7 @@ tasks:
     dir: ./infra/talos/
     cmds:
       - talhelper genconfig
-      - talosctl apply-config --insecure --file clusterconfig/echel-master-01.yaml --nodes {{.CLI_ARGS}} 
+      - talosctl apply-config --insecure --file clusterconfig/echel-master-01.yaml --nodes $(cat ../terraform/script_get_vm_ips/output.txt | jq -r '.[]')
       - echo "Sleeping to let talos get installed" && sleep 120 
       - talosctl --talosconfig clusterconfig/talosconfig config endpoint 192.168.0.31
       - talosctl --talosconfig clusterconfig/talosconfig config node 192.168.0.31
