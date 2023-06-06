@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 60m
-  path: "./flux/core/cert-manager/app"
+  path: "./flux/core/cert-manager/app/kustomzation.yaml"
   prune: true
   wait: true
   sourceRef:
@@ -27,7 +27,7 @@ spec:
   dependsOn:
     - name: cert-manager
   interval: 5m
-  path: "./flux/core/cert-manager/manifests"
+  path: "./flux/core/cert-manager/manifests/kustomization.yaml"
   prune: true
   sourceRef:
     kind: GitRepository
