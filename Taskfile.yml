@@ -42,7 +42,7 @@ tasks:
     dir: ./infra/argocd/
     cmds:
       - helm repo add argo https://argoproj.github.io/argo-helm
-      - helm upgrade --install argocd argo/argo-cd --create-namespace --namespace argocd --version 5.33.0 --values argocd-values.yaml
+      - helm upgrade --install argocd argo/argo-cd --create-namespace --namespace argocd --version 5.33.0 --values argocd-values.yaml --wait
       - kubectl apply -f ../../kubernetes/manifests/argocd-seedjobs/manifest-apps.yaml
       - kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
