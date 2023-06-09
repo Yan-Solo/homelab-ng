@@ -31,6 +31,7 @@ data:
           policy: one_factor
     identity_providers:
       oidc:
+        hmac_secret: this_is_a_secret_abc123abc123abc
         issuer_private_key: |
           -----BEGIN PRIVATE KEY-----
           MIIJQgIBADANBgkqhkiG9w0BAQEFAASCCSwwggkoAgEAAoICAQCuKAqZCW0MJ2F5
