@@ -1,0 +1,198 @@
+kube-prometheus-stack:
+  nameOverride: "prometheus"
+  fullNameOverride: "prometheus"
+  alertmanager:
+    enabled: false
+  grafana:
+    fullNameOverride: grafana
+    defaultDashboardsTimezone: Europe/Brussels
+    sidecar:
+      dashboards:
+        enabled: true
+        provider:
+          disableDelete: true
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: "storage"
+            orgId: 1
+            folder: "storage"
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/storage
+          - name: "security"
+            orgId: 1
+            folder: "security"
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/security
+          - name: "argo"
+            orgId: 1
+            folder: "argo"
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/argo
+          - name: "monitoring"
+            orgId: 1
+            folder: "monitoring"
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/monitoring
+          - name: "networking"
+            orgId: 1
+            folder: "networking"
+            type: file
+            disableDeletion: true
+            editable: false
+            options:
+              path: /var/lib/grafana/dashboards/networking
+    dashboards:
+      storage:
+        postgres:
+          gnetId: 9628
+          revision: 1
+          datasource: Prometheus
+      security:
+        cert-manager:
+          gnetId: 11001
+          revision: 1
+          datasource: Prometheus
+      argo:
+        argo-cd:
+          url: https://github.com/argoproj/argo-cd/blob/master/examples/dashboard.json
+          datasource: Prometheus
+          token: ""
+      networking:
+        nginx:
+          gnetId: 9614
+          revision: 1
+          datasource: Prometheus
+      monitoring:
+        resource-usage:
+          gnetId: 13125
+          revision: 1
+          datasource: Prometheus
+    grafana.ini:
+      paths:
+        data: /var/lib/grafana/
+        logs: /var/log/grafana
+        plugins: /var/lib/grafana/plugins
+        provisioning: /etc/grafana/provisioning
+      analytics:
+        check_for_updates: true
+      log:
+        mode: console
+      grafana_net:
+        url: https://grafana.net
+      server:
+        domain: "grafana.intropin.be"
+        root_url: "https://grafana.intropin.be/"
+      # auth:
+      #   signout_redirect_url: https://auth.intropin.be/application/o/grafana/end-session/
+      #   oauth_auto_login: true
+      #   disable_login_form: true
+      # users:
+      #   auto_assign_org: true
+      #   auto_assign_org_id: 1
+      # auth.generic_oauth:
+      #   name: Authentik
+      #   enabled: true
+      #   allow_sign_up: true
+      #   client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+      #   client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+      #   scopes: openid email profile
+      #   auth_url: https://authentik.k8s.tylercash.dev/application/o/authorize/
+      #   token_url: https://authentik.k8s.tylercash.dev/application/o/token/
+      #   api_url: https://authentik.k8s.tylercash.dev/application/o/userinfo/
+      #   tls_skip_verify_insecure: true
+      #   role_attribute_path: contains(groups[*], 'grafana_admin') && 'Admin' || contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'grafana') && 'Viewer'
+    ingress:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "prometheus-grafana"
+      hosts:
+        - grafana.intropin.be
+      tls:
+        - secretName: grafana-letsencrypt-certificate
+          hosts:
+            - grafana.intropin.be
+  prometheus:
+    fullNameOverride: prometheus
+    prometheusSpec:
+      retention: 60d
+      retentionSize: "180GB"
+      walCompression: true
+      replicas: 1
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      resources:
+        limits:
+          memory: 5Gi
+        requests:
+          cpu: 1500m
+          memory: 3.5Gi
+      storageSpec:
+        emptyDir:
+          medium: Memory
+
+    ingress:
+      enabled: true
+      annotations:
+        hajimari.io/group: "Monitoring"
+        kubernetes.io/ingress-allow-http: "false"
+        kubernetes.io/ingress.class: "nginx"
+        nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8"
+      hosts:
+        - prometheus.intropin.be
+      tls:
+        - secretName: prometheus-letsencrypt-certificate
+          hosts:
+            - prometheus.intropin.be
+  prometheusOperator:
+    admissionWebhooks:
+      certManager:
+        enabled: true
+    resources:
+      limits:
+        cpu: 100m
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+  kubeEtcd:
+    enabled: true
+    endpoints:
+    - 192.168.0.31
+    service:
+      enabled: true
+      port: 2381
+      targetPort: 2381
+
+kubeScheduler:
+  enabled: true
+  endpoints:
+  - 192.168.0.31
+  service:
+    enabled: true
+  serviceMonitor:
+    enabled: true
+    scheme: https
+    insecureSkipVerify: true
+
+kubeProxy:
+  enabled: true
+  endpoints:
+  - 192.168.0.31
+
+kubeStateMetrics:
+  enabled: true
