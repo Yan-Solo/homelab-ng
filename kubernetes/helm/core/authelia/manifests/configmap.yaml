@@ -74,6 +74,19 @@ data:
             - email
             - profile
           userinfo_signing_algorithm: none
+        - id: grafana
+          description: Grafana
+          secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'  # The digest of 'insecure_secret'.
+          public: false
+          authorization_policy: two_factor
+          redirect_uris:
+            - https://grafana.intropin.be/login/generic_oauth
+          scopes:
+            - openid
+            - profile
+            - groups
+            - email
+          userinfo_signing_algorithm: none
     session:
       name: authelia_session
       # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
