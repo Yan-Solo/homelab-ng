@@ -23,6 +23,7 @@ app-template:
           add_header Pragma "no-cache";
           add_header X-Frame-Options "SAMEORIGIN";
           add_header X-XSS-Protection "1; mode=block";
+        nginx.ingress.kubernetes.io/proxy-real-ip-cidr: "192.168.0.0/24"
       hosts:
         - host: &host auth.intropin.be
           paths:
