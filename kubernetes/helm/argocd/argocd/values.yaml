@@ -30,8 +30,8 @@ argo-cd:
       oidc.config: |
         name: Authelia
         issuer: https://auth.intropin.be
-        clientID: $clientID
-        clientSecret: $clientSecret
+        clientID: $authelia.clientID
+        clientSecret: $authelia.clientSecret
         requestedScopes:
           - openid
           - profile
@@ -40,8 +40,8 @@ argo-cd:
         oidc.tls.insecure.skip.verify: true
     secret:
       extra:
-        clientID: "argocd"  
-        clientSecret: "g3B8QGa.4~c9scA2GdWoz.BXgo4cMOW5YgoEX46XqrTBbAhqN~K6-YoZ.YjsBqfLtX1a3Jnw"
+        authelia.clientID: "argocd"  
+        authelia.clientSecret: "g3B8QGa.4~c9scA2GdWoz.BXgo4cMOW5YgoEX46XqrTBbAhqN~K6-YoZ.YjsBqfLtX1a3Jnw"
 
     rbac:
       policy.csv: |
