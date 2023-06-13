@@ -96,25 +96,28 @@ kube-prometheus-stack:
       server:
         domain: "grafana.intropin.be"
         root_url: "https://grafana.intropin.be/"
-      # auth:
-      #   signout_redirect_url: https://auth.intropin.be/application/o/grafana/end-session/
-      #   oauth_auto_login: true
-      #   disable_login_form: true
-      # users:
-      #   auto_assign_org: true
-      #   auto_assign_org_id: 1
-      # auth.generic_oauth:
-      #   name: Authentik
-      #   enabled: true
-      #   allow_sign_up: true
-      #   client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
-      #   client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
-      #   scopes: openid email profile
-      #   auth_url: https://authentik.k8s.tylercash.dev/application/o/authorize/
-      #   token_url: https://authentik.k8s.tylercash.dev/application/o/token/
-      #   api_url: https://authentik.k8s.tylercash.dev/application/o/userinfo/
-      #   tls_skip_verify_insecure: true
-      #   role_attribute_path: contains(groups[*], 'grafana_admin') && 'Admin' || contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'grafana') && 'Viewer'
+      auth:
+        signout_redirect_url: https://auth.intropin.be/application/o/grafana/end-session/
+        oauth_auto_login: true
+        disable_login_form: true
+      users:
+        auto_assign_org: true
+        auto_assign_org_id: 1
+      auth.generic_oauth:
+        enabled: true
+        name: Authelia
+        icon: signin
+        client_id: grafana
+        client_secret: 'insecure_secret'
+        scopes: openid profile email groups
+        empty_scopes: false
+        auth_url: https://auth.intropin.be/api/oidc/authorization
+        token_url: https://auth.intropin.be/api/oidc/token
+        api_url: https://auth.intropin.be/api/oidc/userinfo
+        login_attribute_path: preffered_username
+        groups_attribute_path: groups
+        name_attribute_path: name
+        use_pkce: true
     ingress:
       enabled: true
       annotations:
