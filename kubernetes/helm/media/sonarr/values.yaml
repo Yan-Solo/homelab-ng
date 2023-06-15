@@ -51,6 +51,6 @@ app-template:
       enabled: true
       type: pvc
       accessMode: ReadWriteOnce
-      size: 6Tb
+      size: 6T
       mountpath: /media
       storageClass: hdd-local-path
