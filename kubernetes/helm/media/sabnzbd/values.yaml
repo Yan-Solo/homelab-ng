@@ -1,28 +1,20 @@
 app-template:
- image:
-   repository: ghcr.io/onedr0p/sabnzbd
-   tag: 3.7.1
- podSecurityContext:
-   runAsUser: 568
-   runAsGroup: 568
-   fsGroup: 568
- persistence:
-   config:
-     enabled: true
-     existingClaim: sabnzbd-config
-   media:
-     enabled: true
-     existingClaim: nfs-media-pvc
-     mountPath: "/mnt/media"
+  image:
+    repository: ghcr.io/onedr0p/sabnzbd
+    tag: 3.7.1
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
 
- env:
-   HOST_WHITELIST_ENTRIES: sabnzbd.intropin.be
+  env:
+    HOST_WHITELIST_ENTRIES: sabnzbd.intropin.be
      
- service:
-   main:
-     ports:
-       http:
-         port: &port 8080
+  service:
+    main:
+      ports:
+        http:
+          port: &port 8080
 
   ingress:
     main:
