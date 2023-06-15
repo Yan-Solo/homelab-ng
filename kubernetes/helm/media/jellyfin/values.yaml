@@ -35,11 +35,20 @@ app-template:
 
   persistence:
     config:
-      enabled: false
-    cache:
-      enabled: false
-    transcodes:
-      enabled: false
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /config
+      storageClass: ssd-local-path
+
+    media:
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 6T
+      mountpath: /media
+      storageClass: hdd-local-path
 
   probes:
     liveness:

@@ -41,7 +41,16 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: emptyDir
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /config
+      storageClass: ssd-local-path
+
     media:
       enabled: true
-      type: emptyDir
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 6T
+      mountpath: /media
+      storageClass: hdd-local-path
