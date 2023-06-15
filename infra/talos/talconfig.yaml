@@ -22,6 +22,21 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 192.168.0.1
+    patches:
+      - |-
+        - op: add
+          path: /machine/disks
+          value:
+            - device: /dev/sdb
+              partitions:
+                - mountpoint: /var/mnt/ssd
+      - |-
+        - op: add
+          path: /machine/disks
+          value:
+            - device: /dev/sdc
+              partitions:
+                - mountpoint: /var/mnt/hdd
 controlPlane:
   patches:
     - |-

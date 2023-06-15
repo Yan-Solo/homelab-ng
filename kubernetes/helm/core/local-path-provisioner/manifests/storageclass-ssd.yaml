@@ -4,6 +4,6 @@ metadata:
   name: ssd-local-path
 provisioner: cluster.local/local-path-provisioner
 parameters:
-  path: /mnt/ssd
+  path: /var/mnt/ssd
 volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete

@@ -4,6 +4,6 @@ metadata:
   name: hdd-local-path
 provisioner: cluster.local/local-path-provisioner
 parameters:
-  path: /mnt/hdd
+  path: /var/mnt/hdd
 volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
