@@ -23,7 +23,7 @@ spec:
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: "{{path}}"
+        namespace: "{{path[2]}}"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
