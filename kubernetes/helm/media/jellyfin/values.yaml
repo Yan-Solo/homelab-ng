@@ -45,10 +45,8 @@ app-template:
     media:
       enabled: true
       type: pvc
-      accessMode: ReadWriteOnce
-      size: 6T
+      existingClaim: "media"
       mountpath: /media
-      storageClass: hdd-local-path
 
   probes:
     liveness:
