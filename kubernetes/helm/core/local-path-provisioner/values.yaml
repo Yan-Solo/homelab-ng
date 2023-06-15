@@ -4,5 +4,5 @@ local-path-provisioner:
   nodePathMap:
     - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
       paths:
-        - /mnt/ssd/
-        - /mnt/hdd/
+        - /var/mnt/ssd/
+        - /var/mnt/hdd/
