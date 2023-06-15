@@ -17,8 +17,7 @@ tasks:
     cmds:
       - terraform init
       - terraform apply -auto-approve
-      - ssh root@192.168.0.30 'qm set 100 -scsi2 /dev/disk/by-id/wwn-0x50026b7381090c52'
-      - ssh root@192.168.0.30 'qm set 100 -scsi2 /dev/disk/by-id/wwn-0x50014ee2be336795'
+      - ssh root@192.168.0.30 'qm set 100 -scsi2 /dev/disk/by-id/wwn-0x50026b7381090c52 -scsi3 /dev/disk/by-id/wwn-0x50014ee2be336795'
 
   terraform_vm_destroy:
     desc: Delete VMs
@@ -32,7 +31,7 @@ tasks:
     cmds:
       - talhelper genconfig
       - talosctl apply-config --insecure --file clusterconfig/echel-master-01.yaml --nodes $(cat ../terraform/script_get_vm_ips/output.txt | jq -r '.[]')
-      - echo "Sleeping to let talos get installed" && sleep 120 
+      - echo "Sleeping to let talos get installed" && sleep 180 
       - talosctl --talosconfig clusterconfig/talosconfig config endpoint 192.168.0.31
       - talosctl --talosconfig clusterconfig/talosconfig config node 192.168.0.31
       - talosctl --talosconfig clusterconfig/talosconfig bootstrap 
