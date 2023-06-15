@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media
+spec:
+  storageClassName: hdd-local-path
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 6T
