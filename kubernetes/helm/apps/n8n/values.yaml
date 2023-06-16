@@ -16,12 +16,13 @@ n8n:
   extraEnv:
     N8N_LOG_LEVEL: debug
     WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
+    DB_POSTGRESDB_DATABASE: "n8n-database"
 
   extraEnvSecret:
-    DB_POSTGRES_USER:
+    DB_POSTGRESDB_USER:
       name: n8n-database-app
       key: username
-    DB_POSTGRES_PASSWORD:
+    DB_POSTGRESDB_PASSWORD:
       name: n8n-database-app
       key: password
 
