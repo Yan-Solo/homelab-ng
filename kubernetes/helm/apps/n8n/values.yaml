@@ -12,8 +12,6 @@ n8n:
       postgresdb:
         host: n8n-database-rw.apps.svc.cluster.local
 
-  n8n:
-    encryption_key: "some_random_string"
   extraEnv:
     WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
 
