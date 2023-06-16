@@ -17,6 +17,7 @@ n8n:
     N8N_LOG_LEVEL: debug
     WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
     DB_POSTGRESDB_DATABASE: "n8n-database"
+    DB_POSTGRESDB_PORT: 5432
 
   extraEnvSecret:
     DB_POSTGRESDB_USER:
