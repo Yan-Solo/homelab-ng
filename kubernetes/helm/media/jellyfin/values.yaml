@@ -39,7 +39,7 @@ app-template:
     config:
       enabled: true
       type: pvc
-      accessMode: ReadWriteOnce
+      accessMode: ReadWriteMany
       size: 1Gi
       mountpath: /config
       storageClass: ssd-local-path
