@@ -11,6 +11,7 @@ n8n:
       type: postgresdb
       postgresdb:
         host: n8n-database-rw.apps.svc.cluster.local
+        database: n8n-database
 
   extraEnv:
     N8N_LOG_LEVEL: debug
