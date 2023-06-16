@@ -23,6 +23,7 @@ tasks:
     desc: Delete VMs
     dir: ./infra/terraform/
     cmds:
+      - ssh root@192.168.0.30 'qm unlink 100 --idlist scsi2 --idlist scsi3'
       - terraform destroy -auto-approve
 
   talos_init:
