@@ -31,9 +31,17 @@ app-template:
               pathType: Prefix
               service:
                 port: *port
+        - host: authelia.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: *port
       tls:
         - secretName: auth-letsencrypt-certificate
-          hosts: [*host]
+          hosts:
+            - *host
+            - authelia.intropin.be
 
   persistence:
     config:
