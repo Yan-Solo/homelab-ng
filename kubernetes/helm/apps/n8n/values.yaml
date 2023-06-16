@@ -17,14 +17,16 @@ n8n:
     N8N_LOG_LEVEL: debug
     WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
     DB_POSTGRESDB_PORT: 5432
-
-  extraEnvSecrets:
     DB_POSTGRESDB_USER:
-      name: n8n-database-app
-      key: username
+      valueFrom:
+        secretKeyRef:
+          name: n8n-database-app
+          key: username
     DB_POSTGRESDB_PASSWORD:
-      name: n8n-database-app
-      key: password
+      valueFrom:
+        secretKeyRef:
+          name: n8n-database-app
+          key: password
 
   ingress:
     main:
