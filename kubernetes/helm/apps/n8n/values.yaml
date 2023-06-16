@@ -6,6 +6,23 @@ n8n:
         http:
           port: 5678
 
+  config:
+    database:
+      type: postgresdb
+      postgresdb:
+        host: 
+
+  extraEnv:
+    N8N_ENCRYPTION_KEY: 'some_random_string'
+
+  extraEnvSecret:
+    DB_POSTGRES_USER:
+      name: n8n-database-app
+      key: username
+    DB_POSTGRES_PASSWORD:
+      name: n8n-database-app
+      key: password
+
   ingress:
     main:
       enabled: true
