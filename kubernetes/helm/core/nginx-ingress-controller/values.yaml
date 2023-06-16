@@ -7,6 +7,13 @@ ingress-nginx:
       proxy_buffer_size: "512"
       proxy_buffers: 4 512k 
       proxy_busy_buffers_size: 512k
+      nginx.ingress.kubernetes.io/auth-method: GET
+      nginx.ingress.kubernetes.io/auth-url: http://authelia.core.svc.cluster.local:9091/api/verify
+      nginx.ingress.kubernetes.io/auth-signin: https://auth.intropin.be?rm=$request_method
+      nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+      nginx.ingress.kubernetes.io/auth-snippet: | 
+        proxy_set_header X-Forwarded-Method $request_method;       
+      cert-manager.io/cluster-issuer: "issuer"
 
     watchIngressWithoutClass: true
     ingressClassByName: true
