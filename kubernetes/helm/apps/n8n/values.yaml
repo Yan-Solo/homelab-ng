@@ -19,7 +19,7 @@ n8n:
     DB_POSTGRESDB_DATABASE: "n8n-database"
     DB_POSTGRESDB_PORT: 5432
 
-  extraEnvSecret:
+  extraEnvSecrets:
     DB_POSTGRESDB_USER:
       name: n8n-database-app
       key: username
