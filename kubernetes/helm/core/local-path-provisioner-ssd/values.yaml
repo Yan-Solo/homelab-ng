@@ -1,6 +1,6 @@
 local-path-provisioner-ssd:
   storageClass:
-    create: false
+    create: true
     name: local-path-ssd
   configmap:
     name: local-path-config-ssd
