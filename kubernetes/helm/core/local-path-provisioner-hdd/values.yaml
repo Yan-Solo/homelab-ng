@@ -1,4 +1,4 @@
-local-path-provisioner-hdd:
+local-path-provisioner:
   storageClass:
     create: true
     name: local-path-hdd
