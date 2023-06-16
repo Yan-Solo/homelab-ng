@@ -1,19 +1,18 @@
 app-template:
   image:
-    repository: ghcr.io/onedr0p/radarr
-    tag: 4.5.2.7388
-
+    repository: ghcr.io/onedr0p/bazarr
+    tag: 1.2.1
   service:
     main:
       ports:
         http:
-          port: &port 7878
+          port: &port 6767
 
   ingress:
     main:
       enabled: true
       annotations:
-        nginx.org/websocket-services: "radarr"
+        nginx.org/websocket-services: "bazarr"
         nginx.ingress.kubernetes.io/auth-method: GET
         nginx.ingress.kubernetes.io/auth-url: http://authelia.core.svc.cluster.local:9091/api/verify
         nginx.ingress.kubernetes.io/auth-signin: https://auth.intropin.be?rm=$request_method
@@ -22,14 +21,14 @@ app-template:
           proxy_set_header X-Forwarded-Method $request_method;       
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
-        - host: &host radarr.intropin.be
+        - host: &host bazarr.intropin.be
           paths:
             - path: /
               pathType: Prefix
               service:
                 port: *port
       tls:
-        - secretName: radarr-letsencrypt-certificate
+        - secretName: bazarr-letsencrypt-certificate
           hosts: [*host]
 
   podSecurityContext:
