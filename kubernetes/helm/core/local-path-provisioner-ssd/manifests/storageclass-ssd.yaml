@@ -2,7 +2,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: ssd-local-path
-provisioner: cluster.local/local-path-provisioner
+provisioner: cluster.local/local-path-provisioner-ssd
 parameters:
   path: /var/mnt/ssd
 volumeBindingMode: WaitForFirstConsumer

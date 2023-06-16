@@ -1,0 +1,9 @@
+apiVersion: v2
+name: local-path-provisioner-ssd
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+dependencies:
+- name: local-path-provisioner
+  version: 0.0.24
+  repository: https://charts.containeroo.ch
