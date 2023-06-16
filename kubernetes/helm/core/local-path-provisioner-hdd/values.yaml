@@ -1,6 +1,6 @@
 local-path-provisioner-hdd:
   storageClass:
-    create: false
+    create: true
     name: local-path-hdd
   configmap:
     name: local-path-config-hdd
