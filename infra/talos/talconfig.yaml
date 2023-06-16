@@ -30,10 +30,6 @@ nodes:
             - device: /dev/sdb
               partitions:
                 - mountpoint: /var/mnt/ssd
-      - |-
-        - op: add
-          path: /machine/disks
-          value:
             - device: /dev/sdc
               partitions:
                 - mountpoint: /var/mnt/hdd
