@@ -9,6 +9,8 @@ app-template:
       ports:
         http:
           port: 8096
+      type: LoadBalancer
+      loadBalancerIP: 192.168.0.51
 
   ingress:
     main:
