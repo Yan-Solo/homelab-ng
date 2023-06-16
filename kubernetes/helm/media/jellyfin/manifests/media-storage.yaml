@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: hdd-local-path
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: 6T
