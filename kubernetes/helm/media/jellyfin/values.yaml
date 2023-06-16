@@ -42,7 +42,7 @@ app-template:
       accessMode: ReadWriteOnce
       size: 1Gi
       mountpath: /config
-      storageClass: ssd-local-path
+      storageClass: local-path-ssd
 
     media:
       enabled: true

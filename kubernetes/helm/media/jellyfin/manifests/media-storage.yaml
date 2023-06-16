@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: media
 spec:
-  storageClassName: hdd-local-path
+  storageClassName: local-path-hdd
   accessModes:
   - ReadWriteOnce
   resources:
