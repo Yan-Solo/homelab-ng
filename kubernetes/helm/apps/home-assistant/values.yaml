@@ -36,6 +36,13 @@ app-template:
   persistence:
     config:
       enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /config
+      storageClass: local-path-ssd
+    configuration-yaml:
+      enabled: true
       type: custom
       volumeSpec:
         configMap:
