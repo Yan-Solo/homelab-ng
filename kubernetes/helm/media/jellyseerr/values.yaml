@@ -22,7 +22,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                port: 8096
+                port: *port
       tls:
         - secretName: requests-letsencrypt-certificate
           hosts: [*host]
