@@ -1,10 +1,7 @@
 ---
 n8n:
   service:
-    main:
-      ports:
-        http:
-          port: 5678
+      ports: 5678
 
   config:
     database:
@@ -27,9 +24,6 @@ n8n:
       - host: &host n8n.intropin.be
         paths:
           - path: /
-            pathType: Prefix
-            service:
-              port: 5678
     tls:
       - secretName: n8n-letsencrypt-certificate
         hosts: [*host]
