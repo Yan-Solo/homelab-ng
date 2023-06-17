@@ -14,7 +14,7 @@ app-template:
     main:
       enabled: true
       annotations:
-        nginx.org/websocket-services: "jellyseer"
+        nginx.org/websocket-services: "jellyseerr"
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
         - host: &host requests.intropin.be
