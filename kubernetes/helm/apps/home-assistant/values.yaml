@@ -22,9 +22,17 @@ app-template:
               pathType: Prefix
               service:
                 port: 8123
+        - host: has.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: 8123
       tls:
         - secretName: home-assistant-letsencrypt-certificate
-          hosts: [*host]
+          hosts: 
+            - *host
+            - has.intropin.be
   persistence:
     config:
       enabled: true
