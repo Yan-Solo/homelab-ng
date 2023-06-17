@@ -23,7 +23,7 @@ n8n:
     hosts:
       - host: &host n8n.intropin.be
         paths:
-          - path: /
+          - /
     tls:
       - secretName: n8n-letsencrypt-certificate
         hosts: [*host]
