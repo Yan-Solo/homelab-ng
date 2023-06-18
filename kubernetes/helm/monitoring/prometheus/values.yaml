@@ -100,6 +100,7 @@ kube-prometheus-stack:
         signout_redirect_url: https://auth.intropin.be/application/o/grafana/end-session/
         oauth_auto_login: true
         disable_login_form: true
+        enabled: true
       users:
         auto_assign_org: true
         auto_assign_org_id: 1
