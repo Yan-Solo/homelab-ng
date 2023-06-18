@@ -27,6 +27,8 @@ data:
           - papier
           - pmd
         postcode: 3740
+        cityname: Bilzen
+        streetname: Echellaan
         streetnumber: 6
         upcomingsensor: 1
         dateformat: '%d-%m-%Y'
