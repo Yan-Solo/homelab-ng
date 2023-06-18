@@ -31,6 +31,6 @@ data:
         upcomingsensor: 1
         dateformat: '%d-%m-%Y'
         dateonly: 0
-        builtinicons: 0
-        builtiniconsnew: 1
+        builtinicons: 1
         dutch: 0
+        nameprefix: 0
