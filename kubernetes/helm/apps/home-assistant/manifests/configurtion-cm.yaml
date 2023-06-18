@@ -1,4 +1,4 @@
-# https://kubernetes.io/docs/concepts/configuration/configmap/
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,3 +19,18 @@ data:
         host: 192.168.0.153
         port: 23
         dsmr_version: 5B
+      - afvalbeheer:
+          wastecollector: Limburg.NET
+          resources:
+            - restafval
+            - gft
+            - papier
+            - pmd
+          postcode: 3740
+          streetnumber: 6
+          upcomingsensor: 1
+          dateformat: '%d-%m-%Y'
+          dateonly: 0
+          builtinicons: 0
+          builtiniconsnew: 1
+          dutch: 0
