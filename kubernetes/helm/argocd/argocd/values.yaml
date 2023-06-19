@@ -30,8 +30,8 @@ argo-cd:
       oidc.config: |
         name: Authelia
         issuer: https://auth.intropin.be
-        clientID: $authelia.clientID
-        clientSecret: $authelia.clientSecret
+        clientID: $argocd-secret:authelia.clientID
+        clientSecret: $argocd-secret:authelia.clientSecret
         requestedScopes:
           - openid
           - profile
