@@ -123,6 +123,8 @@ kube-prometheus-stack:
       enabled: true
       annotations:
         nginx.org/websocket-services: "prometheus-grafana"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        cert-manager.io/cluster-issuer: "issuer"
       hosts:
         - grafana.intropin.be
       tls:
