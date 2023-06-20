@@ -81,23 +81,20 @@ kube-prometheus-stack:
           gnetId: 13125
           revision: 1
           datasource: Prometheus
-    grafana.ini:
-      [auth]
-      signout_redirect_url = https://authentik.intropin.be/application/o/grafana/end-session/
-      # Optionally enable auto-login
-      oauth_auto_login = true
+    grafana.ini: 
+        signout_redirect_url: https://authentik.intropin.be/application/o/grafana/end-session/
+        oauth_auto_login: true
       
-      [auth.generic_oauth]
-      name = authentik
-      enabled = true
-      client_id = slqHWcdFRY1PNTF4HQzhEEUltMeXAtsRPFeAqNXq
-      client_secret = NK6EARqaeIlqSQPmVTfxcEMa8viTmTkw0IgZCn1xioDenPHaWIgLGJOdjILi9UVBlFHxu9FaxuFhnIZ8YfR8sxQh8enkClLWtf760pRVMwW9dStTpGtrqlxFNFnXgZq0
-      scopes = openid email profile
-      auth_url = https://authentik.intropin.be/application/o/authorize/
-      token_url = https://authentik.intropin.be/application/o/token/
-      api_url = https://authentik.intropin.be/application/o/userinfo/
-      # Optionally map user groups to Grafana roles
-      role_attribute_path = contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
+      auth.generic_oauth:
+        name: authentik
+        enabled: true
+        client_id: slqHWcdFRY1PNTF4HQzhEEUltMeXAtsRPFeAqNXq
+        client_secret: NK6EARqaeIlqSQPmVTfxcEMa8viTmTkw0IgZCn1xioDenPHaWIgLGJOdjILi9UVBlFHxu9FaxuFhnIZ8YfR8sxQh8enkClLWtf760pRVMwW9dStTpGtrqlxFNFnXgZq0
+        scopes: openid email profile
+        auth_url: https://authentik.intropin.be/application/o/authorize/
+        token_url: https://authentik.intropin.be/application/o/token/
+        api_url: https://authentik.intropin.be/application/o/userinfo/
+        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
     ingress:
       enabled: true
       annotations:
