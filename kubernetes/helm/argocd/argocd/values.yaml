@@ -54,11 +54,6 @@ argo-cd:
         g, admins, role:admin
         g, ArgoCD Admins, role:admin
 
-  rbac:
-    policy.csv: |
-      g, argo-admin, role:admin
-      g, admins, role:admin
-
   controller:
     replicas: 1
     pdb:
