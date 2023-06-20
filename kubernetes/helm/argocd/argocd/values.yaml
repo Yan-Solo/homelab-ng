@@ -30,8 +30,8 @@ argo-cd:
       dex.config: |
         connectors:
           - config:
-              issuer: http://authentik.company/application/o/<application slug defined in step 2>/
-              clientID: <client ID from the Provider above>
+              issuer: http://authentik.intropin.be/application/o/argocd/
+              clientID: v0mi87xDT9cX7GjfBSrxWwGfhJoEHFhcFeintAaX
               clientSecret: $dex.authentik.clientSecret
               insecureEnableGroups: true
               scopes:
