@@ -82,6 +82,7 @@ kube-prometheus-stack:
           revision: 1
           datasource: Prometheus
     grafana.ini: 
+      auth:
         signout_redirect_url: https://authentik.intropin.be/application/o/grafana/end-session/
         oauth_auto_login: true
       
