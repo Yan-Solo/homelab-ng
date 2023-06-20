@@ -27,17 +27,6 @@ argo-cd:
       resource.compareoptions: |
         ignoreAggregatedRoles: true
         ignoreResourceStatusField: crd
-      oidc.config: |
-        name: Authelia
-        issuer: https://auth.intropin.be
-        clientID: argocd
-        clientSecret: insecure_secret
-        requestedScopes:
-          - openid
-          - profile
-          - email
-          - groups
-        oidc.tls.insecure.skip.verify: true
       dex.config: |
         connectors:
           - config:
