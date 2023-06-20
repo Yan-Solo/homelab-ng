@@ -2,6 +2,7 @@ local-path-provisioner:
   storageClass:
     create: true
     name: local-path-ssd
+    defaultClass: true
   configmap:
     name: local-path-config-ssd
   nodePathMap:
