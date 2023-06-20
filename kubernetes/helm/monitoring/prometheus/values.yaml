@@ -82,43 +82,22 @@ kube-prometheus-stack:
           revision: 1
           datasource: Prometheus
     grafana.ini:
-      paths:
-        data: /var/lib/grafana/
-        logs: /var/log/grafana
-        plugins: /var/lib/grafana/plugins
-        provisioning: /etc/grafana/provisioning
-      analytics:
-        check_for_updates: true
-      log:
-        mode: console
-      grafana_net:
-        url: https://grafana.net
-      server:
-        domain: "grafana.intropin.be"
-        root_url: "https://grafana.intropin.be/"
-      auth:
-        signout_redirect_url: https://auth.intropin.be/application/o/grafana/end-session/
-        oauth_auto_login: true
-        disable_login_form: true
-        enabled: true
-      users:
-        auto_assign_org: true
-        auto_assign_org_id: 1
-      auth.generic_oauth:
-        enabled: true
-        name: Authelia
-        icon: signin
-        client_id: grafana
-        client_secret: 'insecure_secret'
-        scopes: openid profile email groups
-        empty_scopes: false
-        auth_url: https://auth.intropin.be/api/oidc/authorization
-        token_url: https://auth.intropin.be/api/oidc/token
-        api_url: https://auth.intropin.be/api/oidc/userinfo
-        login_attribute_path: preffered_username
-        groups_attribute_path: groups
-        name_attribute_path: name
-        use_pkce: true
+      [auth]
+      signout_redirect_url = https://authentik.intropin.be/application/o/grafana/end-session/
+      # Optionally enable auto-login
+      oauth_auto_login = true
+      
+      [auth.generic_oauth]
+      name = authentik
+      enabled = true
+      client_id = slqHWcdFRY1PNTF4HQzhEEUltMeXAtsRPFeAqNXq
+      client_secret = NK6EARqaeIlqSQPmVTfxcEMa8viTmTkw0IgZCn1xioDenPHaWIgLGJOdjILi9UVBlFHxu9FaxuFhnIZ8YfR8sxQh8enkClLWtf760pRVMwW9dStTpGtrqlxFNFnXgZq0
+      scopes = openid email profile
+      auth_url = https://authentik.intropin.be/application/o/authorize/
+      token_url = https://authentik.intropin.be/application/o/token/
+      api_url = https://authentik.intropin.be/application/o/userinfo/
+      # Optionally map user groups to Grafana roles
+      role_attribute_path = contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
     ingress:
       enabled: true
       annotations:
