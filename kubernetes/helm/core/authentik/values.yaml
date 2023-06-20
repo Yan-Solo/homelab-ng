@@ -1,0 +1,52 @@
+authentik:
+  # Check that env variable isn't provided in normal env map. Sync will fail if it's duplicated
+  envValueFrom:
+    AUTHENTIK_POSTGRESQL__PASSWORD:
+      secretKeyRef:
+        name: authentik-database-app
+        key: password
+  env:
+    AUTHENTIK_COOKIE_DOMAIN: intropin.be
+
+  authentik:
+    postgresql:
+      host: authentik-database-rw
+    secret_key: "PleaseGenerateA50CharKey"
+
+  ingress:
+    enabled: true
+    annotations:
+      nginx.org/websocket-services: "authentik"
+      cert-manager.io/cluster-issuer: "issuer"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        add_header Cache-Control "no-store";
+        add_header Pragma "no-cache";
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-XSS-Protection "1; mode=block";
+      nginx.ingress.kubernetes.io/proxy-real-ip-cidr: "192.168.0.0/24"
+    hosts:
+      - host: &host authentik.intropin.be
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              port: *port
+    tls:
+      - hosts:
+          - *host
+        secretName: argocd-letsencrypt-certificate
+
+  postgresql:
+    enabled: false
+
+  redis:
+    enabled: true
+
+  resources:
+    server:
+      requests:
+        cpu: 5m
+
+    worker:
+      requests:
+        cpu: 5m
