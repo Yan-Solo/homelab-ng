@@ -85,7 +85,9 @@ kube-prometheus-stack:
       auth:
         signout_redirect_url: https://authentik.intropin.be/application/o/grafana/end-session/
         oauth_auto_login: true
-      
+      server:
+        domain: "grafana.intropin.be"
+        root_url: "https://grafana.intropin.be/"
       auth.generic_oauth:
         name: authentik
         enabled: true
