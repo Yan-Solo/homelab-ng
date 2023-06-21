@@ -6,55 +6,6 @@ kube-prometheus-stack:
   grafana:
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
-    sidecar:
-      dashboards:
-        enabled: true
-        provider:
-          disableDelete: true
-    dashboardProviders:
-      dashboardproviders.yaml:
-        apiVersion: 1
-        providers:
-          - name: "storage"
-            orgId: 1
-            folder: "storage"
-            type: file
-            disableDeletion: true
-            editable: false
-            options:
-              path: /var/lib/grafana/dashboards/storage
-          - name: "security"
-            orgId: 1
-            folder: "security"
-            type: file
-            disableDeletion: true
-            editable: false
-            options:
-              path: /var/lib/grafana/dashboards/security
-          - name: "argo"
-            orgId: 1
-            folder: "argo"
-            type: file
-            disableDeletion: true
-            editable: false
-            options:
-              path: /var/lib/grafana/dashboards/argo
-          - name: "monitoring"
-            orgId: 1
-            folder: "monitoring"
-            type: file
-            disableDeletion: true
-            editable: false
-            options:
-              path: /var/lib/grafana/dashboards/monitoring
-          - name: "networking"
-            orgId: 1
-            folder: "networking"
-            type: file
-            disableDeletion: true
-            editable: false
-            options:
-              path: /var/lib/grafana/dashboards/networking
     dashboards:
       storage:
         postgres:
@@ -66,11 +17,6 @@ kube-prometheus-stack:
           gnetId: 11001
           revision: 1
           datasource: Prometheus
-      argo:
-        argo-cd:
-          url: https://github.com/argoproj/argo-cd/blob/master/examples/dashboard.json
-          datasource: Prometheus
-          token: ""
       networking:
         nginx:
           gnetId: 9614
