@@ -31,7 +31,7 @@ argo-cd:
         name: Authentik
         issuer: https://authentik.intropin.be/application/o/argocd/
         clientID: v0mi87xDT9cX7GjfBSrxWwGfhJoEHFhcFeintAaX
-        clientSecret: $dex.authentik.clientSecret
+        clientSecret: $argocd-secret:dex.authentik.clientSecret
         requestedScopes:
           - openid
           - profile
