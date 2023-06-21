@@ -57,7 +57,7 @@ argo-cd:
       extra:
         authelia.clientID: "argocd"  
         authelia.clientSecret: "g3B8QGa.4~c9scA2GdWoz.BXgo4cMOW5YgoEX46XqrTBbAhqN~K6-YoZ.YjsBqfLtX1a3Jnw"
-            dex.authentik.clientSecret: Y3AwVE0xb2NnN2k2akFXRUVCaU1JamR1TVN6bGp5ZFZtaGdmRVN3cXVhalVNWlg1aUpEQ3dJQk9VNmVNczJYYzl2OHNOUkVqSUpvQXlvVmpvRXlTN1hVUFc5UXF3OTB2Y2pWM2Zjb1FBYUhnaHl2RGoxS0hVcEplSURrdGJZRU0K
+        dex.authentik.clientSecret: Y3AwVE0xb2NnN2k2akFXRUVCaU1JamR1TVN6bGp5ZFZtaGdmRVN3cXVhalVNWlg1aUpEQ3dJQk9VNmVNczJYYzl2OHNOUkVqSUpvQXlvVmpvRXlTN1hVUFc5UXF3OTB2Y2pWM2Zjb1FBYUhnaHl2RGoxS0hVcEplSURrdGJZRU0K
 
     rbac:
       policy.csv: |
