@@ -6,27 +6,6 @@ kube-prometheus-stack:
   grafana:
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
-    dashboards:
-      storage:
-        postgres:
-          gnetId: 9628
-          revision: 1
-          datasource: Prometheus
-      security:
-        cert-manager:
-          gnetId: 11001
-          revision: 1
-          datasource: Prometheus
-      networking:
-        nginx:
-          gnetId: 9614
-          revision: 1
-          datasource: Prometheus
-      monitoring:
-        resource-usage:
-          gnetId: 13125
-          revision: 1
-          datasource: Prometheus
     grafana.ini: 
       auth:
         signout_redirect_url: https://authentik.intropin.be/application/o/grafana/end-session/
