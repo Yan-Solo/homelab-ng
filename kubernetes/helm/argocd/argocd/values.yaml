@@ -29,7 +29,7 @@ argo-cd:
         ignoreResourceStatusField: crd
       oidc.config: |
         name: Authentik
-        issuer: http://authentik.intropin.be/application/o/argocd/
+        issuer: https://authentik.intropin.be/application/o/argocd/
         clientID: v0mi87xDT9cX7GjfBSrxWwGfhJoEHFhcFeintAaX
         clientSecret: $dex.authentik.clientSecret
         requestedScopes:
