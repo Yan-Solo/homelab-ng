@@ -30,11 +30,11 @@ kube-prometheus-stack:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
-        - grafana.intropin.be
+        - prometheus-grafana.intropin.be
       tls:
-        - secretName: grafana-letsencrypt-certificate
+        - secretName: prometheus-grafana-letsencrypt-certificate
           hosts:
-            - grafana.intropin.be
+            - prometheus-grafana.intropin.be
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
