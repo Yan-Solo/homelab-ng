@@ -38,7 +38,7 @@ authentik:
     enabled: false
 
   redis:
-    enabled: false
+    enabled: true
 
   resources:
     server:
