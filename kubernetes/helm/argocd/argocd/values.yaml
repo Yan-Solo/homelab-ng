@@ -33,7 +33,7 @@ argo-cd:
         clientID: v0mi87xDT9cX7GjfBSrxWwGfhJoEHFhcFeintAaX
         clientSecret: $argocd-secret:dex.authentik.clientSecret
         requestedScopes: ["openid", "profile", "email"]
-        requestedIDTokenClaims: {"groups": {"essential": true}}
+        oidc.tls.insecure.skip.verify: true
 
     secret:
       extra:
