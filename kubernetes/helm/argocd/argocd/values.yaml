@@ -27,20 +27,14 @@ argo-cd:
       resource.compareoptions: |
         ignoreAggregatedRoles: true
         ignoreResourceStatusField: crd
-      dex.config: |
-        connectors:
-        - config:
-            issuer: https://authentik.intropin.be/application/o/argocd/
-            clientID: v0mi87xDT9cX7GjfBSrxWwGfhJoEHFhcFeintAaX
-            clientSecret: $argocd-secret:dex.authentik.clientSecret
-            insecureEnableGroups: true
-            scopes:
-              - openid
-              - profile
-              - email
-          name: authentik
-          type: oidc
-          id: authentik
+      oidc.config: |
+        name: Authentik
+        issuer: https://authentik.intropin.be/application/o/argocd/
+        clientID: v0mi87xDT9cX7GjfBSrxWwGfhJoEHFhcFeintAaX
+        clientSecret: $argocd-secret:dex.authentik.clientSecret
+        requestedScopes: ["openid", "profile", "email"]
+        requestedIDTokenClaims: {"groups": {"essential": true}}
+
     secret:
       extra:
         authelia.clientID: "argocd"  
