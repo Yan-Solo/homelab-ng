@@ -10,10 +10,10 @@ app-template:
         http:
           port: &port 5055
 
-  podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
+  # podSecurityContext:
+  #   runAsUser: 568
+  #   runAsGroup: 568
+  #   fsGroup: 568
 
   ingress:
     main:
