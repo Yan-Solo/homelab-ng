@@ -17,7 +17,7 @@ resource "proxmox_vm_qemu" "talos-master-01" {
   onboot      = true
   iso         = "local:iso/talos-amd64-${var.talos_version}.iso"
   cores       = 12
-  memory      = 11264
+  memory      = 20480
   qemu_os     = "other"
 
   network {
