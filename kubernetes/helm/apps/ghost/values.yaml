@@ -14,6 +14,8 @@ app-template:
       enabled: true
       annotations:
         nginx.org/websocket-services: "ghost"
+        nginx.org/client-max-body-size: "10240m"
+        nginx.ingress.kubernetes.io/proxy-body-size: "10240m"
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
         - host: &host blog.intropin.be
