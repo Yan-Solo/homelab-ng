@@ -29,7 +29,7 @@ app-template:
   env:
    # see https://ghost.org/docs/config/#configuration-options
    database__client: mysql
-   database__connection__host: sabnzbd.media.svc.cluster.local
+   database__connection__host: mysql.apps.svc.cluster.local:3306
    database__connection__user: ghost
    database__connection__password: ghostpassword
    database__connection__database: ghost
