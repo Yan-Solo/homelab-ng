@@ -2,7 +2,7 @@
 app-template:
   image:
     repository: docker.io/ghost
-    tag: 4-alpine
+    tag: 5.59.0
   service:
     main:
       ports:
