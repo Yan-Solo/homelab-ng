@@ -1,0 +1,45 @@
+---
+app-template:
+  image:
+    repository: docker.io/ghost
+    tag: 4-alpine
+  service:
+    main:
+      ports:
+        http:
+          port: 2368
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "ghost"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host blog.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: 2368
+      tls:
+        - secretName: ghost-letsencrypt-certificate
+          hosts: 
+            - *host
+  env:
+   # see https://ghost.org/docs/config/#configuration-options
+   database__client: mysql
+   database__connection__host: sabnzbd.media.svc.cluster.local
+   database__connection__user: ghost
+   database__connection__password: ghostpassword
+   database__connection__database: ghost
+   # this url value is just an example, and is likely wrong for your environment!
+   url: https://blog.intropin.be
+   # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
+   #NODE_ENV: development
+mysql:
+  auth:
+    createDatabase: true
+    database: ghost
+    username: ghost
+    password: ghostpassword
