@@ -43,7 +43,7 @@ app-template:
     fsGroupChangePolicy: "Always"
   resources:
     limits:
-      cpu: 3333Mi
+      cpu: 1000Mi
       memory: 5120M
   persistence:
     config:
