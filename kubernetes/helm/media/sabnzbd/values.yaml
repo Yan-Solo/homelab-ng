@@ -41,7 +41,10 @@ app-template:
     runAsGroup: 568
     fsGroup: 568
     fsGroupChangePolicy: "Always"
-
+  resources:
+    limits:
+      cpu: 3333Mi
+      memory: 5120M
   persistence:
     config:
       enabled: true
