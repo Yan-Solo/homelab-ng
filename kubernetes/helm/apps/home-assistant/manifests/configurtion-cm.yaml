@@ -11,7 +11,7 @@ data:
       use_x_forwarded_for: true
       trusted_proxies: 
         - 0.0.0.0/0
-      base_url: home-assistant.intropin.ba
+      base_url: home-assistant.intropin.be
       server_port: 8123
 
     sensor:
