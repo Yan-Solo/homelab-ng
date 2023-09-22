@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: renovate-config
+data:
+  config: |
+    {
+      "extends": ["config:base"],
+      "platform": "github",
+      "repositories": [
+        "yan-solo/homelab-ng"
+      ],
+      "schedule": "daily",
+      "packageRules": [
+        {
+          "updateTypes": ["docker"],
+          "schedule": "daily",
+          "base": ["main"],
+          "depTypeList": ["docker"]
+        }
+      ]
+    }

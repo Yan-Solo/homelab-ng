@@ -1,18 +1,6 @@
 renovate:
-  config: |
-    {
-      "extends": ["config:base"],
-      "platform": "github",
-      "repositories": [
-        "yan-solo/homelab-ng"
-      ],
-      "schedule": "daily",
-      "packageRules": [
-        {
-          "updateTypes": ["docker"],
-          "schedule": "daily",
-          "base": ["main"],
-          "depTypeList": ["docker"]
-        }
-      ]
-    }
+  extraVolumes:
+    - name: renovate-config
+      configMap:
+        name: renovate-config
+
