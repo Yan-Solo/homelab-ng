@@ -16,4 +16,3 @@ renovate:
         }
       ]
     }
-  cronjob: "0 4 * * 1" # every monday night at 04:00 
