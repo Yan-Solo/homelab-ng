@@ -1,19 +1,19 @@
 renovate:
   config: |
-  {
-    "extends": ["config:base"],
-    "platform": "github",
-    "repositories": [
-      "yan-solo/homelab-ng"
-    ],
-    "schedule": "daily",
-    "packageRules": [
-      {
-        "updateTypes": ["docker"],
-        "schedule": "daily",
-        "base": ["main"],
-        "depTypeList": ["docker"]
-      }
-    ]
-  }
+    {
+      "extends": ["config:base"],
+      "platform": "github",
+      "repositories": [
+        "yan-solo/homelab-ng"
+      ],
+      "schedule": "daily",
+      "packageRules": [
+        {
+          "updateTypes": ["docker"],
+          "schedule": "daily",
+          "base": ["main"],
+          "depTypeList": ["docker"]
+        }
+      ]
+    }
   cronjob: "0 4 * * 1" # every monday night at 04:00 
