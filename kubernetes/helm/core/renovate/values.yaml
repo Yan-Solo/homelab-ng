@@ -1,6 +1,0 @@
-renovate:
-  extraVolumes:
-    - name: renovate-config
-      configMap:
-        name: renovate-config
-
