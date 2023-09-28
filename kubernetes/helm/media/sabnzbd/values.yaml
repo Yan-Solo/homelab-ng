@@ -58,3 +58,4 @@ app-template:
       type: pvc
       existingClaim: "media"
       mountpath: /media
+
