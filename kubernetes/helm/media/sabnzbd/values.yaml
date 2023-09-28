@@ -45,7 +45,7 @@ app-template:
       enabled: true
       type: pvc
       existingClaim: "sab-downloads"
-      mountpath: /config/Downloads
+      mountpath: /downloads
 
     media:
       enabled: true
