@@ -1,7 +1,7 @@
 app-template:
   image:
     repository: ghcr.io/onedr0p/sabnzbd
-    tag: 3.7.1
+    tag: 3.6.1
   podSecurityContext:
     runAsUser: 568
     runAsGroup: 568
