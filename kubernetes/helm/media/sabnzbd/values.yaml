@@ -1,6 +1,6 @@
 app-template:
   image:
-    repository: ghcr.io/linuxserver/sabnzbd
+    repository: ghcr.io/onedr0p/sabnzbd
     tag: 4.1.0
 
   service:
@@ -31,6 +31,12 @@ app-template:
       tls:
         - secretName: sabnzbd-letsencrypt-certificate
           hosts: [*host]
+
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: "Always"
 
   persistence:
     config:
