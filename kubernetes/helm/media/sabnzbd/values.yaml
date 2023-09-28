@@ -41,6 +41,12 @@ app-template:
       mountpath: /config
       storageClass: local-path-ssd
 
+    downloads:
+      enabled: true
+      type: pvc
+      existingClaim: "sab-downloads"
+      mountpath: /config/Downloads
+
     media:
       enabled: true
       type: pvc
