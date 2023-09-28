@@ -36,6 +36,11 @@ app-template:
         - secretName: sabnzbd-letsencrypt-certificate
           hosts: [*host]
 
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+    fsGroupChangePolicy: "Always"
   persistence:
     config:
       enabled: true
