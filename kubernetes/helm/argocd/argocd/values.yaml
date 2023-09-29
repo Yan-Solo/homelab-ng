@@ -31,7 +31,7 @@ argo-cd:
         name: Authelia
         issuer: https://auth.intropin.be
         clientID: argocd
-        clientSecret: "g3B8QGa.4~c9scA2GdWoz.BXgo4cMOW5YgoEX46XqrTBbAhqN~K6-YoZ.YjsBqfLtX1a3Jnw"
+        clientSecret: "insecure_secret"
         cliClientID: argocd-cli
         requestedScopes:
           - openid
