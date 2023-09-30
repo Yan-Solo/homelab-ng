@@ -10,7 +10,7 @@ app-template:
    main:
      type: LoadBalancer
      externalTrafficPolicy: Cluster
-     loadBalancerIP: 192.168.0.39
+     loadBalancerIP: 192.168.0.69
      annotations:
        metallb.universe.tf/allow-shared-ip: satisfactory
      ports:
