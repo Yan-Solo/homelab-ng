@@ -113,7 +113,7 @@ data:
             - groups
             - email
             - profile
-            - public
+            - offline_access
           userinfo_signing_algorithm: none
     session:
       name: authelia_session
