@@ -86,7 +86,7 @@ data:
           961IXVRDhlxyYHG5O54VvDm2lll+o8K9
           -----END PRIVATE KEY-----
         access_token_lifespan: 1h
-        authorize_code_lifespan: 1m
+        authorize_code_lifespan: 1h
         id_token_lifespan: 1h
         refresh_token_lifespan: 90m
         enable_client_debug_messages: false
@@ -98,7 +98,7 @@ data:
             - revocation
             - introspection
           allowed_origins:
-            - https://example.com
+            - "*"
           allowed_origins_from_client_redirect_uris: false
         clients:
         - id: argocd
@@ -119,7 +119,7 @@ data:
       # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
       expiration: 3600  # 1 hour
-      inactivity: 300  # 5 minutes
+      inactivity: 3600# 5 minutes
       domain: intropin.be # Should match whatever your root protected domain is
     regulation:
       max_retries: 3

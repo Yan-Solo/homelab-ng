@@ -30,8 +30,8 @@ argo-cd:
       oidc.config: |
         name: Authelia
         issuer: https://auth.intropin.be
-        clientID: argocd
-        clientSecret: "insecure_secret"
+        clientID: authelia.clientID
+        clientSecret: authelia.clientSecret
         cliClientID: argocd-cli
         requestedScopes:
           - openid
@@ -42,7 +42,7 @@ argo-cd:
     secret:
       extra:
         authelia.clientID: "argocd"  
-        authelia.clientSecret: "g3B8QGa.4~c9scA2GdWoz.BXgo4cMOW5YgoEX46XqrTBbAhqN~K6-YoZ.YjsBqfLtX1a3Jnw"
+        authelia.clientSecret: "$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng"
 
     rbac:
       policy.csv: |
