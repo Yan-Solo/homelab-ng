@@ -43,6 +43,7 @@ argo-cd:
     secret:
       extra:
         authelia.clientID: "argocd"  
+        authelia.clientSecret: "JHBia2RmMi1zaGE1MTIkMzEwMDAwJGM4cDc4bjdwVU1sbjBqenZkNGFLNFEkSk5SQnp3QW8wZWs1cUtuNTBjRnp6dkU5UlhWODhoMXdKbjVLR2lIckQwWUt0WmFSL25DYjJDSlBPc0thUEswaGpmLjl5SHh6UUdaeml6aWNjcDZZbmc="
         authelia.clientSecret: "$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng"
 
     rbac:
