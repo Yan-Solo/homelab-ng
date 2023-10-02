@@ -104,7 +104,7 @@ data:
         - id: argocd
           description: Argo CD
           secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
-          public: false
+          public: true
           authorization_policy: one_factor
           redirect_uris:
             - https://argocd.intropin.be/auth/callback
@@ -113,6 +113,7 @@ data:
             - groups
             - email
             - profile
+            - public
           userinfo_signing_algorithm: none
     session:
       name: authelia_session

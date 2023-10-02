@@ -38,6 +38,7 @@ argo-cd:
           - profile
           - email
           - groups
+          - public
 
     secret:
       extra:
