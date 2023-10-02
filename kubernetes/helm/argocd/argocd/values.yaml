@@ -38,7 +38,7 @@ argo-cd:
           - profile
           - email
           - groups
-          - public
+          - offline_access
 
     secret:
       extra:
