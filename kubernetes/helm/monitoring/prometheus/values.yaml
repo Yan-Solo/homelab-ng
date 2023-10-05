@@ -34,7 +34,7 @@ kube-prometheus-stack:
     extraConfigmapMounts:
       - name: organisation-configmap
         mountPath: /etc/grafana/provisioning/orgs/intropin.yaml
-        configmap: grafana-organisation
+        configMap: grafana-organisation
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
