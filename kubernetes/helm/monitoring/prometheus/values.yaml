@@ -11,6 +11,8 @@ kube-prometheus-stack:
         enabled: true
         org_name: Intropin
         org_role: Admin
+      auth.basic:
+        enabled: false
       server:
         domain: "grafana.intropin.be"
         root_url: "https://grafana.intropin.be/"
