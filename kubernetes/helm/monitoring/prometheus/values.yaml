@@ -31,10 +31,6 @@ kube-prometheus-stack:
         - secretName: prometheus-grafana-letsencrypt-certificate
           hosts:
             - prometheus-grafana.intropin.be
-    extraConfigmapMounts:
-      - name: organisation-configmap
-        mountPath: /etc/grafana/provisioning/orgs/
-        configMap: grafana-organisation
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
