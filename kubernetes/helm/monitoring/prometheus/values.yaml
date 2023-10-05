@@ -13,6 +13,7 @@ kube-prometheus-stack:
       server:
         domain: "grafana.intropin.be"
         root_url: "https://grafana.intropin.be/"
+      auth.disable_login_form: true
       auth.anonymous:
         enabled: true
         org_name: Intropin
