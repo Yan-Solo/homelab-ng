@@ -4,6 +4,8 @@ kube-prometheus-stack:
   alertmanager:
     enabled: false
   grafana:
+    provisioning:
+      enabled: true
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
     grafana.ini: 
@@ -48,6 +50,11 @@ kube-prometheus-stack:
       storageSpec:
         emptyDir:
           medium: Memory
+
+    extraConfigMapMounts:
+      - name: organisation-configmap
+        mountPath: /etc/grafana/provisioning/orgs/intropin.yaml
+        configmap: grafana-organisation
 
     ingress:
       enabled: true
