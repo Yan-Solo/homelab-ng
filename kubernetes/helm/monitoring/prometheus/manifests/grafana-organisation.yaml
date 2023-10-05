@@ -1,0 +1,11 @@
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-organisation
+data:
+  intropin.yaml: |
+    apiVersion: 1
+    orgs:
+      - name: "Intropin"
+        id: 1  # Specify a unique organization ID
