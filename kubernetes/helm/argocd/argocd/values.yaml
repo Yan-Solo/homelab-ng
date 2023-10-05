@@ -34,23 +34,6 @@ argo-cd:
       resource.compareoptions: |
         ignoreAggregatedRoles: true
         ignoreResourceStatusField: crd
-      oidc.config: |
-        name: Authelia
-        issuer: https://auth.intropin.be
-        clientID: $authelia.clientID
-        clientSecret: $authelia.clientSecret
-        cliClientID: argocd-cli
-        requestedScopes:
-          - openid
-          - profile
-          - email
-          - groups
-          - offline_access
-
-    secret:
-      extra:
-        authelia.clientID: "argocd"  
-        authelia.clientSecret: "JHBia2RmMi1zaGE1MTIkMzEwMDAwJGM4cDc4bjdwVU1sbjBqenZkNGFLNFEkSk5SQnp3QW8wZWs1cUtuNTBjRnp6dkU5UlhWODhoMXdKbjVLR2lIckQwWUt0WmFSL25DYjJDSlBPc0thUEswaGpmLjl5SHh6UUdaeml6aWNjcDZZbmc="
 
     rbac:
       policy.csv: |
