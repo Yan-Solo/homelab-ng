@@ -8,4 +8,4 @@ data:
     apiVersion: 1
     orgs:
       - name: "Intropin"
-        id: 69
+        id: 1
