@@ -13,16 +13,10 @@ kube-prometheus-stack:
       server:
         domain: "grafana.intropin.be"
         root_url: "https://grafana.intropin.be/"
-      auth.generic_oauth:
-        name: authentik
+      auth.anonymous:
         enabled: true
-        client_id: slqHWcdFRY1PNTF4HQzhEEUltMeXAtsRPFeAqNXq
-        client_secret: NK6EARqaeIlqSQPmVTfxcEMa8viTmTkw0IgZCn1xioDenPHaWIgLGJOdjILi9UVBlFHxu9FaxuFhnIZ8YfR8sxQh8enkClLWtf760pRVMwW9dStTpGtrqlxFNFnXgZq0
-        scopes: openid email profile
-        auth_url: https://authentik.intropin.be/application/o/authorize/
-        token_url: https://authentik.intropin.be/application/o/token/
-        api_url: https://authentik.intropin.be/application/o/userinfo/
-        role_attribute_path: "contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+        org_name: Intropin
+        org_role: Admin
     ingress:
       enabled: true
       annotations:
