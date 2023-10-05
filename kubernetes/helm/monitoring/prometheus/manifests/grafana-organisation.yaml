@@ -8,4 +8,4 @@ data:
     apiVersion: 1
     orgs:
       - name: "Intropin"
-        id: 1  # Specify a unique organization ID
+        id: 69
