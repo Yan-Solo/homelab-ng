@@ -4,11 +4,11 @@ kube-prometheus-stack:
   alertmanager:
     enabled: false
   grafana:
-    provisioning:
-      enabled: true
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
     grafana.ini: 
+      provisioning:
+        enabled: true
       auth:
         disable_login_form: true
       auth.anonymous:
