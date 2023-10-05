@@ -119,8 +119,8 @@ data:
       name: authelia_session
       # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
-      expiration: 3600  # 1 hour
-      inactivity: 3600  # 5 minutes
+      expiration: 604800 # 1 week
+      inactivity: 604800 # 1 week
       domain: intropin.be # Should match whatever your root protected domain is
     regulation:
       max_retries: 3
