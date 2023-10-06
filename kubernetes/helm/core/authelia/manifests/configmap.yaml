@@ -29,6 +29,24 @@ data:
       rules:
         - domain: home-assistant.intropin.be
           policy: one_factor
+    identity_providers:
+      oidc:
+        ## The other portions of the mandatory OpenID Connect 1.0 configuration go here.
+        ## See: https://www.authelia.com/c/oidc
+        clients:
+        - id: outline
+          description: Outline
+          secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'  # The digest of 'insecure_secret'.
+          public: false
+          authorization_policy: two_factor
+          redirect_uris:
+            - https://outline.example.com/auth/oidc.callback
+          scopes:
+            - openid
+            - offline_access
+            - profile
+            - email
+          userinfo_signing_algorithm: none
     session:
       name: authelia_session
       # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
