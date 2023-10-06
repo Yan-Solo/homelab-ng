@@ -97,7 +97,6 @@ data:
             - introspection
           allowed_origins:
             - https://intropin.be
-            - 0.0.0.0/0
           allowed_origins_from_client_redirect_uris: false
         clients:
         - id: outline
