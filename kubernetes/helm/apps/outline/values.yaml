@@ -7,7 +7,7 @@ outline:
     tls:
       enabled: true
   env:
-    OIDC_CLIENT: "outline"
+    OIDC_CLIENT_ID: "outline"
     OIDC_CLIENT_SECRET: "insecure_secret"
     OIDC_AUTH_URI: "https://auth.intropin.be/api/oidc/authorization"
     OIDC_TOKEN_URI: "https://auth.intropin.be/api/oidc/token"
