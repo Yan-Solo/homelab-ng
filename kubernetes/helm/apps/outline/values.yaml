@@ -3,8 +3,8 @@ outline:
     annotations:
       nginx.org/websocket-services: "outline"
       cert-manager.io/cluster-issuer: "issuer"
-      nginx.org/real-ip-header: "X-Forwarded-For"  # Use X-Forwarded-For header to get the real IP
-      nginx.org/set-real-ip-from: "0.0.0.0/0"  # Accept real IP from any source
+      nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"  # Use X-Forwarded-For header to get the real IP
+      nginx.ingress.kubernetes.io/set-real-ip-from: "0.0.0.0/0"  # Accept real IP from any source
     host: &host outline.intropin.be
     tls:
       enabled: true
