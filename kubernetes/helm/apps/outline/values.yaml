@@ -1,13 +1,8 @@
 outline:
   ingress:
-    enabled: true
     annotations:
       nginx.org/websocket-services: "outline"
       cert-manager.io/cluster-issuer: "issuer"
-    hosts:
-      - host: &host outline.intropin.be
-        paths:
-          - /
+    host: &host outline.intropin.be
     tls:
-      - secretName: outline-letsencrypt-certificate
-        hosts: [*host]
+      enabled: true
