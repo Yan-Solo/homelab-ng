@@ -1,0 +1,13 @@
+outline:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.org/websocket-services: "n8n"
+      cert-manager.io/cluster-issuer: "issuer"
+    hosts:
+      - host: &host n8n.intropin.be
+        paths:
+          - /
+    tls:
+      - secretName: n8n-letsencrypt-certificate
+        hosts: [*host]
