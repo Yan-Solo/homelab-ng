@@ -37,6 +37,18 @@ kube-prometheus-stack:
         - secretName: grafana-letsencrypt-certificate
           hosts:
             - grafana.intropin.be
+    additionalDatasources:
+      - name: Loki
+        type: loki
+        isDefault: false
+        access: proxy
+        url: http://loki.monitoring.svc.cluster.local:3100
+        version: 1
+      - name: Prometheus
+        type: prometheus
+        isDefault: true
+        access: proxy
+        url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
