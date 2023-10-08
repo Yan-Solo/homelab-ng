@@ -21,7 +21,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                port: 8123
+                port: 5678
       tls:
         - secretName: n8n-letsencrypt-certificate
           hosts: 
