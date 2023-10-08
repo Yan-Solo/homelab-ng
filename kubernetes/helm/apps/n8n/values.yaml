@@ -1,39 +1,50 @@
 ---
-n8n:
+app-template:
+  image:
+    repository: n8n repo
+    tag: n8n tag
   service:
-      ports: 5678
-
-  config:
-    database:
-      type: postgresdb
-      postgresdb:
-        host: n8n-database-rw.apps.svc.cluster.local
-        database: n8n
-
-  existingSecret: n8n-secret
-
-  extraEnv:
-    N8N_LOG_LEVEL: debug
-    WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
-    DB_POSTGRESDB_PORT: 5432
-
+    main:
+      ports:
+        http:
+          port: 5678
+  
   ingress:
-    enabled: true
-    annotations:
-      nginx.org/websocket-services: "n8n"
-      cert-manager.io/cluster-issuer: "issuer"
-    hosts:
-      - host: &host n8n.intropin.be
-        paths:
-          - /
-    tls:
-      - secretName: n8n-letsencrypt-certificate
-        hosts: [*host]
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "n8n"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host n8n.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: 8123
+      tls:
+        - secretName: n8n-letsencrypt-certificate
+          hosts: 
+            - *host
+
   persistence:
     config:
       enabled: true
-      type: pvc 
+      type: pvc
       accessMode: ReadWriteOnce
       size: 1Gi
       mountPath: /home/node/.n8n
       storageClass: local-path-ssd
+
+  env:
+    N8N_LOG_LEVEL: debug
+    WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
+    DB_TYPE: postgresdb
+    DB_POSTGRESDB_HOST: "n8n-database-rw.apps.svc.cluster.local"
+    DB_POSTGRESDB_PORT: 5432
+    DB_POSTGRESDB_USER: "n8n"
+    DB_POSTGRESDB_DATABASE: "n8n"
+
+  envFrom:
+    - secretRef:
+      name: n8n-secret
