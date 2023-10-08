@@ -46,4 +46,6 @@ app-template:
     DB_POSTGRESDB_DATABASE: "n8n"
     N8N_ENCRYPTION_KEY: "c29tZS1yYW5kb20tc3RyaW5nCg=="
     DB_POSTGRESDB_PASSWORD: "1KZOjlRTiqgSeVuA4lzf0sIeKt9no7C2DXbW3r4zdbagcL0zE6LWEVvzaRMCoshn"
+    N8N_HOST: "n8n.intropin.be"
     N8N_PORT: 5678
+    N8N_EDITOR_BASE_URL: "https://n8n.intropin.be"
