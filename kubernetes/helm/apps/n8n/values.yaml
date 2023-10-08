@@ -10,6 +10,8 @@ n8n:
         host: n8n-database-rw.apps.svc.cluster.local
         database: n8n
 
+  existingSecret: n8n-secret
+
   extraEnv:
     N8N_LOG_LEVEL: debug
     WEBHOOK_TUNNEL_URL: "https://n8n.intropin.be"
