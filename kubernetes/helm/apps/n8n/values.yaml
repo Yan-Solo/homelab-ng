@@ -1,8 +1,8 @@
 ---
 app-template:
   image:
-    repository: n8n repo
-    tag: n8n tag
+    repository: docker.n8n.io/n8nio/n8n
+    tag: 0.220.1
   service:
     main:
       ports:
@@ -45,6 +45,8 @@ app-template:
     DB_POSTGRESDB_USER: "n8n"
     DB_POSTGRESDB_DATABASE: "n8n"
 
-  envFrom:
-    - secretRef:
-      name: n8n-secret
+  containers:
+    main:
+      envFrom:
+        - secretRef:
+          name: n8n-secret
