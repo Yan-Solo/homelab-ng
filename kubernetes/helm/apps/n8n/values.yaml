@@ -44,9 +44,5 @@ app-template:
     DB_POSTGRESDB_PORT: 5432
     DB_POSTGRESDB_USER: "n8n"
     DB_POSTGRESDB_DATABASE: "n8n"
-
-  containers:
-    main:
-      envFrom:
-        - secretRef:
-          name: n8n-secret
+    N8N_ENCRYPTION_KEY: "c29tZS1yYW5kb20tc3RyaW5nCg=="
+    DB_POSTGRESDB_PASSWORD: "1KZOjlRTiqgSeVuA4lzf0sIeKt9no7C2DXbW3r4zdbagcL0zE6LWEVvzaRMCoshn"
