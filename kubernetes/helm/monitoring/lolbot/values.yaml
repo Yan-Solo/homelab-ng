@@ -1,0 +1,16 @@
+---
+app-template:
+  image:
+    repository: ghcr.io/yan-solo/lolbot/lolbot:latest 
+    tag: latest
+
+  persistence:
+    config-yaml:
+      enabled: true
+      type: custom
+      volumeSpec:
+        configMap:
+          name: config
+      subPath:
+        - path: config.yaml
+          mountPath: /usr/src/app/config.yaml
