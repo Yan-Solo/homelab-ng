@@ -4,6 +4,13 @@ app-template:
     repository: ghcr.io/yan-solo/lolbot/lolbot:latest 
     tag: latest
 
+  # Chart requires a svc, we don't use one tho
+  service:
+    main:
+      ports:
+        http:
+          port: 8123
+
   persistence:
     config-yaml:
       enabled: true
