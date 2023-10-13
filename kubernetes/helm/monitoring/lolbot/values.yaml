@@ -21,3 +21,5 @@ app-template:
       subPath:
         - path: config.yaml
           mountPath: /usr/src/app/config.yaml
+
+  readinessProbe: []
