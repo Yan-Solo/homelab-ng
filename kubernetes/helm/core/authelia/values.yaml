@@ -16,7 +16,7 @@ authelia:
         readOnly: true
         subPath: users_database.yaml
     extraVolumes:
-      - name: authelia-config
+      - name: authelia-userdb
         configMap:
           name: authelia-userdb
           items:
