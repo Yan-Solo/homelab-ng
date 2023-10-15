@@ -68,6 +68,7 @@ authelia:
         enabled: false
     identity_providers:
       oidc:
+        enabled: true
         hmac_secret: this_is_a_secret_abc123abc123abc
         issuer_certificate_chain: |
           -----BEGIN CERTIFICATE-----
