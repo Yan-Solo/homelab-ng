@@ -46,9 +46,14 @@ authelia:
       find_time: 120
       ban_time: 300
     storage:
-     encryption_key: 7TTiE99YQfT1bBic6W9Mh5HgbozhoVF8QBX8E9AsbJSA2Jux8obqWKqdH1mOvp32 # Now required
-     local:
-       path: /config/db.sqlite3
+      encryption_key: 7TTiE99YQfT1bBic6W9Mh5HgbozhoVF8QBX8E9AsbJSA2Jux8obqWKqdH1mOvp32 # Now required
+      local:
+        enabled: true
+        path: /config/db.sqlite3
+      postgres:
+        enabled: false
+      mysql:
+        enabled: false
     identity_providers:
       oidc:
         hmac_secret: this_is_a_secret_abc123abc123abc
