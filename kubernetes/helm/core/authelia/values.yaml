@@ -70,54 +70,6 @@ authelia:
       oidc:
         enabled: true
         hmac_secret: this_is_a_secret_abc123abc123abc
-        issuer_certificate_chain: |
-          -----BEGIN CERTIFICATE-----
-          MIIDETCCAfmgAwIBAgIQPpZnoPiv1FSuqSD6vGaJrTANBgkqhkiG9w0BAQsFADAp
-          MREwDwYDVQQKEwhBdXRoZWxpYTEUMBIGA1UEAxMLaW50cm9waW4uYmUwHhcNMjMx
-          MDE1MjAzNDIwWhcNMjQxMDE0MjAzNDIwWjApMREwDwYDVQQKEwhBdXRoZWxpYTEU
-          MBIGA1UEAxMLaW50cm9waW4uYmUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
-          AoIBAQC3bWrjkcnvqebyGAcDyIa/tGBZ9rze3fjk1qjAm/mMvfW3t3PpZZq2CB/P
-          3I68I2P2iIzc57sJPrQLf7sR5SGl/nM+tGSL+5bjFkk2s1OEAPAfGVr1njNKP44R
-          JApvTyrg/bwfISrIDy98tmDQzdMnRLhUKgINOq3gMfEMIvsNbl4uiY0DIBgtupoF
-          QX/CmzPTIM0hPlGe+ERqYBPUvtKNxkgczwEbZxU4y/5/Sw3XVIt0Axml0ak+7KGS
-          vJHds8rIIvngiQNuJEDzoy6mz2ZITpnhjjXt26mz0y6xDnjLbPYld9DU3ARj9P2I
-          GHy2J+oqR4sfBmB6df4OLwkLJZ8HAgMBAAGjNTAzMA4GA1UdDwEB/wQEAwIFoDAT
-          BgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUA
-          A4IBAQCT97zKseUILeK46colfr1kPll2PoRsRFZvpC3YcbW1bLjzNR0UASLZBW7G
-          RiVlK02CKX+U+HxPacdE379P+G7axpjnyE+zJVBigfIWgiEvbEwb9axJ9UnUQKsY
-          Y6svx9DVUX5BuEnKHgYXY9HF+8iAQCVLAJyQ+oOT75hMQSBMKXwQRXTRZuPkd0yk
-          9DnluMmBBQgz3+vCYF+Gtnm0R8fDrmy/6XctO7LgorVm4Z36WvQ8C2utrpiIiDYr
-          eMRm597VJK+8vpBVSLuK0UHL7d/pC2wmOz/rEv+UWRCJWhCkMEHnH3WN2hw6V72A
-          2f5njuUz+LmfeQTKEN+UkqFmGBu6
-          -----END CERTIFICATE-----
-        issuer_private_key: |
-          -----BEGIN RSA PRIVATE KEY-----
-          MIIEowIBAAKCAQEAt21q45HJ76nm8hgHA8iGv7RgWfa83t345NaowJv5jL31t7dz
-          6WWatggfz9yOvCNj9oiM3Oe7CT60C3+7EeUhpf5zPrRki/uW4xZJNrNThADwHxla
-          9Z4zSj+OESQKb08q4P28HyEqyA8vfLZg0M3TJ0S4VCoCDTqt4DHxDCL7DW5eLomN
-          AyAYLbqaBUF/wpsz0yDNIT5RnvhEamAT1L7SjcZIHM8BG2cVOMv+f0sN11SLdAMZ
-          pdGpPuyhkryR3bPKyCL54IkDbiRA86Mups9mSE6Z4Y417dups9MusQ54y2z2JXfQ
-          1NwEY/T9iBh8tifqKkeLHwZgenX+Di8JCyWfBwIDAQABAoIBAEdqRm+L13+EOvKP
-          AEwsyqng5JKiSi7LZZhTKyiykZqGayC4QFzivjWZPCmFydzeOpFF4PIxFtUmoJrJ
-          hGAXQd6LDvue6HbH4ZtQlfjCIQYIB3VUPeHbUkTaMcniql1kCWHH6HKGS03Q+8Am
-          kdM6D7f+PXYnVN0pt4DOcPc0t2ImqNnCD1HqJGE5ohrfXd7IGcpa7IwKZCvJDzjd
-          5cnDNgjJDfEwwrSoKbWgVFnuSYgh0AUENqfPPWkygohaLsruZVNJxAHAZABn2b1U
-          UvqOMMdjJsnPX3bD2Q63NWuHTcDmioXdDeSikM+lcoc+gl+DoCizG7ADFHRIDncu
-          UMpeZkECgYEAxC9tI29GFMdmHegCCeBEcJ49YNIgcuRBrgpeww4YtLqitFbydIUh
-          7dBz33Y0ZZr8Os9QnsBEP8textW64O8RfUWXFhCsHH50FcZQ5aQfSG+eeHtmNnwe
-          laEfBy8zvWiUtmJsD6K/s/ZQBvLlgMDZaUDsW6o71A4YJqbalKfKYGkCgYEA71o4
-          iK4K/bUWm8XoFhu/YU0AFo7bP9OAlIJ3jpUJPmlmsK9w4Hz1WTFscro+UArJ92b4
-          6hnyAoJdDpmQKs0IJ4dKhb+GeyJ0ytlip+SeGqkDJB5MgT+zh2LDhf1poMbZlEZw
-          +B57SpZGbmi5DEWChHrhithKPixFae6bIHdFFe8CgYBGds5ZYtcmEXSBG1rYF0Ad
-          vwhGpVJYUdmxXDIrFv4Ss9JKucv9w++qzitAQOGS+PbNXLcVPfOFglM5UXz824FJ
-          oFwi5bwbw+OICqH1yVwfFVAy8AeHXE9T6PoPB4oq5sw7MeCkQQ1f4wFdbZK3Cw1L
-          u7DpP5ybjrBn+ZgauqV6uQKBgQCl++MIpelpV5N+Ixh3fHaTe1p8SkUxVfLtCizu
-          69ulNGLKVF/qzb03RVb3mMBtsY2ty/MCJUv3AYCXB1c610S4ZNIBPnh8G8Dyix4n
-          YBtkUaCkA376grp1QMBmwv3lSQDKGq9s4XaOmvfsySLKp8mDJdQS/Ts/MmRQue9J
-          7Gw0cQKBgGa0tVJBg28fcAo9VChH1QW9TlYLdPhxI0oZgoUDz+aH6vj/jRT87z6w
-          M5aEWU4ZoTzuhcW0o3wLNckGH6QO2DqT8nbXeZsMnmMVAqlHrXdc7YpS1IJ1ELl7
-          96b1U98EvcdXzNPLV34n8BfsbP2LFXNM3Yw4JOg38xjquMdAf7ZR
-          -----END RSA PRIVATE KEY-----
         access_token_lifespan: 1h
         authorize_code_lifespan: 1m
         id_token_lifespan: 1h
