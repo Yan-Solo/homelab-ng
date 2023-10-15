@@ -19,6 +19,9 @@ authelia:
       - name: authelia-config
         configMap:
           name: authelia-userdb
+          items:
+            - key: users_database.yaml
+              path: users_database.yaml
   configMap:
     enabled: true
     theme: dark
