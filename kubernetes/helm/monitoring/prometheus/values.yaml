@@ -56,7 +56,7 @@ kube-prometheus-stack:
         defaultDatasourceEnabled: true
         isDefaultDatasource: true
         uid: prometheus
-        url: http://promehteus-prometheus.monitoring.svc.cluster.local:9090/
+        url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
