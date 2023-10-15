@@ -11,10 +11,14 @@ authelia:
       - name: TZ
         value: Europe/Brussels
     extraVolumeMounts:
-        - mountPath: /config/users_database.yml
+      - mountPath: /config/users_database.yml
+        name: authelia-userdb
+        readOnly: true
+        subPath: users_database.yaml
+    extraVolumes:
+      - name: authelia-config
+        configMap:
           name: authelia-userdb
-          readOnly: true
-          subPath: users_database.yaml
   configMap:
     enabled: true
     theme: dark
