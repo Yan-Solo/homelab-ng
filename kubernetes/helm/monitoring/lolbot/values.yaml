@@ -7,10 +7,8 @@ app-template:
   # Chart requires a svc, we don't use one tho
   service:
     main:
-      ports:
-        http:
-          port: 8123
-
+      enabled: false
+        
   persistence:
     config-yaml:
       enabled: true
@@ -22,4 +20,9 @@ app-template:
         - path: config.yaml
           mountPath: /usr/src/app/config.yaml
 
-  readinessProbe: []
+  readinessProbe:
+    enabled: false
+  startupProbe:
+    enabled: false
+  livenessProbe:
+    enabled: false
