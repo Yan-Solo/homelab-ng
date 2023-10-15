@@ -14,6 +14,7 @@ authelia:
         - mountPath: /config/users_database.yml
           name: authelia-userdb
           readOnly: true
+          namespace: core
   configMap:
     enabled: true
     theme: dark
