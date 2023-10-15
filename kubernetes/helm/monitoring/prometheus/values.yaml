@@ -56,8 +56,12 @@ kube-prometheus-stack:
         url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
         type: prometheus
         version: 1
+        access: direct
       - name: loki
         url: http://loki-stack.monitoring.svc.cluster.local:3100
+        type: loki
+        version: 1
+        access: direct
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
