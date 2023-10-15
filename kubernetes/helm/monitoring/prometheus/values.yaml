@@ -51,12 +51,13 @@ kube-prometheus-stack:
             enabled: false
         provider:
           allowUiUpdates: false
-      datasources:
-        enabled: true
-        defaultDatasourceEnabled: true
-        isDefaultDatasource: true
-        uid: prometheus
-        url: 'http://prometheus-prometheus.monitoring.svc.cluster.local:9090'
+    additionalDataSource:
+      - name: prometheus
+        url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
+        type: prometheus
+        version: 1
+      - name: loki
+        url: http://loki-stack.monitoring.svc.cluster.local:3100
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
