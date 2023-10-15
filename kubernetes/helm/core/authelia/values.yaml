@@ -19,6 +19,7 @@ authelia:
     ntp:
       address: be.pool.ntp.org
     authentication_backend:
+      ldap.enabled: false
       file:
         enabled: true
         path: /config/users_database.yml
