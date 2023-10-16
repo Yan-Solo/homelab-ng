@@ -44,6 +44,10 @@ authelia:
           memory: 64
     access_control:
       default_policy: one_factor
+      rules:
+        - domain: outline.intropin.be
+          subject:
+            group: users
     session:
       name: authelia_session
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
