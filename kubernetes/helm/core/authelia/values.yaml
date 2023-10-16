@@ -43,7 +43,7 @@ authelia:
           parallelism: 8
           memory: 64
     access_control:
-      default_policy: one_factor
+      default_policy: deny
       rules:
         - domain: outline.intropin.be
           subject:
