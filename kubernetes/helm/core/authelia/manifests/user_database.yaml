@@ -12,8 +12,7 @@ data:
         password: "$argon2id$v=19$m=65536,t=3,p=4$WmNI29/6AWArBdLdgdEZgA$wB0Uoy9K9KYZ/MR6uQ12k93RVj7h8fKKjdNv+0xN2aY"
         email: jan.peters1995@gmail.com
         groups:
-          - admins
-          - dev
+          - admin
       joran:
         disabled: false
         displayname: "Joran Dirkzwager"
