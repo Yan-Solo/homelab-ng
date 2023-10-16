@@ -47,7 +47,8 @@ authelia:
       rules:
         - domain: outline.intropin.be
           subject:
-            group: users
+            - ['group:admins']
+            - ['group:users']
     session:
       name: authelia_session
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
