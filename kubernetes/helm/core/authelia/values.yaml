@@ -45,7 +45,8 @@ authelia:
     access_control:
       default_policy: deny
       rules:
-        - domain: 'sonarr.intropin.be'
+        - domain: '*.intropin.be'
+          policy: one_factor
           subject:
             - ['group:admins']
         - domain: outline.intropin.be
