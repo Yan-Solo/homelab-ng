@@ -51,7 +51,7 @@ authelia:
             - ['group:admin']
         - domain: outline.intropin.be
           subject:
-            - ['group:admins']
+            - ['group:admin']
             - ['group:users']
     session:
       name: authelia_session
