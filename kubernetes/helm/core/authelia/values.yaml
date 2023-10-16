@@ -45,6 +45,9 @@ authelia:
     access_control:
       default_policy: deny
       rules:
+        - domain: *.intropin.be
+          subject:
+            - ['group:admins']
         - domain: outline.intropin.be
           subject:
             - ['group:admins']
