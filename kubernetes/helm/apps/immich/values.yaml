@@ -1,5 +1,7 @@
 ---
 immich:
+  image:
+    tag: v1.82.1
   immich:
     persistence:
       library:
