@@ -21,7 +21,7 @@ immich:
               - path: /
                 pathType: Prefix
                 service:
-                  port: 8123
+                  port: 8080
         tls:
           - secretName: immich-letsencrypt-certificate
             hosts: 
