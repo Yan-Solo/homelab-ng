@@ -16,13 +16,13 @@ immich:
           nginx.org/websocket-services: "immich"
           cert-manager.io/cluster-issuer: "issuer"
         hosts:
-          - host: &host immich.intropin.be
+          - host: &host photos.intropin.be
             paths:
               - path: /
                 pathType: Prefix
                 service:
                   port: 8080
         tls:
-          - secretName: immich-letsencrypt-certificate
+          - secretName: photos-letsencrypt-certificate
             hosts: 
               - *host
