@@ -11,12 +11,6 @@ argo-cd:
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         nginx.org/websocket-services: "argocd-server"
-        nginx.ingress.kubernetes.io/auth-method: GET
-        nginx.ingress.kubernetes.io/auth-url: http://authelia.core.svc.cluster.local:80/api/verify
-        nginx.ingress.kubernetes.io/auth-signin: https://auth.intropin.be?rm=$request_method
-        nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-        nginx.ingress.kubernetes.io/auth-snippet: |
-          proxy_set_header X-Forwarded-Method $request_method;       
         cert-manager.io/cluster-issuer: "issuer"
       tls:
         - hosts:
@@ -40,6 +34,18 @@ argo-cd:
         g, argo-admin, role:admin
         g, admins, role:admin
         g, ArgoCD Admins, role:admin
+
+    oidc.config: |
+      name: Authelia
+      issuer: https://auth.intropin.be
+      clientID: argocd
+      clientSecret: insecure_secret
+      cliClientID: argocd-cli
+      requestedScopes:
+        - openid
+        - profile
+        - email
+        - groups
 
   controller:
     replicas: 1
