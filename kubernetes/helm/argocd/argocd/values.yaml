@@ -21,6 +21,18 @@ argo-cd:
     params:
       applicationsetcontroller.policy: "create-only"
     cm:
+      oidc.config: |
+        name: Authelia
+        issuer: https://auth.intropin.be
+        clientID: argocd
+        clientSecret: insecure_secret
+        cliClientID: argocd-cli
+        requestedScopes:
+          - openid
+          - profile
+          - email
+          - groups
+
       admin.enabled: "true"
       url: https://argocd.intropin.be
       exec.enabled: "true"
@@ -33,18 +45,6 @@ argo-cd:
         g, argo-admin, role:admin
         g, admins, role:admin
         g, ArgoCD Admins, role:admin
-
-    oidc.config: |
-      name: Authelia
-      issuer: https://auth.intropin.be
-      clientID: argocd
-      clientSecret: insecure_secret
-      cliClientID: argocd-cli
-      requestedScopes:
-        - openid
-        - profile
-        - email
-        - groups
 
   controller:
     replicas: 1
