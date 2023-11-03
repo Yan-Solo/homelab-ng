@@ -20,7 +20,6 @@ argo-cd:
   configs:
     params:
       applicationsetcontroller.policy: "create-only"
-      server.disable.auth: true
     cm:
       admin.enabled: "true"
       url: https://argocd.intropin.be
