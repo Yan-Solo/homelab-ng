@@ -45,7 +45,7 @@ argo-cd:
         g, argo-admin, role:admin
         g, admins, role:admin
         g, ArgoCD Admins, role:admin
-        g, admins, role:dev
+        g, ArgoCD Admins, role:dev
 
   controller:
     replicas: 1
