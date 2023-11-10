@@ -22,7 +22,7 @@ data:
       simon:
         disabled: false
         displayname: "Simon Geelen"
-        password: $argon2id$v=19$m=65536,t=3,p=4$OQjLQch8lB0+1WGfj4zCHQ$2H2OmUz+9lQZBYAJabdpHUGizRwY6bNHvvlYX2RMq4Y
+        password: $argon2id$v=19$m=65536,t=3,p=4$TheSaeJD4+FKDCCSnYyscg$QvqP40fE6plJms2d7p56TxuUTQvZYHCI08PPax/DVGQ
         email: simon@intropin.be
         groups:
           - admin
