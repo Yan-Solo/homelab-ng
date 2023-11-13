@@ -1,7 +1,7 @@
 ---
 app-template:
   image:
-    repository: registry.hub.docker.com/tombursch/kitchenowl-web
+    repository: registry.hub.docker.com/tombursch/kitchenowl-web:v85
     tag: v85
   service:
     main:
@@ -39,5 +39,5 @@ app-template:
     main:
       containers:
         backend:
-          repository: registry.hub.docker.com/tombursch/kitchenowl-web
+          repository: registry.hub.docker.com/tombursch/kitchenowl:v85
           tag: v85
