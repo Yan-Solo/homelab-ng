@@ -1,5 +1,5 @@
 ---
-app-template-web:
+app-template:
   image:
     repository: registry.hub.docker.com/tombursch/kitchenowl-web
     tag: v85
@@ -35,19 +35,9 @@ app-template-web:
       mountpath: /data
       storageClass: local-path-ssd
 
-app-template-backend:
-  image:
-    repository: registry.hub.docker.com/tombursch/kitchenowl-web
-    tag: v85
-  service:
+  controllers:
     main:
-      enabled: false
-
-  persistence:
-    config:
-      enabled: true
-      type: pvc
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      mountpath: /data
-      storageClass: local-path-ssd
+      containers:
+        backend:
+          repository: registry.hub.docker.com/tombursch/kitchenowl-web
+          tag: v85
