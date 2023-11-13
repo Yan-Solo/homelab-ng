@@ -1,8 +1,8 @@
 ---
 app-template:
   image:
-    repository: tombursch/kitchenowl-web
-    tag: v85
+    repository: registry.hub.docker.com/tombursch/kitchenowl-web
+    tag: latest
   service:
     main:
       ports:
