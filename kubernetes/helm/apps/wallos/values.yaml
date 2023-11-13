@@ -1,0 +1,43 @@
+---
+app-template:
+  image:
+    repository: registry.hub.docker.com/bellamy/wallos
+    tag: latest
+  service:
+    main:
+      ports:
+        http:
+          &port: 8282
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "wallos"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host wallos.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: *port
+      tls:
+        - secretName: wallos-letsencrypt-certificate
+          hosts: 
+            - *host
+  persistence:
+    db:
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /var/www/html/db
+      storageClass: local-path-ssd
+    logos:
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /var/www/html/images/uploads/logos
+      storageClass: local-path-ssd
