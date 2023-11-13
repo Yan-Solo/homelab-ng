@@ -1,7 +1,7 @@
 ---
 app-template:
   image:
-    repository: registry.hub.docker.com/tombursch/kitchenowl-web
+    repository: tombursch/kitchenowl-web
     tag: v85
   service:
     main:
@@ -34,10 +34,3 @@ app-template:
       size: 1Gi
       mountpath: /data
       storageClass: local-path-ssd
-
-  controllers:
-    main:
-      containers:
-        backend:
-          repository: registry.hub.docker.com/tombursch/kitchenowl
-          tag: v85
