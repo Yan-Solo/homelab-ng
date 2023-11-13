@@ -1,0 +1,53 @@
+---
+app-template-web:
+  image:
+    repository: registry.hub.docker.com/tombursch/kitchenowl-web
+    tag: v85
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "kitchenowl"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host kitchenowl.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: 80
+      tls:
+        - secretName: kitchenowl-letsencrypt-certificate
+          hosts: 
+            - *host
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /data
+      storageClass: local-path-ssd
+
+app-template-backend:
+  image:
+    repository: registry.hub.docker.com/tombursch/kitchenowl-web
+    tag: v85
+  service:
+    main:
+      enabled: false
+
+  persistence:
+    config:
+      enabled: true
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      mountpath: /data
+      storageClass: local-path-ssd
