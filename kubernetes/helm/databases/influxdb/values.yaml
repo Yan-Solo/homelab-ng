@@ -1,5 +1,6 @@
 influxdb:
-  setDefaultUser: true
+  setDefaultUser:
+    enabled: true
   ingress:
     enabled: true
     annotations:
