@@ -1,4 +1,6 @@
 influxdb:
+  image:
+    tag: 2.4.7
   setDefaultUser:
     enabled: true
   ingress:
