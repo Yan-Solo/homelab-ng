@@ -2,17 +2,17 @@ influxdb:
   ingress:
     enabled: true
     annotations:
-      nginx.org/websocket-services: "home-assistant"
+      nginx.org/websocket-services: "influxdb"
       cert-manager.io/cluster-issuer: "issuer"
     hosts:
-      - host: &host home-assistant.intropin.be
+      - host: &host influxdb.intropin.be
         paths:
           - path: /
             pathType: Prefix
             service:
-              port: 8123
+              port: 8086
     tls:
-      - secretName: home-assistant-letsencrypt-certificate
+      - secretName: influxdb-letsencrypt-certificate
         hosts: 
           - *host
   persistence:
