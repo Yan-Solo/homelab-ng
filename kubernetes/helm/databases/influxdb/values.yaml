@@ -1,5 +1,6 @@
 influxdb:
   image:
+    repository: "influxdb"
     tag: "2.4.7-alpine"
   setDefaultUser:
     enabled: true
