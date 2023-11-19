@@ -1,4 +1,7 @@
 influxdb:
+  config:
+    http:
+      auth-enabled: true
   ingress:
     enabled: true
     annotations:
