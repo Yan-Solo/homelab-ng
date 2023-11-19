@@ -5,8 +5,8 @@ influxdb:
       nginx.org/websocket-services: "influxdb"
       cert-manager.io/cluster-issuer: "issuer"
     hostname: influxdb.intropin.be
-    tls:
-      secretName: influxdb-letsencrypt-certificate
+    tls: true
+    secretName: influxdb-letsencrypt-certificate
   persistence:
     enabled: true
     size: 8Gi
