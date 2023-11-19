@@ -1,7 +1,5 @@
 influxdb:
-  config:
-    http:
-      auth-enabled: true
+  setDefaultUser: true
   ingress:
     enabled: true
     annotations:
