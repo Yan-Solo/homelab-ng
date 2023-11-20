@@ -6,6 +6,7 @@ kube-prometheus-stack:
   grafana:
     plugins:
       - grafana-googlesheets-datasource
+      - grafana-image-renderer
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
     grafana.ini: 
