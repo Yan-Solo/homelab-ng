@@ -43,3 +43,4 @@ app-template:
       subPath:
         - path: configuration.yaml
           mountPath: /config/configuration.yaml
+  hostNetwork: true
