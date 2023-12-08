@@ -37,8 +37,9 @@ app-template:
       size: 1Gi
       mountpath: /config
       storageClass: local-path-ssd
-    config:
+    configuration:
       enabled: true
       type: configMap
       name: configuration
+      path: /config
   hostNetwork: true
