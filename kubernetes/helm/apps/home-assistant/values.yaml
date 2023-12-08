@@ -41,5 +41,5 @@ app-template:
       enabled: true
       type: configMap
       name: configuration
-      path: /config
+      path: /config/configuration.yaml
   hostNetwork: true
