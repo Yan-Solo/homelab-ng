@@ -41,7 +41,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
       mountpath: /config
@@ -49,12 +49,12 @@ app-template:
 
     downloads:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       existingClaim: "sab-downloads"
       mountpath: /downloads
 
     media:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       existingClaim: "media"
       mountpath: /media

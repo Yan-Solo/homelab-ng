@@ -29,14 +29,14 @@ app-template:
   persistence:
     db:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
       mountpath: /var/www/html/db
       storageClass: local-path-ssd
     logos:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
       mountpath: /var/www/html/images/uploads/logos

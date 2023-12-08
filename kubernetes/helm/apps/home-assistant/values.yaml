@@ -29,7 +29,7 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
       mountpath: /config
