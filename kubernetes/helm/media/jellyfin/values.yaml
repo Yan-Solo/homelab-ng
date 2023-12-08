@@ -1,8 +1,12 @@
 app-template:
 
-  image:
-    repository: ghcr.io/confusedpolarbear/jellyfin-intro-skipper
-    tag: 10.8.10
+  controllers:
+		main:
+			containers:
+				main:
+					image:
+            repository: ghcr.io/confusedpolarbear/jellyfin-intro-skipper
+            tag: 10.8.10
 
   service:
     main:
@@ -24,6 +28,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
+								name: main
                 port: 8096
       tls:
         - secretName: jellyfin-letsencrypt-certificate

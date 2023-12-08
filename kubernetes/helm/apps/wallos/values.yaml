@@ -1,8 +1,12 @@
 ---
 app-template:
-  image:
-    repository: registry.hub.docker.com/bellamy/wallos
-    tag: latest
+  controllers:
+		main:
+			containers:
+				main:
+					image:
+            repository: registry.hub.docker.com/bellamy/wallos
+            tag: latest
   service:
     main:
       ports:
@@ -21,6 +25,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
+								name: main
                 port: 80
       tls:
         - secretName: wallos-letsencrypt-certificate

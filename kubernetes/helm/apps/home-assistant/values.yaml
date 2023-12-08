@@ -1,8 +1,12 @@
 ---
 app-template:
-  image:
-    repository: ghcr.io/home-assistant/home-assistant
-    tag: 2023.12.0
+  controllers:
+		main:
+			containers:
+				main:
+					image:
+            repository: ghcr.io/home-assistant/home-assistant
+            tag: 2023.12.0
   service:
     main:
       ports:
@@ -21,6 +25,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
+								name: main
                 port: 8123
       tls:
         - secretName: home-assistant-letsencrypt-certificate

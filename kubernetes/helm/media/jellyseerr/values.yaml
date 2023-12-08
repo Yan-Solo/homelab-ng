@@ -1,8 +1,12 @@
 app-template:
 
-  image:
-    repository: registry.hub.docker.com/fallenbagel/jellyseerr
-    tag: 1.7.0
+  controllers:
+		main:
+			containers:
+				main:
+					image:
+            repository: registry.hub.docker.com/fallenbagel/jellyseerr
+            tag: 1.7.0
 
   service:
     main:
@@ -22,6 +26,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
+								name: main
                 port: *port
       tls:
         - secretName: requests-letsencrypt-certificate
