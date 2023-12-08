@@ -41,5 +41,6 @@ app-template:
       enabled: true
       type: configMap
       name: configuration
-      path: /config/configuration.yaml
+      globalMounts:
+        - path: /config
   hostNetwork: true
