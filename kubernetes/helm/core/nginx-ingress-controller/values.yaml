@@ -21,4 +21,4 @@ ingress-nginx:
 
     minAvailable: 1
 
-    allowSnippetAnnotation: true
+    allowSnippetAnnotations: true
