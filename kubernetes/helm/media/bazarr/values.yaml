@@ -52,6 +52,6 @@ app-template:
 
     media:
       enabled: true
-      type: pvc
+      type: persistentVolumeClaim
       existingClaim: "media"
       mountpath: /media
