@@ -1,7 +1,11 @@
 app-template:
-  image:
-    repository: ghcr.io/yan-solo/lolbot/lolbot
-    tag: latest
+  controller:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/yan-solo/lolbot/lolbot
+            tag: latest
   # Chart requires a svc, we don't use one tho
   service:
     main:
