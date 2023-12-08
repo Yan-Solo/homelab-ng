@@ -30,6 +30,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
+                name: main
                 port: *port
       tls:
         - secretName: bazarr-letsencrypt-certificate
