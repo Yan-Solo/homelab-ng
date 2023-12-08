@@ -35,7 +35,6 @@ app-template:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
-      mountpath: /config
       storageClass: local-path-ssd
     configuration:
       enabled: true
