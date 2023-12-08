@@ -37,7 +37,7 @@ app-template:
       size: 1Gi
       mountpath: /config
       storageClass: local-path-ssd
-    configuration-yaml:
+    config:
       enabled: true
       type: custom
       volumeSpec:
