@@ -5,20 +5,15 @@ ingress-nginx:
       proxy-read-timeout: "300"
       proxy-send-timeout: "300"
       proxy_buffer_size: "512"
-      proxy_buffers: 4 512k 
+      proxy_buffers: 4 512k
       proxy_busy_buffers_size: 512k
-
     watchIngressWithoutClass: true
     ingressClassByName: true
-
     service:
       externalTrafficPolicy: Local
       internal:
         enabled: true
         externalTrafficPolicy: "Local"
-
     replicaCount: 1
-
     minAvailable: 1
-
     allowSnippetAnnotations: true

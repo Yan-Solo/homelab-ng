@@ -1,14 +1,11 @@
----
 app-template:
   image:
     repository: ghcr.io/yan-solo/lolbot/lolbot
     tag: latest
-
   # Chart requires a svc, we don't use one tho
   service:
     main:
       enabled: false
-        
   persistence:
     config-yaml:
       enabled: true
@@ -19,7 +16,6 @@ app-template:
       subPath:
         - path: config.yaml
           mountPath: /usr/src/app/config.yaml
-
   readinessProbe:
     enabled: false
   startupProbe:

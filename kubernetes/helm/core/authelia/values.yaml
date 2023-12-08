@@ -5,7 +5,7 @@ authelia:
     annotations:
       nginx.org/websocket-services: "outline"
       cert-manager.io/cluster-issuer: "issuer"
-      nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"  # Use X-Forwarded-For header to get the real IP
+      nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For" # Use X-Forwarded-For header to get the real IP
   pod:
     env:
       - name: TZ
@@ -95,32 +95,32 @@ authelia:
             - https://intropin.be
           allowed_origins_from_client_redirect_uris: false
         clients:
-        - id: outline
-          description: Outline
-          secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'  # The digest of 'insecure_secret'.
-          public: false
-          authorization_policy: one_factor
-          redirect_uris:
-            - https://outline.intropin.be/auth/oidc.callback
-          scopes:
-            - openid
-            - offline_access
-            - profile
-            - email
-          userinfo_signing_algorithm: none
-        - id: argocd
-          description: Argo CD
-          secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'  # The digest of 'insecure_secret'.
-          public: false
-          authorization_policy: one_factor
-          redirect_uris:
-            - https://argocd.intropin.be/auth/callback
-          scopes:
-            - openid
-            - groups
-            - email
-            - profile
-          userinfo_signing_algorithm: none
+          - id: outline
+            description: Outline
+            secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
+            public: false
+            authorization_policy: one_factor
+            redirect_uris:
+              - https://outline.intropin.be/auth/oidc.callback
+            scopes:
+              - openid
+              - offline_access
+              - profile
+              - email
+            userinfo_signing_algorithm: none
+          - id: argocd
+            description: Argo CD
+            secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
+            public: false
+            authorization_policy: one_factor
+            redirect_uris:
+              - https://argocd.intropin.be/auth/callback
+            scopes:
+              - openid
+              - groups
+              - email
+              - profile
+            userinfo_signing_algorithm: none
     notifier:
       filesystem:
         enabled: true

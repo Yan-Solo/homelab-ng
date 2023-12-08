@@ -1,18 +1,16 @@
 app-template:
   controllers:
-		main:
-			containers:
-				main:
-					image:
+    main:
+      containers:
+        main:
+          image:
             repository: ghcr.io/onedr0p/sabnzbd
             tag: 4.1.0
-
   service:
     main:
       ports:
         http:
           port: &port 8080
-
   ingress:
     main:
       enabled: true
@@ -23,26 +21,23 @@ app-template:
         nginx.ingress.kubernetes.io/auth-url: http://authelia.core.svc.cluster.local:80/api/verify
         nginx.ingress.kubernetes.io/auth-signin: https://auth.intropin.be?rm=$request_method
         nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-        nginx.ingress.kubernetes.io/auth-snippet: |
-          proxy_set_header X-Forwarded-Method $request_method;       
+        nginx.ingress.kubernetes.io/auth-snippet: "proxy_set_header X-Forwarded-Method $request_method;       \n"
       hosts:
         - host: &host sabnzbd.intropin.be
           paths:
             - path: /
               pathType: Prefix
               service:
-								name: main
+                name: main
                 port: 8080
       tls:
         - secretName: sabnzbd-letsencrypt-certificate
           hosts: [*host]
-
   podSecurityContext:
     runAsUser: 568
     runAsGroup: 568
     fsGroup: 568
     fsGroupChangePolicy: "Always"
-
   persistence:
     config:
       enabled: true
@@ -51,16 +46,13 @@ app-template:
       size: 1Gi
       mountpath: /config
       storageClass: local-path-ssd
-
     downloads:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "sab-downloads"
       mountpath: /downloads
-
     media:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "media"
       mountpath: /media
-

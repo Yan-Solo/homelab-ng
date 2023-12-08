@@ -1,10 +1,9 @@
----
 app-template:
   controllers:
-		main:
-			containers:
-				main:
-					image:
+    main:
+      containers:
+        main:
+          image:
             repository: ghcr.io/home-assistant/home-assistant
             tag: 2023.12.0
   service:
@@ -12,7 +11,6 @@ app-template:
       ports:
         http:
           port: 8123
-
   ingress:
     main:
       enabled: true
@@ -25,11 +23,11 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-								name: main
+                name: main
                 port: 8123
       tls:
         - secretName: home-assistant-letsencrypt-certificate
-          hosts: 
+          hosts:
             - *host
   persistence:
     config:

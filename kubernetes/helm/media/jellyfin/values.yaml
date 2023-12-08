@@ -1,13 +1,11 @@
 app-template:
-
   controllers:
-		main:
-			containers:
-				main:
-					image:
+    main:
+      containers:
+        main:
+          image:
             repository: ghcr.io/confusedpolarbear/jellyfin-intro-skipper
             tag: 10.8.10
-
   service:
     main:
       ports:
@@ -15,7 +13,6 @@ app-template:
           port: 8096
       type: LoadBalancer
       loadBalancerIP: 192.168.0.61
-
   ingress:
     main:
       enabled: true
@@ -28,18 +25,16 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-								name: main
+                name: main
                 port: 8096
       tls:
         - secretName: jellyfin-letsencrypt-certificate
           hosts: [*host]
-
   podSecurityContext:
     runAsUser: 568
     runAsGroup: 568
     fsGroup: 568
     fsGroupChangePolicy: "Always"
-
   persistence:
     config:
       enabled: true
@@ -48,19 +43,17 @@ app-template:
       size: 1Gi
       mountpath: /config
       storageClass: local-path-ssd
-
     media:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "media"
       mountpath: /media
-
   probes:
     liveness:
       spec:
         exec:
           command:
-          - /usr/bin/env
-          - bash
-          - -c
-          - test -w /config/data/jellyfin.db
+            - /usr/bin/env
+            - bash
+            - -c
+            - test -w /config/data/jellyfin.db

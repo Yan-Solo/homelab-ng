@@ -16,7 +16,6 @@ argo-cd:
         - hosts:
             - *host
           secretName: argocd-letsencrypt-certificate
-
   configs:
     params:
       applicationsetcontroller.policy: "create-only"
@@ -32,37 +31,30 @@ argo-cd:
           - profile
           - email
           - groups
-
       admin.enabled: "true"
       url: https://argocd.intropin.be
       exec.enabled: "true"
       resource.compareoptions: |
         ignoreAggregatedRoles: true
         ignoreResourceStatusField: crd
-
     rbac:
       policy.csv: |
         g, argo-admin, role:admin
         g, admins, role:admin
         g, ArgoCD Admins, role:admin
-
   controller:
     replicas: 1
     pdb:
       enabled: true
       minAvailable: 1
-
   repoServer:
     replicas: 1
-
   applicationSet:
     replicaCount: 1
-
   dex:
     enabled: true
     pdb:
       enabled: true
       minAvailable: 1
-
   global:
     priorityClassName: system-cluster-critical

@@ -1,19 +1,16 @@
 app-template:
-
   controllers:
-		main:
-			containers:
-				main:
-					image:
+    main:
+      containers:
+        main:
+          image:
             repository: registry.hub.docker.com/fallenbagel/jellyseerr
             tag: 1.7.0
-
   service:
     main:
       ports:
         http:
           port: &port 5055
-
   ingress:
     main:
       enabled: true
@@ -26,12 +23,11 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-								name: main
+                name: main
                 port: *port
       tls:
         - secretName: requests-letsencrypt-certificate
           hosts: [*host]
-
   persistence:
     config:
       enabled: true
