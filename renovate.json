@@ -7,7 +7,7 @@
   "timezone": "Europe/Brussels",
   "helm-values": {
     "fileMatch": [
-      "flux\/.*helm-release.ya?ml$"
+      "kubernets\/helm\/.*\/.*\/values.ya?ml$"
     ]
   },
   "automerge": true
