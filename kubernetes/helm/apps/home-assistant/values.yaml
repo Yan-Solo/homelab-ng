@@ -39,11 +39,6 @@ app-template:
       storageClass: local-path-ssd
     config:
       enabled: true
-      type: custom
-      volumeSpec:
-        configMap:
-          name: configuration
-      subPath:
-        - path: configuration.yaml
-          mountPath: /config/configuration.yaml
+      type: configMap
+      name: configuration
   hostNetwork: true
