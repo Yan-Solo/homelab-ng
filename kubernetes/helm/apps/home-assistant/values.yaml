@@ -48,6 +48,4 @@ app-template:
             - path: /config/configuration.yaml
               readOnly: true
               subPath: configuration.yaml
-      globalMounts:
-        - path: /config/configuration.yaml
   hostNetwork: true
