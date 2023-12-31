@@ -36,6 +36,8 @@ app-template:
       accessMode: ReadWriteOnce
       size: 1Gi
       storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
     configuration:
       enabled: true
       type: configMap
