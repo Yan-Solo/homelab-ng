@@ -48,4 +48,5 @@ app-template:
             - path: /config/configuration.yaml
               readOnly: true
               subPath: configuration.yaml
-  hostNetwork: true
+  defaultPodOptions:
+    hostNetwork: true
