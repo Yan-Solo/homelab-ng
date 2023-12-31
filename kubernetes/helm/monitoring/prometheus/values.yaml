@@ -4,9 +4,6 @@ kube-prometheus-stack:
   alertmanager:
     enabled: false
   grafana:
-    plugins:
-      - grafana-googlesheets-datasource
-      - grafana-image-renderer
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
     grafana.ini:
