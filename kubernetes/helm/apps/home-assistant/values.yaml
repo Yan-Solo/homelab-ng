@@ -42,6 +42,12 @@ app-template:
       enabled: true
       type: configMap
       name: configuration
+      advancedMounts:
+        main:
+          main:
+            - path: /config/configuration.yaml
+              readOnly: true
+              subPath: configuration.yaml
       globalMounts:
         - path: /config/configuration.yaml
   hostNetwork: true
