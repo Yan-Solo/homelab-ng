@@ -13,13 +13,14 @@ app-template:
   persistence:
     config-yaml:
       enabled: true
-      type: custom
-      volumeSpec:
-        configMap:
-          name: config
-      subPath:
-        - path: config.yaml
-          mountPath: /usr/src/app/config.yaml
+      type: configMap
+      name: config
+      advancedMounts:
+        main:
+          main:
+            - path: /usr/src/app/config.yaml
+              readOnly: true
+              subPath: config.yaml
   readinessProbe:
     enabled: false
   startupProbe:
