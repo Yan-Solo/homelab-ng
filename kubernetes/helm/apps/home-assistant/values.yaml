@@ -48,5 +48,11 @@ app-template:
             - path: /config/configuration.yaml
               readOnly: true
               subPath: configuration.yaml
+    usb:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/ttyUSB0
+      mountPath: /dev/zigbee
+      hostPathType: CharDevice
   defaultPodOptions:
     hostNetwork: true
