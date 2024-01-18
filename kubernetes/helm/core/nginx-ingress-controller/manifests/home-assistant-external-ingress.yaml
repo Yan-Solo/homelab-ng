@@ -5,6 +5,7 @@ metadata:
   name: home-assistant-external-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "issuer"
 spec:
   rules:
   - host: ha.intropin.be 
@@ -17,6 +18,10 @@ spec:
             name: home-assistant-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - ha.intropin.be
+    secretName: home-assistant-tls-secret
 ---
 apiVersion: v1
 kind: Service
