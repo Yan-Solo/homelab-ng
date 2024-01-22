@@ -1,0 +1,34 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: jammsen/palworld-dedicated-server:latest
+            tag: latest
+          env:
+            ALWAYS_UPDATE_ON_START: true
+            MAX_PLAYERS: 32
+            MULTITHREAD_ENABLED: true
+            COMMUNITY_SERVER: true
+            RCON_ENABLED: true
+            RCON_PORT: 25575
+            PUBLIC_PORT: 8211
+            SERVER_NAME: bambi-palworld
+            SERVER_DESCRIPTION: Palworld-Dedicated-Server running in Docker by Bambi
+            SERVER_PASSWORD: bambi4ever
+            ADMIN_PASSWORD: bambi4ever 
+  service:
+    main:
+      ports:
+        http:
+          port: 8211
+          nodePort: 8211
+  persistence:
+    palworld:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 30Gi
+      mountpath: /palworld
+      storageClass: local-path-ssd
