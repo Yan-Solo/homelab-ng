@@ -41,3 +41,21 @@ app-template:
       size: 30Gi
       mountpath: /palworld
       storageClass: local-path-ssd
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "palworld"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host palworld.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                name: main
+                port: *port
+                protocol: UDP
+      tls:
+        - secretName: palworld-letsencrypt-certificate
+          hosts: [*host]
