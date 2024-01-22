@@ -10,7 +10,7 @@ app-template:
             ALWAYS_UPDATE_ON_START: true
             MAX_PLAYERS: 32
             MULTITHREAD_ENABLED: true
-            COMMUNITY_SERVER: true
+            COMMUNITY_SERVER: false
             RCON_ENABLED: true
             RCON_PORT: 25575
             PUBLIC_PORT: 8211
