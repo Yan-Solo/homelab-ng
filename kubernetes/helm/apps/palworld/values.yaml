@@ -18,6 +18,13 @@ app-template:
             SERVER_DESCRIPTION: Palworld-Dedicated-Server running in Docker by Bambi
             SERVER_PASSWORD: bambi4ever
             ADMIN_PASSWORD: bambi4ever 
+        probes:
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
+          startup:
+            enabled: false
   service:
     main:
       type: LoadBalancer
@@ -41,10 +48,3 @@ app-template:
       size: 30Gi
       mountpath: /palworld
       storageClass: local-path-ssd
-  probes:
-    startup:
-      enabled: false
-    liveness:
-      enabled: false
-    readiness:
-      enabled: false
