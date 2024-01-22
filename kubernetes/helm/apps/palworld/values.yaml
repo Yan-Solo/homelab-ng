@@ -20,10 +20,19 @@ app-template:
             ADMIN_PASSWORD: bambi4ever 
   service:
     main:
+      type: LoadBalancer
+      externalTrafficPolicy: Cluster
+      loadBalancerIP: 192.168.0.69
+      annotations:
+        metallb.universe.tf/allow-shared-ip: palworld
       ports:
         http:
+          enabled: false
+          primary: false
+        game:
+          enabled: true
           port: 8211
-          nodePort: 8211
+          protocol: UDP
   persistence:
     palworld:
       enabled: true
@@ -32,3 +41,10 @@ app-template:
       size: 30Gi
       mountpath: /palworld
       storageClass: local-path-ssd
+  probes:
+    startup:
+      enabled: false
+    liveness:
+      enabled: false
+    readiness:
+      enabled: false
