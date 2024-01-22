@@ -14,6 +14,7 @@ app-template:
             RCON_ENABLED: true
             RCON_PORT: 25575
             PUBLIC_PORT: 8211
+            PUBLIC_IP: 84.193.166.67
             SERVER_NAME: bambi-palworld
             SERVER_DESCRIPTION: Palworld-Dedicated-Server running in Docker by Bambi
             SERVER_PASSWORD: bambi4ever
