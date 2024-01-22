@@ -54,7 +54,7 @@ app-template:
               pathType: Prefix
               service:
                 name: main
-                port: *port
+                port: 8211
                 protocol: UDP
       tls:
         - secretName: palworld-letsencrypt-certificate
