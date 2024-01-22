@@ -44,9 +44,6 @@ app-template:
   ingress:
     main:
       enabled: true
-      annotations:
-        nginx.org/websocket-services: "palworld"
-        cert-manager.io/cluster-issuer: "issuer"
       hosts:
         - host: &host palworld.intropin.be
           paths:
@@ -54,8 +51,5 @@ app-template:
               pathType: Prefix
               service:
                 name: main
-                port: 8211
+                port: 8212
                 protocol: UDP
-      tls:
-        - secretName: palworld-letsencrypt-certificate
-          hosts: [*host]
