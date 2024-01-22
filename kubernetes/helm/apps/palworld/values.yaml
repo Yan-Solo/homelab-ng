@@ -4,21 +4,17 @@ app-template:
       containers:
         main:
           image:
-            repository: registry.hub.docker.com/jammsen/palworld-dedicated-server
+            repository: registry.hub.docker.com/thijsvanloef/palworld-server-docker
             tag: latest
           env:
-            ALWAYS_UPDATE_ON_START: true
-            MAX_PLAYERS: 32
-            MULTITHREAD_ENABLED: true
-            COMMUNITY_SERVER: false
-            RCON_ENABLED: true
+            PUID: 1000
+            PORT: 8211
+            PLAYERS: 16
+            MULTITHREADING: true
+            ENABLE_RCON: true
             RCON_PORT: 25575
-            PUBLIC_PORT: 8211
-            PUBLIC_IP: 84.193.166.67
-            SERVER_NAME: bambi-palworld
-            SERVER_DESCRIPTION: Palworld-Dedicated-Server running in Docker by Bambi
-            SERVER_PASSWORD: bambi4ever
-            ADMIN_PASSWORD: bambi4ever 
+            ADMIN_PASSWORD: "bambi4ever"
+            COMMUNITY: false
           probes:
             liveness:
               enabled: false
@@ -41,15 +37,3 @@ app-template:
       size: 30Gi
       mountpath: /palworld
       storageClass: local-path-ssd
-  ingress:
-    main:
-      enabled: true
-      hosts:
-        - host: &host palworld.intropin.be
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                name: main
-                port: 8212
-                protocol: UDP
