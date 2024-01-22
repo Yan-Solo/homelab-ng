@@ -4,7 +4,7 @@ app-template:
       containers:
         main:
           image:
-            repository: jammsen/palworld-dedicated-server:latest
+            repository: registry.hub.docker.com/jammsen/palworld-dedicated-server
             tag: latest
           env:
             ALWAYS_UPDATE_ON_START: true
