@@ -81,7 +81,7 @@ app-template:
         backup:
           dependsOn: main
           image:
-            repository: registry.hub.docker.com/_/busybox
+            repository: registry.hub.docker.com/library/busybox
             tag: 1.35.0
           args:
             - "rsync -avz /palword jan@192.168.0.219:/home/jan/palworld_backups/"
