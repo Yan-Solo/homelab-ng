@@ -78,6 +78,14 @@ app-template:
               enabled: false
             startup:
               enabled: false
+        backup:
+          dependsOn: main
+          image:
+            repository: registry.hub.docker.com/busybox
+            tag: 1.35.0
+          args:
+            - "rsync -avz /palword jan@192.168.0.219:/home/jan/palworld_backups/"
+
   service:
     main:
       ports:
@@ -100,3 +108,5 @@ app-template:
       size: 30Gi
       mountpath: /palworld
       storageClass: local-path-ssd
+      globalMounts:
+        - path: /palworld
