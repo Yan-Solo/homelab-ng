@@ -83,7 +83,11 @@ app-template:
           image:
             repository: registry.hub.docker.com/library/busybox
             tag: 1.35.0
-          command: "ls -l /"
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              rsync -avz /palworld jan@192.168.0.213:/home/jan/palworld
 
   service:
     main:
