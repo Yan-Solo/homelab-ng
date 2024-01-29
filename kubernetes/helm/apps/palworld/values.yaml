@@ -81,8 +81,8 @@ app-template:
         backup:
           dependsOn: main
           image:
-            repository: registry.hub.docker.com/library/busybox
-            tag: 1.35.0
+            repository: registry.hub.docker.com/instrumentisto/rsync-ssh
+            tag: alpine3.19
           command:
             - "/bin/sh"
             - "-c"
