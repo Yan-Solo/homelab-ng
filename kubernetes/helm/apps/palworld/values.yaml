@@ -90,7 +90,7 @@ app-template:
               while true; do
                 current_time=$(date +"%H:%M")
                 if [ "$current_time" == "06:00" ]; then
-                  rsync -avz /palworld jan@192.168.0.219:/home/jan/palworld/$(date +"%F")
+                  rsync -e "ssh -o StrictHostKeyChecking=no -i /palworld/ssh_key" -avz /palworld root@192.168.0.30:/mnt/palworld/$(date +"%F")
                   echo "rsync command executed at 6 am"
                   sleep $((24 * 60 * 60))  # Sleep for 24 hours (next day)
                 else
