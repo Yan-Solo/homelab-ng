@@ -19,7 +19,7 @@ app-template:
             # DIFFICULTY: 
             # DAYTIME_SPEEDRATE: 
             # NIGHTTIME_SPEEDRATE: 
-            EXP_RATE: 10 
+            EXP_RATE: 1
             # PAL_CAPTURE_RATE: 
             # PAL_SPAWN_NUM_RATE: 
             # PAL_DAMAGE_RATE_ATTACK: 
