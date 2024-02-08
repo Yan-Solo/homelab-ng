@@ -50,11 +50,13 @@ kube-prometheus-stack:
             enabled: false
         provider:
           allowUiUpdates: false
-      datasources:
-        enabled: true
-        defaultDatasourceEnabled: true
-        isDefaultDatasource: true
-        uid: prometheus
+    additionalDataSources:
+      - name: loki
+        type: loki
+        access: proxy
+        org_id: 1
+        url: 'http://loki-stack:3100'
+        version: 1
   prometheus:
     fullNameOverride: prometheus
     prometheusSpec:
