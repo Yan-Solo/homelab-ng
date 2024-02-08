@@ -7,16 +7,6 @@ argo-cd:
     ingress:
       enabled: true
       hostname: argocd.intropin.be
-      hosts:
-        - &host argocd.intropin.be
-      annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        nginx.org/websocket-services: "argocd-server"
-        cert-manager.io/cluster-issuer: "issuer"
-      tls:
-        - hosts:
-            - *host
-          secretName: argocd-letsencrypt-certificate
   configs:
     params:
       applicationsetcontroller.policy: "create-only"
