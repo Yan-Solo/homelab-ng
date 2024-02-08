@@ -6,6 +6,7 @@ argo-cd:
       minAvailable: 1
     ingress:
       enabled: true
+      hostname: argocd.intropin.be
       hosts:
         - &host argocd.intropin.be
       annotations:
