@@ -7,6 +7,7 @@ argo-cd:
     ingress:
       enabled: true
       hostname: argocd.intropin.be
+      tls: true
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         nginx.org/websocket-services: "argocd-server"
