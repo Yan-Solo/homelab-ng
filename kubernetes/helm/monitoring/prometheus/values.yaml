@@ -50,6 +50,11 @@ kube-prometheus-stack:
             enabled: false
         provider:
           allowUiUpdates: false
+      datasources:
+        enabled: true
+        defaultDatasourceEnabled: true
+        isDefaultDatasource: true
+        uid: prometheus
     additionalDataSources:
       - name: prometheus
         url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
