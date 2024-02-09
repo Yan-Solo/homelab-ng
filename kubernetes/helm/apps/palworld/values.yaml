@@ -72,7 +72,7 @@ app-template:
             ENABLE_RCON: true
             RCON_PORT: 25575
           envFrom:
-            - secretRef:
+            secretRef:
               name: discord-webhook-secret
 
           resources:
