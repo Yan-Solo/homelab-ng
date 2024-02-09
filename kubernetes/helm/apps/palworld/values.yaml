@@ -72,8 +72,8 @@ app-template:
             ENABLE_RCON: true
             RCON_PORT: 25575
           envFrom:
-            secretRef:
-              name: palworld-discord-webhook-secret
+            - secretRef:
+              name: discord-webhook-secret
 
           resources:
             limits:
