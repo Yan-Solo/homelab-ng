@@ -1,12 +1,11 @@
 loki-stack:
-  loki:
-    commonConfig:
-      replication_factor: 1
-    storage:
-      type: 'filesystem'
-    singleBinary:
-      replicas: 1
-    read:
-      replicas: 1
-    write:
-      replicas: 1
+  commonConfig:
+    replication_factor: 1
+  storage:
+    type: 'filesystem'
+  singleBinary:
+    replicas: 1
+  read:
+    replicas: 1
+  write:
+    replicas: 1
