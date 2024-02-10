@@ -9,3 +9,4 @@ loki:
     replicas: 1
   write:
     replicas: 1
+  auth_enabled: false
