@@ -1,16 +1,8 @@
 loki-stack:
   loki:
     commonConfig:
-      replication_factor: 3
+      replication_factor: 1
     storage:
-      bucketNames:
-        chunks: loki-chunks
-        ruler: loki-ruler
-        admin: loki-admin
-      type: 's3'
-      s3:
-        endpoint: foo.aws.com
-        secretAccessKey: supersecret
-        accessKeyId: secret
-  singleBinary:
-    replicas: 3
+      type: 'filesystem'
+    singleBinary:
+      replicas: 1
