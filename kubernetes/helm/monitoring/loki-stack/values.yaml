@@ -2,5 +2,3 @@ loki-stack:
   namespace: monitoring
   loki:
     isDefault: false
-  grafana:
-    enabled: true
