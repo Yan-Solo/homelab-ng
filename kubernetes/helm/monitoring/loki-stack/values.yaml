@@ -1,4 +1,4 @@
-loki-stack:
+loki:
   commonConfig:
     replication_factor: 1
   storage:
