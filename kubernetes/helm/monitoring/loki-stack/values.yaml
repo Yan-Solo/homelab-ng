@@ -1,13 +1,7 @@
 loki:
   commonConfig:
-    replication_factor: 1
+    replication_factor: 2
   storage:
     type: 'filesystem'
-  singleBinary:
-    replicas: 1
-  read:
-    replicas: 1
-  write:
-    replicas: 1
   loki:
     auth_enabled: false
