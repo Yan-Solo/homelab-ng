@@ -1,27 +1,48 @@
 loki:
-  loki:
+  
+  # Values for loki deployment
+  
+  # Configure Loki to run in single binary mode (monolithic)
+  singleBinary:
+    # Set replicas to 1 for single-node deployment
+    replicas: 1
+  
+  # Configure storage for Loki (adjust based on your needs)
+  storage:
+    # Use local storage for a single node setup
+    filesystem:
+      # Adjust directory path as needed
+      directory: /var/loki/chunks
+  
+  # Configure Grafana Loki API server
+  grafana_api:
+    # Disable authentication for simplicity (not recommended for production)
     enabled: true
-    isDefault: true
-    url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
-    readinessProbe:
-      httpGet:
-        path: /ready
-        port: http-metrics
-      initialDelaySeconds: 45
-    livenessProbe:
-      httpGet:
-        path: /ready
-        port: http-metrics
-      initialDelaySeconds: 45
-    datasource:
-      jsonData: "{}"
-      uid: ""
+    force_accept_compressed_responses: true
   
-  
+  # Logs from pods will be automatically streamed to Loki by Promtail
+  # Configure Promtail deployment (adjust selectors as needed)
   promtail:
-    enabled: true
-    config:
-      logLevel: info
-      serverPort: 3101
-      clients:
-        - url: http://{{ .Release.Name }}:3100/loki/api/v1/push
+    # Enable scraping logs from all pods in all namespaces
+    selector: {}
+    # Adjust paths and labels based on your log format
+    scrape_configs:
+    - job_name: kubernetes
+      kubernetes_sd_configs:
+      - role: pod
+        # Adjust label selector to filter specific pods or namespaces
+        selector: {}
+      pipeline_stage:
+      - stream: {selector: {kubernetes.k8s.io/namespace: "<your-namespace>"} }
+        transforms:
+        - label: {name: "namespace", value: "${kubernetes.namespace}" }
+  
+  # Optional: Configure resources for Loki and Promtail deployments
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+   
