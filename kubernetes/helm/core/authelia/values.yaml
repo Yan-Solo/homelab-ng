@@ -121,6 +121,10 @@ authelia:
               - email
               - profile
             userinfo_signing_algorithm: none
+      server:
+        buffers:
+          read: 8192
+          write: 8192
     notifier:
       filesystem:
         enabled: true
