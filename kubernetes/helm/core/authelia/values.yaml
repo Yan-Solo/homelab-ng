@@ -56,8 +56,8 @@ authelia:
     session:
       name: authelia_session
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
-      expiration: 1h # 1 hour
-      inactivity: 1h # 1 hour
+      expiration: 24h # 24 hour
+      inactivity: 24h # 24 hour
       remember_me_duration: 1M # month
       domain: intropin.be # Should match whatever your root protected domain is
       redis:
