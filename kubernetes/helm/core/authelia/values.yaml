@@ -125,6 +125,8 @@ authelia:
         buffers:
           read: 8192
           write: 8192
+      log:
+        level: debug
     notifier:
       filesystem:
         enabled: true
