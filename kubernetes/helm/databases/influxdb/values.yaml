@@ -16,4 +16,5 @@ influxdb:
     enabled: true
     size: 8Gi
   env:
-    TZ: "Europe/Brussels"
+    - name: TZ
+      value: Europe/Brussels
