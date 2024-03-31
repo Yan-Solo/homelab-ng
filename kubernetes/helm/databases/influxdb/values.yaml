@@ -15,3 +15,5 @@ influxdb:
   persistence:
     enabled: true
     size: 8Gi
+  env:
+    TZ: "Europe/Brussels"
