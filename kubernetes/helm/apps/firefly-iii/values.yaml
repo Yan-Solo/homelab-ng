@@ -12,6 +12,4 @@ firefly-iii-stack:
       envValueFrom: {}
       existingSecret: ''
   importer:
-    config:
-      env:
-        FIREFLY_III_URL: "https://firefly.intropin.be"
+    fireflyiii.url: "https://firefly.intropin.be"
