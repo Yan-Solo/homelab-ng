@@ -13,3 +13,6 @@ firefly-iii-stack:
       existingSecret: ''
   importer:
     fireflyiii.url: "https://firefly.intropin.be"
+    config:
+      env:
+        FIREFLY_III_URL: "https://firefly.intropin.be"
