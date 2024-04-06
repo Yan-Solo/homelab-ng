@@ -1,2 +1,13 @@
 firefly-iii-stack:
-  placeholder: true
+  firefly-iii:
+    config:
+      env:
+        DB_HOST: firefly-db
+        DEFAULT_LANGUAGE: en_US
+        DEFAULT_LOCALE: equal
+        TRUSTED_PROXIES: "**"
+        TZ: Europe/Brussels
+        APP_KEY: 9xmisGDZACsd5kDc9RS9fLPSt5WZGjea
+      envValueFrom: {}
+      existingSecret: ''
+
