@@ -8,6 +8,7 @@ firefly-iii-stack:
         TRUSTED_PROXIES: "**"
         TZ: Europe/Brussels
         APP_KEY: 9xmisGDZACsd5kDc9RS9fLPSt5WZGjea
+        DB_HOST: "firefly-iii-firefly-db"
       envValueFrom: {}
       existingSecret: ''
 
