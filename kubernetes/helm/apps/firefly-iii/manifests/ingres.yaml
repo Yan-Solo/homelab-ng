@@ -13,12 +13,12 @@ spec:
       http:
         paths:
           - backend:
-            service:
-              name: firefly-iii
-              port:
-                number:
-            path: /
-            pathType: Prefix
+              service:
+                name: firefly-iii
+                port:
+                  number: 80
+              path: /
+              pathType: Prefix
   tls:
     - hosts:
         - firefly.intropin.be
