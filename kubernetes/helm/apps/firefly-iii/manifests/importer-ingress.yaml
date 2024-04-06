@@ -1,0 +1,26 @@
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: issuer
+    nginx.org/websocket-services: firefly-iii-importer
+  name: firefly-iii-importer
+  namespace: apps
+spec:
+  rules:
+    - host: firefly-importer.intropin.be
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: firefly-iii-importer
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - firefly-importer.intropin.be
+      secretName: firefly-impoerter-letsencrypt-certificate
