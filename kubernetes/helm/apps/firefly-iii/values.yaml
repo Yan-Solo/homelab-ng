@@ -11,4 +11,7 @@ firefly-iii-stack:
         DB_HOST: "firefly-iii-firefly-db"
       envValueFrom: {}
       existingSecret: ''
-
+  importer:
+    config:
+      env:
+        FIREFLY_III_URL: "https://firefly.intropin.be"
