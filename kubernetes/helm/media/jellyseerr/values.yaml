@@ -8,6 +8,7 @@ app-template:
             tag: 1.7.0
   service:
     main:
+      controller: main
       ports:
         http:
           port: &port 5055

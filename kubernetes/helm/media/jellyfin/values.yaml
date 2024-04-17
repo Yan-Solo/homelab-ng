@@ -8,6 +8,7 @@ app-template:
             tag: 10.8.10
   service:
     main:
+      controller: main
       ports:
         http:
           port: 8096
@@ -41,13 +42,15 @@ app-template:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
-      mountpath: /config
+      globalMounts:
+        - path: /config
       storageClass: local-path-ssd
     media:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "media"
-      mountpath: /media
+      globalMounts:
+        - path: /media
   probes:
     liveness:
       spec:

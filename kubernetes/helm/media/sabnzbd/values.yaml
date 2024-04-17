@@ -8,6 +8,7 @@ app-template:
             tag: 4.2.3
   service:
     main:
+      controller: main
       ports:
         http:
           port: &port 8080
@@ -44,15 +45,19 @@ app-template:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 1Gi
-      mountpath: /config
+      globalMounts:
+        - path: /config
       storageClass: local-path-ssd
     downloads:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "sab-downloads"
       mountpath: /downloads
+      globalMounts:
+        - path: /media
     media:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "media"
-      mountpath: /media
+      globalMounts:
+        - path: /media
