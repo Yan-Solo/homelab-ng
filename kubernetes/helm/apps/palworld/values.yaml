@@ -127,7 +127,6 @@ app-template:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 30Gi
-      mountpath: /palworld
       storageClass: local-path-ssd
       globalMounts:
         - path: /palworld

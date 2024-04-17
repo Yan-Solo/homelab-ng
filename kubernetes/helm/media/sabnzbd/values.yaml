@@ -52,7 +52,6 @@ app-template:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "sab-downloads"
-      mountpath: /downloads
       globalMounts:
         - path: /media
     media:
