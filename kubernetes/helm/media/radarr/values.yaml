@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/radarr
-            tag: 5.3.6.8612
+            tag: 5.4.6.8723
   service:
     main:
       controller: main
