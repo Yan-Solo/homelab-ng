@@ -29,8 +29,8 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: main
-                port: 8080
+                identifier: main
+                port: *port
       tls:
         - secretName: sabnzbd-letsencrypt-certificate
           hosts: [*host]
