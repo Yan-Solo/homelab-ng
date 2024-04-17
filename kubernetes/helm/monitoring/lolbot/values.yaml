@@ -9,6 +9,7 @@ app-template:
   # Chart requires a svc, we don't use one tho
   service:
     main:
+      controller: main
       enabled: false
   persistence:
     config-yaml:
