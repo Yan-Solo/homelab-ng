@@ -8,8 +8,7 @@ argo-workflows:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
-        - host: 
-          - workflows.intropin.be
+        - workflows.intropin.be
       paths:
         - /
       tls:
