@@ -9,13 +9,13 @@ argo-workflows:
         cert-manager.io/cluster-issuer: "issuer"
         nginx.org/websocket-services: "workflows-argo-workflows-server"
       hosts:
-        - argocd.intropin.be
+        - workflows.intropin.be
       paths:
-        - /workflows
+        - /
       tls:
-        - secretName: argocd-letsencrypt-certificate
+        - secretName: workflows-letsencrypt-certificate
           hosts:
-            - argocd.intropin.be
+            - workflows.intropin.be
     secure: true
     authModes:
       - server
