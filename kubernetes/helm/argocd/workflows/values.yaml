@@ -8,12 +8,10 @@ argo-workflows:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
-        - host: &host workflows.intropin.be
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                port: 2746
+        - host: 
+          - &host workflows.intropin.be
+      paths:
+        - /
       tls:
         - secretName: workflows-letsencrypt-certificate
           hosts: [*host]
