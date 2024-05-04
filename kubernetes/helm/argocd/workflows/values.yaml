@@ -13,7 +13,6 @@ argo-workflows:
             - path: /
               pathType: Prefix
               service:
-                identifier: main
                 port: 2746
       tls:
         - secretName: workflows-letsencrypt-certificate
