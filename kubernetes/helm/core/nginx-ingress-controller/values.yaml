@@ -17,3 +17,8 @@ ingress-nginx:
     replicaCount: 1
     minAvailable: 1
     allowSnippetAnnotations: true
+    dnsPolicy: "ClusterFirst"
+    dnsConfig:
+      nameservers:
+        - 8.8.8.8
+        - 8.8.4.4
