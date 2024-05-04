@@ -2,9 +2,9 @@ argo-workflows:
   server:
     ingress:
       enabled: true
-      hostname: argocd.intropin.be
+      hostname: workflows.intropin.be
       tls: true
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        nginx.org/websocket-services: "argocd-server"
+        nginx.org/websocket-services: "workflows-argo-workflows-server"
         cert-manager.io/cluster-issuer: "issuer"
