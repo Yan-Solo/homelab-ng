@@ -8,6 +8,8 @@ argo-workflows:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         cert-manager.io/cluster-issuer: "issuer"
         nginx.org/websocket-services: "argo-workflows-server"
+        nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For" # Use X-Forwarded-For header to get the real IP
+        nginx.ingress.kubernetes.io/set-real-ip-from: "0.0.0.0/0" # Accept real IP from any source
       hosts:
         - workflows.intropin.be
       paths:
