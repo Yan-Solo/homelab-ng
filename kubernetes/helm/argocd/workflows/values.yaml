@@ -2,19 +2,6 @@ argo-workflows:
   server:
     ingress:
       enabled: true
-      hostname: workflows.intropin.be
-      tls: true
-      annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        cert-manager.io/cluster-issuer: "issuer"
-        nginx.org/websocket-services: "argo-workflows-server"
-        nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For" # Use X-Forwarded-For header to get the real IP
-        nginx.ingress.kubernetes.io/set-real-ip-from: "0.0.0.0/0" # Accept real IP from any source
-      hosts:
-        - workflows.intropin.be
+      hostname: argocd.intropin.be
       paths:
-        - /
-      tls:
-        - secretName: workflows-letsencrypt-certificate
-          hosts:
-            - workflows.intropin.be
+        - /workflows
