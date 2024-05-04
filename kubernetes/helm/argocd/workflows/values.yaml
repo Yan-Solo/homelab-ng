@@ -17,3 +17,5 @@ argo-workflows:
           hosts:
             - workflows.intropin.be
     secure: true
+    authModes:
+      - server
