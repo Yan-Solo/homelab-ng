@@ -9,9 +9,10 @@ argo-workflows:
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
         - host: 
-          - &host workflows.intropin.be
+          - workflows.intropin.be
       paths:
         - /
       tls:
         - secretName: workflows-letsencrypt-certificate
-          hosts: [*host]
+          hosts:
+            - workflows.intropin.be
