@@ -16,3 +16,5 @@ argo-workflows:
         - secretName: argocd-server-tls
           hosts:
             - argocd.intropin.be
+
+    secure: true
