@@ -19,3 +19,6 @@ argo-workflows:
     secure: true
     authModes:
       - server
+  workflow:
+    serviceAccount:
+      create: true
