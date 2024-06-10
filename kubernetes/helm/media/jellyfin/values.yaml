@@ -4,8 +4,8 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/confusedpolarbear/jellyfin-intro-skipper
-            tag: 10.8.10
+            repository: lscr.io/linuxserver/jellyfin
+            tag: 10.9.6
   service:
     main:
       controller: main
