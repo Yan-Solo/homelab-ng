@@ -8,7 +8,7 @@ app-template:
         main:
           image:
             repository: lscr.io/linuxserver/jellyfin
-            tag: 10.9.6
+            tag: 2021.12.16
   service:
     main:
       controller: main
