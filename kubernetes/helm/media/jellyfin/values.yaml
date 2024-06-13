@@ -1,4 +1,7 @@
 app-template:
+  global:
+    labels:
+      app-name: "dvs-dev"
   controllers:
     main:
       containers:
