@@ -1,4 +1,10 @@
 app-template:
+  defaultPodOptions:
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "Always"
   controllers:
     main:
       containers:
@@ -34,11 +40,6 @@ app-template:
       tls:
         - secretName: bazarr-letsencrypt-certificate
           hosts: [*host]
-  podSecurityContext:
-    runAsUser: 65534
-    runAsGroup: 65534
-    fsGroup: 65534
-    fsGroupChangePolicy: "Always"
   persistence:
     config:
       enabled: true
