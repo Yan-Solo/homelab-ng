@@ -1,7 +1,10 @@
 app-template:
   defaultPodOptions:
-    labels:
-      app-name: "dvs-dev"
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "Always"
   controllers:
     main:
       containers:
@@ -34,11 +37,6 @@ app-template:
       tls:
         - secretName: jellyfin-letsencrypt-certificate
           hosts: [*host]
-  podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
-    fsGroupChangePolicy: "Always"
   persistence:
     config:
       enabled: true
