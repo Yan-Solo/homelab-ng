@@ -1,9 +1,11 @@
 loki:
+  deploymentMode: 'SingleBinary<->SimpleScalable'
   loki:
     commonConfig:
       replication_factor: 1
     storage:
       type: 'filesystem'
     auth_enabled: false
+    useTestSchema: true
   singleBinary:
     replicas: 1
