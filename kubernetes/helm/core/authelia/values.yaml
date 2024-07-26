@@ -57,8 +57,8 @@ authelia:
       buffers:
         read: 8192
         write: 8192
-      log:
-        level: 'debug'
+    log:
+      level: 'debug'
     session:
       name: authelia_session
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
