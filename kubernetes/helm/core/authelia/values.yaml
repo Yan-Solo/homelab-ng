@@ -59,6 +59,7 @@ authelia:
         write: 8192
     log:
       level: 'debug'
+      format: 'json'
     session:
       name: authelia_session
       secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
