@@ -36,7 +36,7 @@ authelia:
         enabled: true
         path: /config/users_database.yml
         password:
-          algorith: argon2id
+          algorithm: argon2id
           iterations: 1
           salt_length: 16
           parallelism: 8
@@ -99,6 +99,17 @@ authelia:
           id_token: 1h
           refresh_token: 90m
         enable_client_debug_messages: true
+        jwks:
+          - key_id: ''
+            algorithm: 'RS256'
+            use: 'sig'
+            key:
+              value: |
+                abs
+                123
+              path: '/secrets/oidc.jwk.RS256.pem'
+            certificate_chain:
+              paht: '/secrets/oidc.jwk.RS256.cert'
         enforce_pkce: public_clients_only
         cors:
           endpoints:
