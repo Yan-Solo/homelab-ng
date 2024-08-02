@@ -89,7 +89,10 @@ authelia:
     identity_providers:
       oidc:
         enabled: true
-        hmac_secret: this_is_a_secret_abc123abc123abc
+        hmac_secret: 
+          disabled: false
+          secret_name: '~'
+          value: 'this_is_a_secret_abc123abc123abc'
         lifespans:
           access_token: 1h
           authoize_code: 1m
