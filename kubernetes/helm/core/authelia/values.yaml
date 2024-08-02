@@ -91,7 +91,7 @@ authelia:
         enabled: true
         hmac_secret: 
           disabled: false
-          secret_name: '~'
+          secret_name: ~
           value: 'this_is_a_secret_abc123abc123abc'
         lifespans:
           access_token: 1h
