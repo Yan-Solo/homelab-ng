@@ -6,6 +6,15 @@ authelia:
       nginx.org/websocket-services: "outline"
       cert-manager.io/cluster-issuer: "issuer"
       nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For" # Use X-Forwarded-For header to get the real IP
+    hosts:
+      - host: auth.intropin.be
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - auth.intropin.be
+        secretName: authelia-tls
   pod:
     env:
       - name: TZ
@@ -95,7 +104,7 @@ authelia:
           value: 'this_is_a_secret_abc123abc123abc'
         lifespans:
           access_token: 1h
-          authoize_code: 1m
+          authorize_code: 1m
           id_token: 1h
           refresh_token: 90m
         enable_client_debug_messages: true
