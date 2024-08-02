@@ -75,7 +75,8 @@ authelia:
       find_time: 120
       ban_time: 300
     storage:
-      encryption_key: 7TTiE99YQfT1bBic6W9Mh5HgbozhoVF8QBX8E9AsbJSA2Jux8obqWKqdH1mOvp32 # Now required
+      encryption_key: 
+        value: '7TTiE99YQfT1bBic6W9Mh5HgbozhoVF8QBX8E9AsbJSA2Jux8obqWKqdH1mOvp32'
       local:
         enabled: true
         path: /config/db.sqlite3
