@@ -100,16 +100,16 @@ authelia:
           refresh_token: 90m
         enable_client_debug_messages: true
         jwks:
-          - key_id: ''
-            algorithm: 'RS256'
-            use: 'sig'
-            key:
-              value: |
-                abs
-                123
-              path: '/secrets/oidc.jwk.RS256.pem'
-            certificate_chain:
-              path: '/secrets/oidc.jwk.RS256.cert'
+        - key_id: ''
+          algorithm: 'RS256'
+          use: 'sig'
+          key:
+            value: |
+              abs
+              123
+            path: '/secrets/oidc.jwk.RS256.pem'
+          certificate_chain:
+            path: '/secrets/oidc.jwk.RS256.cert'
         enforce_pkce: public_clients_only
         cors:
           endpoints:
@@ -121,30 +121,30 @@ authelia:
             - https://intropin.be
           allowed_origins_from_client_redirect_uris: false
         clients:
-          - client_id: outline
-            description: Outline
-            client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
-            public: false
-            authorization_policy: one_factor
-            redirect_uris:
-              - https://outline.intropin.be/auth/oidc.callback
-            scopes:
-              - openid
-              - offline_access
-              - profile
-              - email
-          - client_id: argocd
-            description: Argo CD
-            client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
-            public: false
-            authorization_policy: one_factor
-            redirect_uris:
-              - https://argocd.intropin.be/auth/callback
-            scopes:
-              - openid
-              - groups
-              - email
-              - profile
+        - client_id: outline
+          description: Outline
+          client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
+          public: false
+          authorization_policy: one_factor
+          redirect_uris:
+            - https://outline.intropin.be/auth/oidc.callback
+          scopes:
+            - openid
+            - offline_access
+            - profile
+            - email
+        - client_id: argocd
+          description: Argo CD
+          client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
+          public: false
+          authorization_policy: one_factor
+          redirect_uris:
+            - https://argocd.intropin.be/auth/callback
+          scopes:
+            - openid
+            - groups
+            - email
+            - profile
     notifier:
       filesystem:
         enabled: true
