@@ -1,154 +1,84 @@
 authelia:
-  domain: intropin.be
-  ingress:
-    enabled: true
-    annotations:
-      nginx.org/websocket-services: "outline"
-      cert-manager.io/cluster-issuer: "issuer"
-      nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For" # Use X-Forwarded-For header to get the real IP
-  pod:
-    env:
-      - name: TZ
-        value: Europe/Brussels
-    extraVolumeMounts:
-      - mountPath: /config/users_database.yml
-        name: authelia-userdb
-        readOnly: true
-        subPath: users_database.yaml
-    extraVolumes:
-      - name: authelia-userdb
-        configMap:
-          name: authelia-userdb
-          items:
-            - key: users_database.yaml
-              path: users_database.yaml
-  configMap:
-    enabled: true
-    theme: dark
-    totp:
-      issuer: authelia.com
-    ntp:
-      address: be.pool.ntp.org
+  config:
+    storage:
+      local:
+        path: /config/db.sqlite3
+
     authentication_backend:
-      ldap:
-        enabled: false
       file:
-        enabled: true
-        path: /config/users_database.yml
-        password:
-          algorithm: argon2id
-          iterations: 1
-          salt_length: 16
-          parallelism: 8
-          memory: 64
+        path: /config/users.yml
+
     access_control:
       default_policy: deny
       rules:
-        - domain: '*.intropin.be'
+        - domain: "*.intropin.be"
           policy: one_factor
-          subject:
-            - ['group:admin']
-        - domain: outline.intropin.be
-          subject:
-            - ['group:admin']
-            - ['group:users']
-    server:
-      buffers:
-        read: 8192
-        write: 8192
-    log:
-      level: 'debug'
+
     session:
       name: authelia_session
-      secret: V9eur43qxzzsaJ7q6I7lQ29U4NV4CcdGABKvSJbzjtOeDUbMcUr11yMOJjPvjQz9
-      expiration: 24h # 24 hour
-      inactivity: 24h # 24 hour
-      remember_me: 1M # month
-      cookies: 
-        - domain: 'intropin.be' # Should match whatever your root protected domain is
-          subdomain: 'auth'
-          default_redirection_url: 'https://auth.intropin.be'
-      redis:
-        enabled: false
+      secret: your-session-secret
+      expiration: 3600
+      domain: intropin.be
+
     regulation:
       max_retries: 3
       find_time: 120
       ban_time: 300
-    storage:
-      encryption_key: 
-        disabled: false
-        secret_name: ~
-        value: '7TTiE99YQfT1bBic6W9Mh5HgbozhoVF8QBX8E9AsbJSA2Jux8obqWKqdH1mOvp32'
-      local:
-        enabled: true
-        path: /config/db.sqlite3
-      postgres:
-        enabled: false
-      mysql:
-        enabled: false
-    identity_providers:
-      oidc:
-        enabled: true
-        hmac_secret: 
-          disabled: false
-          secret_name: ~
-          value: 'this_is_a_secret_abc123abc123abc'
-        lifespans:
-          access_token: 1h
-          authorize_code: 1m
-          id_token: 1h
-          refresh_token: 90m
-        enable_client_debug_messages: true
-        jwks:
-        - key_id: ''
-          algorithm: 'RS256'
-          use: 'sig'
-          key:
-            value: |
-              abs
-              123
-            path: '/secrets/oidc.jwk.RS256.pem'
-          certificate_chain:
-            path: '/secrets/oidc.jwk.RS256.cert'
-        enforce_pkce: public_clients_only
-        cors:
-          endpoints:
-            - authorization
-            - token
-            - revocation
-            - introspection
-          allowed_origins:
-            - https://intropin.be
-          allowed_origins_from_client_redirect_uris: false
-        clients:
-        - client_id: outline
-          description: Outline
-          client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
-          public: false
-          authorization_policy: one_factor
-          redirect_uris:
-            - https://outline.intropin.be/auth/oidc.callback
-          scopes:
-            - openid
-            - offline_access
-            - profile
-            - email
-        - client_id: argocd
-          client_name: 'argocd'
-          description: Argo CD
-          client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng' # The digest of 'insecure_secret'.
-          public: false
-          authorization_policy: one_factor
+
+    jwt_secret: your-jwt-secret
+
+    oidc:
+      clients:
+        - id: argocd
+          description: ArgoCD
+          secret: your-argocd-client-secret
           redirect_uris:
             - https://argocd.intropin.be/auth/callback
           scopes:
             - openid
-            - groups
-            - email
             - profile
-    notifier:
-      filesystem:
-        enabled: true
-        filename: /config/notification.txt
-      smtp:
-        enabled: false
+            - email
+          grant_types:
+            - authorization_code
+          response_types:
+            - code
+          token_endpoint_auth_method: client_secret_post
+
+    server:
+      host: 0.0.0.0
+      port: 9091
+
+    tls:
+      key: /config/ssl/key.pem
+      certificate: /config/ssl/cert.pem
+
+    logging:
+      level: info
+      format: text
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: "issuer"
+    nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
+  hosts:
+    - host: auth.intropin.be
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - auth.intropin.be
+      secretName: authelia-tls
+
+# User file for basic authentication backend
+extraConfigFiles:
+  users.yml: |
+    users:
+      jan:
+        disabled: false
+        displayname: "Jan Peters"
+        password: "$argon2id$v=19$m=65536,t=3,p=4$WmNI29/6AWArBdLdgdEZgA$wB0Uoy9K9KYZ/MR6uQ12k93RVj7h8fKKjdNv+0xN2aY"
+        email: jan.peters1995@gmail.com
+        groups:
+          - admin
