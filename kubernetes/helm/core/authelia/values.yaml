@@ -76,7 +76,8 @@ authelia:
       ban_time: 300
     storage:
       encryption_key: 
-        disabled: true
+        disabled: false
+        secret_name: ~
         value: '7TTiE99YQfT1bBic6W9Mh5HgbozhoVF8QBX8E9AsbJSA2Jux8obqWKqdH1mOvp32'
       local:
         enabled: true
