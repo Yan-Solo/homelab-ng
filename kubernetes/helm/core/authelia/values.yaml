@@ -109,7 +109,7 @@ authelia:
                 123
               path: '/secrets/oidc.jwk.RS256.pem'
             certificate_chain:
-              paht: '/secrets/oidc.jwk.RS256.cert'
+              path: '/secrets/oidc.jwk.RS256.cert'
         enforce_pkce: public_clients_only
         cors:
           endpoints:
