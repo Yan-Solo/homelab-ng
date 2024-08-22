@@ -1,84 +1,150 @@
 authelia:
-  config:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "issuer"
+      nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
+    hosts:
+      - host: auth.intropin.be
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - auth.intropin.be
+        secretName: authelia-tls
+  
+  configMap:
+    log:
+      level: 'info'
+  
+    ## Set the default 2FA method for new users and for when a user has a preferred method configured that has been
+    ## disabled. This setting must be a method that is enabled.
+    ## Options are totp, webauthn, mobile_push.
+    default_2fa_method: ''
+  
+    theme: 'dark'
+  
+    identity_validation:
+      reset_password:
+        jwt_lifespan: '5 minutes'
+        jwt_algorithm: 'HS256'
+        secret:
+          ## Disables this secret and leaves configuring it entirely up to you.
+          disabled: false
+  
+          ## The secret name. The ~ name is special as it is the secret we generate either automatically or via the
+          ## secret_value option below.
+          secret_name: ~
+  
+          ## The value of a generated secret when using the ~ secret_name.
+          value: ''
+  
+          ## The path to the secret. If it has a '/' prefix it's assumed to be an absolute path within the pod. Otherwise
+          ## it uses the format '{mountPath}/{secret_name}/{path}' where '{mountPath}' refers to the 'secret.mountPath'
+          ## value, '{secret_name}' is the secret_name above, and '{path}' is this value.
+          path: 'identity_validation.reset_password.jwt.hmac.key'
+      elevated_session:
+        code_lifespan: '5 minutes'
+        elevation_lifespan: '10 minutes'
+        characters: 8
+        require_second_factor: false
+        skip_second_factor: false
+  
+  
+    ##
+    ## TOTP Configuration
+    ##
+    ## Parameters used for TOTP generation.
+    totp:
+      disable: true
+    webauthn:
+      disable: true
+    ntp:
+      ## NTP server address.
+      address: 'udp://be.pool.ntp.org:123'
+  
+  
+    ##
+    ## Authentication Backend Provider Configuration
+    ##
+    ## Used for verifying user passwords and retrieve information such as email address and groups users belong to.
+    ##
+    ## The available providers are: `file`, `ldap`. You must use one and only one of these providers.
+    authentication_backend:
+  
+      ## Password Reset Options.
+      password_reset:
+  
+        ## Disable both the HTML element and the API for reset password functionality
+        disable: false
+  
+        ## External reset password url that redirects the user to an external reset portal. This disables the internal
+        ## reset functionality.
+        custom_url: ''
+  
+      ## The amount of time to wait before we refresh data from the authentication backend. Uses duration notation.
+      ## To disable this feature set it to 'disable', this will slightly reduce security because for Authelia, users will
+      ## always belong to groups they belonged to at the time of login even if they have been removed from them in LDAP.
+      ## To force update on every request you can set this to '0' or 'always', this will increase processor demand.
+      ## See the below documentation for more information.
+      ## Duration Notation docs:  https://www.authelia.com/configuration/prologue/common/#duration-notation-format
+      ## Refresh Interval docs: https://www.authelia.com/configuration/first-factor/ldap/#refresh-interval
+      refresh_interval: '5 minutes'
+  
+      ##
+      ## File (Authentication Provider)
+      ##
+      file:
+        enabled: true
+        path: '/config/users.yml'
+        password:
+          algorithm: 'argon2'
+          argon2:
+            variant: 'argon2id'
+            iterations: 3
+            memory: 65536
+            parallelism: 4
+            key_length: 32
+            salt_length: 16
+          scrypt:
+            iterations: 16
+            block_size: 8
+            parallelism: 1
+            key_length: 32
+            salt_length: 16
+          pbkdf2:
+            variant: 'sha512'
+            iterations: 310000
+            salt_length: 16
+          sha2crypt:
+            variant: 'sha512'
+            iterations: 50000
+            salt_length: 16
+          bcrypt:
+            variant: 'standard'
+            cost: 12
+
     storage:
       local:
+        enabled: true
         path: /config/db.sqlite3
 
-    authentication_backend:
-      file:
-        path: /config/users.yml
-
-    access_control:
-      default_policy: deny
-      rules:
-        - domain: "*.intropin.be"
-          policy: one_factor
-
-    session:
-      name: authelia_session
-      secret: your-session-secret
-      expiration: 3600
-      domain: intropin.be
-
-    regulation:
-      max_retries: 3
-      find_time: 120
-      ban_time: 300
-
-    jwt_secret: your-jwt-secret
-
-    oidc:
-      clients:
-        - id: argocd
-          description: ArgoCD
-          secret: your-argocd-client-secret
-          redirect_uris:
-            - https://argocd.intropin.be/auth/callback
-          scopes:
-            - openid
-            - profile
-            - email
-          grant_types:
-            - authorization_code
-          response_types:
-            - code
-          token_endpoint_auth_method: client_secret_post
-
-    server:
-      host: 0.0.0.0
-      port: 9091
-
-    tls:
-      key: /config/ssl/key.pem
-      certificate: /config/ssl/cert.pem
-
-    logging:
-      level: info
-      format: text
-
-ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: "issuer"
-    nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
-  hosts:
-    - host: auth.intropin.be
-      paths:
-        - path: /
-          pathType: Prefix
-  tls:
-    - hosts:
-        - auth.intropin.be
-      secretName: authelia-tls
-
-# User file for basic authentication backend
-extraConfigFiles:
-  users.yml: |
-    users:
-      jan:
-        disabled: false
-        displayname: "Jan Peters"
-        password: "$argon2id$v=19$m=65536,t=3,p=4$WmNI29/6AWArBdLdgdEZgA$wB0Uoy9K9KYZ/MR6uQ12k93RVj7h8fKKjdNv+0xN2aY"
-        email: jan.peters1995@gmail.com
-        groups:
-          - admin
+    identity_providers:
+      oidc:
+        enabled: false
+        # clients:
+        #   - id: argocd
+        #     description: ArgoCD
+        #     secret: your-argocd-client-secret
+        #     redirect_uris:
+        #       - https://argocd.intropin.be/auth/callback
+        #     scopes:
+        #       - openid
+        #       - profile
+        #       - email
+        #     grant_types:
+        #       - authorization_code
+        #     response_types:
+        #       - code
+        #     token_endpoint_auth_method: client_secret_post
