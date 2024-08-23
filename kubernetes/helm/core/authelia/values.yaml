@@ -10,9 +10,7 @@ authelia:
           - path: /
             pathType: Prefix
     tls:
-      - hosts:
-          - auth.intropin.be
-        secretName: authelia-tls
+      enabled: false
   
   configMap:
     log:
