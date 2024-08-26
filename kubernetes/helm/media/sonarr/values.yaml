@@ -11,7 +11,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/sonarr
-            tag: 4.0.8.1874
+            tag: 4.0.9.2244
   service:
     main:
       controller: main
