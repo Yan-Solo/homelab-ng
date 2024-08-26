@@ -11,7 +11,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/onedr0p/sabnzbd
-            tag: 4.3.2
+            tag: 4.3.3
   service:
     main:
       controller: main
