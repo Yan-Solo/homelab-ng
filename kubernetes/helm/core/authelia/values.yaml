@@ -44,6 +44,9 @@ authelia:
       format: 'text'
   
     theme: 'dark'
+
+    server:
+      disable_healthcheck: true
   
     identity_validation:
       reset_password:
