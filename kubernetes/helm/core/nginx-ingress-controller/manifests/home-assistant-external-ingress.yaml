@@ -17,7 +17,7 @@ spec:
           service:
             name: home-assistant-service
             port:
-              number: 80
+              number: 8123
   tls:
   - hosts:
     - ha.intropin.be
@@ -30,7 +30,7 @@ metadata:
 spec:
   clusterIP: None  # This makes it a headless service
   ports:
-  - port: 80
+  - port: 8123
     targetPort: 8123
   selector: {}
   externalIPs:
