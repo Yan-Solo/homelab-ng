@@ -95,23 +95,16 @@ authelia:
       oidc:
         enabled: true
 
-      jwks:
-        - key_id: 'my-rsa-key'
-          algorithm: 'RS256'
-          use: 'sig'
-          key:
-            value: |
-              {
-                "kty": "RSA",
-                "kid": "my-rsa-key",
-                "use": "sig",
-                "alg": "RS256",
-                "n": "vGOJwGtGfKvQ2vZZN8FiG8nFcd9BdG_Au3q9oDlOjeuvxlqx4XW_fQ5fybz1sUOYvqDUSqD_Vq3J8Tkp8Ed0ZKz-QpWxXWzjtZHwlgJSgLx92elZzDZsxRYVRksXthFoFh9E_NYTLwB_gBYFhlRtjlzpGQfO5bRbGFrTYNk-FeHBbk0MuFJZR96SB8vQXsTBYUOzK0svOivhnRQFQ4oTQ9x3TuBPYr_oGLyFaOUtWmXwxpBCsxb-GlCtnT1CmO-JceRQzQ9wOs7xjjZdyopbUWeJgtzFLEsHoFft1ECmzkKpKiTcEQwzU9ST6_dTnkgPumV8WiORCJHgxbAy_ZVe-Yrj6MIxbJzsyYzAbUftPU88YHBHzgHd0OMYPfyDRMXbbbgsyScitvMBzI_Mq7RCQXBLoYXW8w3lHY0HHrUirFJ5xPyN8nMI3ZikglgKRs9vbnokyxnZDr6PGl56ftM9FtwfRcFtWwP2tks-MVbm19HJAWXzRm-Z9FZdVn_Of38Gk",
-                "e": "AQAB"
-              }
-            path: '/secrets/oidc.jwk.RS256.pem'
-          certificate_chain:
-            path: '/secrets/oidc.jwk.RS256.crt'
+        jwks:
+          - key_id: 'key'
+            algorithm: 'RS256'
+            use: 'sig'
+            key:
+              value: |
+                "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDNTcbivY7w+Ur6\nosI7+clq78MG1CnWMATFT43G2+93XK6zf9Fqr5S1SDOH6SSZH4TtsnNLp+ITw458\nXEIGGw1Jmqq1WRbK9MiIuih6MMjo/hMqna8JHETIrhgFGYo0YpMpxx1E7FL71R/m\n5TIStmFyJPWMIOiTcTGwmyVMZNtnS7PIQeSx3E3YJLvw+ckYykt3xyl1bR3bfCdp\ndkrVrQJ4tAd4jWvZGEUNY0iVdt9xce2XmgVSZ4jfIUWz6axQaNOewGGFPZnCQpw9\n66S+9haHJOTBycuBrFbrcPuXKNfzgncsSHXinVSJekYk23i5Gzc47BypOrss4wby\n3suCMtZ1AgMBAAECggEBAK2NJyi7x58rjleryPh8Yul0P3CBX9CBjTbi1l4ZxCgq\nAEEbNwOx48sPewhUbSzIOU3awZ5eED5W3ReBwgp5SdVD2zUsV5lALlluzRLmNKDJ\nT5iB7dqMvBTNHt8IxQ0dm3wAp1yBTnE2rB46+AZbiKq+VZicpR8m3DOII5Kd299H\n2rjd2j8Ra7FuT+iYIt40zxqS/mwJZ0dO23sx2/YJxwvhZI4woncivYX+pCZHKlFi\nf7CPS9FGMPtzF/vIl05YdBFllPUJDBnIOkH6zEnyhPwSSJklWre+8wcAZnvVMxKZ\nsMheIFQgjzgH+l+wwRB+FO+wTOWXhTMZlG6IVFMb6M0CgYEA62kubKcauiv7mkMB\nD3AWSYXJpH1+ilm0Po97BpBRpnENk5bjjOPxHwZ1WSeLzn9nhAqgUJtoEQt4cpjh\nP5ZPD11SSS99SXfjRoiAwewioyaDFTA86NYBWk/6AvQI9tQvP5rBtDnSPXGJNYwM\n/fUnacNSjN+TxpSzsHn81mPAQosCgYEA30KArXy4yzAqJFd0ga4s/UkicwVcZzoE\ntQdCe4qcX+FxZNxsMX8UcxORFBnRNIOnZqFJ7Bap16o83sYZU8/E2hSgu755QOUF\ni/mbczGwOxjrdtKzMpQcwgPba/kBLJrejXS+Vmh7FBiy1XqtkPs7IMws01vlS97N\nRYNdJUHJav8CgYEAllVpLEHas6F635yChNVTpkgl6UGrGbcHgBwouJxZSC1SOjpV\nvpeiV+nL7s9uXMTH2m7eyhs0bg4hMS2oSu82Nd2mus30+IHzRgvODgk6ZW4mr9VK\nUHa6Dm6cfl5Riy8drUSrBukV9d8XfHafpV51ePkfMo9k06AK0FxWtqKlGNkCgYBo\nC4gIUc2U87dQBGnJXbCdwY2KaP8tJD65Vs7G4EwL6vZ7eLX7Qyv2jTHZWkbC4HAN\nRjE7EzzHwxBnCY8YHgWxVFer5xJ/CbxSBVtKjeeBQxXI5Fyav6e/Syjg4sSHUw1Q\ngw2JG1vwe6osDuYAYPSnTj+9qF/twcGMGbI5ALWrZQKBgQCMLqigE/cMstyNmDfN\n3pNcpMgqzVrRY5/zXeI5K5zcc+iIzADt861nQUBFF4yD67uLLowad4VzmtFYIQTS\n7R8Kmu4jOGktNYG8OGuy/RO/Z+MGq43KkkDTHNLO1YzzPrHiSdiS4ba5IpHFV4U4\nRczm1b3kPdW9PAhJSEFBHEBbhA==\n-----END PRIVATE KEY-----\n"
+              path: '/secrets/oidc.jwk.RS256.pem'
+            certificate_chain:
+              path: '/secrets.oidc.jwk.RS256.crt'
 
         clients:
           - client_id: 'argocd'
