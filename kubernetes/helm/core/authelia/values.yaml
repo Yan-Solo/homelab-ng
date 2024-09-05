@@ -94,7 +94,18 @@ authelia:
     identity_providers:
       oidc:
         enabled: true
-        jwks: []
+        jwks:
+          - key_id: ''
+            algorithm: 'RS256'
+            use: 'sig'
+            key:
+              value: |
+                abc
+                123
+              path: '/secrets/oidc.jwk.RS256.pem'
+            certificate_chain:
+              path: '/secrets.oidc.jwk.RS256.crt'
+
         clients:
           - client_id: 'argocd'
             client_name: 'Argo CD'
