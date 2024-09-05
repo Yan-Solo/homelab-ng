@@ -53,6 +53,11 @@ authelia:
         disable: true
       file:
         enabled: true
+
+    notificatier:
+      filesystem:
+        enabled: false
+        filename: '/config/notification.txt'
   
     ##
     ## Access Control Configuration
