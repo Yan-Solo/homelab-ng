@@ -5,6 +5,7 @@ authelia:
     annotations:
         cert-manager.io/cluster-issuer: "issuer"
         nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
+        nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
     certManager: true
     rewriteTarget: true
     tls:
