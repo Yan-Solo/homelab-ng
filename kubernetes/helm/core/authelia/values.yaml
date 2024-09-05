@@ -38,15 +38,12 @@ authelia:
         subPath: ""
 
   configMap:
-    disabled: false
-  
     key: 'configuration.yaml'
-  
     log:
       level: 'debug'
       format: 'text'
   
-    theme: 'light'
+    theme: 'dark'
   
     identity_validation:
       reset_password:
@@ -120,63 +117,10 @@ authelia:
       ## Default policy can either be 'bypass', 'one_factor', 'two_factor' or 'deny'. It is the policy applied to any
       ## resource if there is no policy to be applied to the user.
       default_policy: 'deny'
-  
-      networks: []
-      # networks:
-      # - name: 'private'
-      #   networks:
-      #   - '10.0.0.0/8'
-      #   - '172.16.0.0/12'
-      #   - '192.168.0.0/16'
-      # - name: 'vpn'
-      #   networks:
-      #   - '10.9.0.0/16'
-  
-      rules: []
-      # rules:
-      # - domain_regex: '^.*\.example.com$'
-      #   policy: 'bypass'
-      # - domain: 'public.example.com'
-      #   policy: 'bypass'
-      # - domain: '*.example.com'
-      #   policy: 'bypass'
-      #   methods:
-      #   - 'OPTIONS'
-      # - domain: 'secure.example.com'
-      #   policy: 'one_factor'
-      #   networks:
-      #   - 'private'
-      #   - 'vpn'
-      #   - '192.168.1.0/24'
-      #   - '10.0.0.1'
-      # - domain:
-      #   - 'secure.example.com'
-      #   - 'private.example.com'
-      #   policy: 'two_factor'
-      # - domain: 'singlefactor.example.com'
-      #   policy: 'one_factor'
-      # - domain: 'mx2.mail.example.com'
-      #   subject: 'group:admins'
-      #   policy: 'deny'
-      # - domain: '*.example.com'
-      #   subject:
-      #   - 'group:admins'
-      #   - 'group:moderators'
-      #   policy: 'two_factor'
-      # - domain: 'dev.example.com'
-      #   resources:
-      #   - '^/groups/dev/.*$'
-      #   subject: 'group:dev'
-      #   policy: 'two_factor'
-      # - domain: 'dev.example.com'
-      #   resources:
-      #   - '^/users/john/.*$'
-      #   subject:
-      #   - ['group:dev', 'user:john']
-      #   - 'group:admins'
-      #   policy: 'two_factor'
-      # - domain: '{user}.example.com'
-      #   policy: 'bypass'
+      rules:
+        - domain: '*.intropin.be'
+          policy: one_factor
+          subject: 'group:admin'
   
     session:
       name: 'authelia_session'
@@ -199,133 +143,24 @@ authelia:
   
     identity_providers:
       oidc:
-        ## Enables this in the config map. Currently in beta stage.
-        ## See https://www.authelia.com/r/openid-connect/
-        enabled: false
+        enabled: true
   
-        hmac_secret:
-          ## Disables this secret and leaves configuring it entirely up to you.
-          disabled: false
-  
-          ## The secret name. The ~ name is special as it is the secret we generate either automatically or via the
-          ## secret_value option below.
-          secret_name: ~
-  
-          ## The value of a generated secret when using the ~ secret_name.
-          value: ''
-  
-          ## The path to the secret. If it has a '/' prefix it's assumed to be an absolute path within the pod. Otherwise
-          ## it uses the format '{mountPath}/{secret_name}/{path}' where '{mountPath}' refers to the 'secret.mountPath'
-          ## value, '{secret_name}' is the secret_name above, and '{path}' is this value.
-          path: 'identity_providers.oidc.hmac.key'
-  
-        lifespans:
-          access_token: '1 hour'
-          authorize_code: '1 minute'
-          id_token: '1 hour'
-          refresh_token: '1 hour and 30 minutes'
-          # custom:
-          #   lifespan_name:
-          #     access_token: '1 hour'
-          #     authorize_code: '1 minute'
-          #     id_token: '1 hour'
-          #     refresh_token: '1 hour and 30 minutes'
-          #     grants:
-          #       authorize_code:
-          #         access_token: '1 hour'
-          #         authorize_code: '1 minute'
-          #         id_token: '1 hour'
-          #         refresh_token: '1 hour and 30 minutes'
-          #       implicit:
-          #         access_token: '1 hour'
-          #         authorize_code: '1 minute'
-          #         id_token: '1 hour'
-          #         refresh_token: '1 hour and 30 minutes'
-          #       client_credentials:
-          #         access_token: '1 hour'
-          #         authorize_code: '1 minute'
-          #         id_token: '1 hour'
-          #         refresh_token: '1 hour and 30 minutes'
-          #       refresh_token:
-          #         access_token: '1 hour'
-          #         authorize_code: '1 minute'
-          #         id_token: '1 hour'
-          #         refresh_token: '1 hour and 30 minutes'
-          #       jwt_bearer:
-          #         access_token: '1 hour'
-          #         authorize_code: '1 minute'
-          #         id_token: '1 hour'
-          #         refresh_token: '1 hour and 30 minutes'
-  
-        ## Adjusts the PKCE enforcement. Options are always, public_clients_only, never.
-        ## For security reasons it's recommended this option is public_clients_only or always, however always is not
-        ## compatible with all clients.
-        enforce_pkce: 'public_clients_only'
-  
-        ## Enables the plain PKCE challenge which is not recommended for security reasons but may be necessary for some clients.
-        enable_pkce_plain_challenge: false
-  
-        ## SECURITY NOTICE: It's not recommended changing this option, and highly discouraged to have it below 8 for
-        ## security reasons.
-        minimum_parameter_entropy: 8
-  
-        ## Enables additional debug messages.
-        enable_client_debug_messages: false
-  
-        pushed_authorizations:
-          enforce: false
-          context_lifespan: '5 minutes'
-  
-        authorization_policies: {}
-  
-        # authorization_policies:
-        #   policy_name:
-        #     default_policy: 'deny'
-        #     rules:
-        #       - policy: 'two_factor'
-        #         subject: 'user:abc'
-  
-        ## The JWK's issuer option configures multiple JSON Web Keys. It's required that at least one of the JWK's
-        ## configured has the RS256 algorithm. For RSA keys (RS or PS) the minimum is a 2048 bit key.
-        jwks: []
-  
-        # jwks:
-        #   - key_id: ''
-        #     algorithm: 'RS256'
-        #     use: 'sig'
-        #     key:
-        #       value: |
-        #         abc
-        #         123
-        #       path: '/secrets/oidc.jwk.RS256.pem'
-        #     certificate_chain:
-        #       path: '/secrets.oidc.jwk.RS256.crt'
-  
-        ## Cross-Origin Resource Sharing (CORS) settings.
-        cors:
-          ## List of endpoints in addition to the metadata endpoints to permit cross-origin requests on.
-          # endpoints:
-          #    - 'authorization'
-          #    - 'pushed-authorization-request'
-          #    - 'token'
-          #    - 'revocation'
-          #    - 'introspection'
-          #    - 'userinfo'
-          endpoints: []
-  
-          ## List of allowed origins.
-          ## Any origin with https is permitted unless this option is configured or the
-          ## allowed_origins_from_client_redirect_uris option is enabled.
-          # allowed_origins:
-          #   - 'https://example.com'
-          allowed_origins: []
-  
-          ## Automatically adds the origin portion of all redirect URI's on all clients to the list of allowed_origins,
-          ## provided they have the scheme http or https and do not have the hostname of localhost.
-          allowed_origins_from_client_redirect_uris: false
-  
-        clients: []
-  
+        clients:
+          - client_id: 'argocd'
+            client_name: 'Argo CD'
+            secret:
+              value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
+              path: /secret/oidc.client.argocd.value
+            public: false
+            authorization_policy: 'one_factor'
+            redirect_uris:
+              - https://argocd.intropin.be/auth/callback
+            scopes:
+              - openid
+              - groups
+              - email
+              - profile
+            userinfo_signed_response_alg: 'none'
         # clients:
           # -
             ## The ID is the OpenID Connect ClientID which is used to link an application to a configuration.
