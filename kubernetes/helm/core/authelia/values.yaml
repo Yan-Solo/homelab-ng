@@ -19,7 +19,7 @@ authelia:
 
   pod:
     extraVolumes:
-      - name: users_database
+      - name: users-database
         configMap: 
           name: authelia-userdb
           items:
