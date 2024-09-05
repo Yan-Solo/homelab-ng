@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: "issuer"
 spec:
   rules:
-  - host: ha.intropin.be 
+  - host: ha.intropin.be
     http:
       paths:
       - path: /
@@ -28,8 +28,10 @@ kind: Service
 metadata:
   name: home-assistant-service
 spec:
-  type: ExternalName
-  externalName: 192.168.0.146
+  clusterIP: None  # This makes it a headless service
   ports:
   - port: 80
     targetPort: 8123
+  selector: {}
+  externalIPs:
+  - 192.168.0.146
