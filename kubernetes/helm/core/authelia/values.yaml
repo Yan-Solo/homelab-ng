@@ -27,7 +27,7 @@ authelia:
             path: users_database.yml
       
     extraVolumeMounts:
-      - name: users_database
+      - name: users-database
         mountPath: /config
 
   configMap:
