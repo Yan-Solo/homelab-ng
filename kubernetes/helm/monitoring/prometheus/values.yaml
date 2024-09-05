@@ -11,35 +11,28 @@ kube-prometheus-stack:
         enabled: true
       auth:
         disable_login_form: true
-      auth.anonymous:
-        enabled: true
-        org_name: "Main Org."
-        org_role: Admin
-      auth.basic:
-        enabled: false
       server:
         domain: "grafana.intropin.be"
         root_url: "https://grafana.intropin.be/"
-      auth:
-        generic_oauth:
-          enabled: true
-          name: Authelia
-          icon: signin
-          client_id: grafana
-          client_secret: insecure_secret
-          scopes:
-            - openid
-            - profile
-            - email
-            - groups
-          empty_scopes: false
-          auth_url: 'https://auth.intropin.be/api/oidc/authorization'
-          token_url: 'https://auth.intropin.be/api/oidc/token'
-          api_url: 'https://auth.intropin.be/api/oidc/userinfo'
-          login_attribute_path: preferred_username
-          groups_attribute_path: groups
-          name_attribute_path: name
-          use_pkce: false
+      auth.generic_oauth:
+        enabled: true
+        name: Authelia
+        icon: signin
+        client_id: grafana
+        client_secret: insecure_secret
+        scopes:
+          - openid
+          - profile
+          - email
+          - groups
+        empty_scopes: false
+        auth_url: 'https://auth.intropin.be/api/oidc/authorization'
+        token_url: 'https://auth.intropin.be/api/oidc/token'
+        api_url: 'https://auth.intropin.be/api/oidc/userinfo'
+        login_attribute_path: preferred_username
+        groups_attribute_path: groups
+        name_attribute_path: name
+        use_pkce: false
     additionalDataSources:
       - name: loki
         access: proxy
