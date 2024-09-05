@@ -293,10 +293,10 @@ data:
             "includeAll": true,
             "label": "",
             "multi": true,
-            "name": "container",
+            "name": "app",
             "options": [],
             "query": {
-              "label": "container",
+              "label": "app",
               "refId": "LokiVariableQueryEditor-VariableQuery",
               "stream": "{namespace=\"$namespace\"}",
               "type": 1
