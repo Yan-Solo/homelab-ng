@@ -23,7 +23,7 @@ authelia:
         configMap: 
           name: authelia-userdb
           items:
-          - key: authelia-userdb
+          - key: users_database.yml
             path: users_database.yml
       
     extraVolumeMounts:
