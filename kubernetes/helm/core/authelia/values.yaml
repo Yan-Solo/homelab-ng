@@ -25,10 +25,17 @@ authelia:
           items:
           - key: users_database.yml
             path: users_database.yml
+      - name: config-dir
+        emptyDir: {}
       
     extraVolumeMounts:
       - name: users-database
+        mountPath: /config/users_database.yml
+        subPath: users_database.yml
+        readOnly: true
+      - name: config-dir
         mountPath: /config
+        subPath: ""
 
   configMap:
     disabled: false
