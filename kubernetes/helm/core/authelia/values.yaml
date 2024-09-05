@@ -1,25 +1,25 @@
 ---
 authelia:
-  ingress:
-    enabled: true
-    annotations:
-        cert-manager.io/cluster-issuer: "issuer"
-        nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
-    certManager: true
-    rewriteTarget: true
-    tls:
-      enabled: true
-      secret: 'authelia-tls'
-  
-      hostNameOverride: 'auth.intropin.be'
-  
-    env:
-    - name: 'TZ'
-      value: 'Europe/Brussels'
-  
-    extraVolumeMounts: []
-    extraVolumes: []
-  
+  # ingress:
+  #   enabled: true
+  #   annotations:
+  #       cert-manager.io/cluster-issuer: "issuer"
+  #       nginx.ingress.kubernetes.io/real-ip-header: "X-Forwarded-For"
+  #   certManager: true
+  #   rewriteTarget: true
+  #   tls:
+  #     enabled: true
+  #     secret: 'authelia-tls'
+  #
+  #     hostNameOverride: 'auth.intropin.be'
+  #
+  #   env:
+  #   - name: 'TZ'
+  #     value: 'Europe/Brussels'
+  #
+  #   extraVolumeMounts: []
+  #   extraVolumes: []
+  #
   configMap:
     disabled: false
   
