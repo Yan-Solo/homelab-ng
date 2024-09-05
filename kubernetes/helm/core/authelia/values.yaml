@@ -141,38 +141,38 @@ authelia:
         enabled: true
         path: /config/db.sqlite3
   
-    identity_providers:
-      oidc:
-        enabled: true
-
-        jwks:
-          - key_id: ''
-            algorithm: 'RS256'
-            use: 'sig'
-            key:
-              value: |
-                abc
-                123
-              path: '/secrets/oidc.jwk.RS256.pem'
-            certificate_chain:
-              path: '/secrets.oidc.jwk.RS256.crt'
-
-        clients:
-          - client_id: 'argocd'
-            client_name: 'Argo CD'
-            client_secret:
-              value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
-              path: /secret/oidc.client.argocd.value
-            public: false
-            authorization_policy: 'one_factor'
-            redirect_uris:
-              - https://argocd.intropin.be/auth/callback
-            scopes:
-              - openid
-              - groups
-              - email
-              - profile
-            userinfo_signed_response_alg: 'none'
+    # identity_providers:
+    #   oidc:
+    #     enabled: true
+    #
+    #     jwks:
+    #       - key_id: ''
+    #         algorithm: 'RS256'
+    #         use: 'sig'
+    #         key:
+    #           value: |
+    #             abc
+    #             123
+    #           path: '/secrets/oidc.jwk.RS256.pem'
+    #         certificate_chain:
+    #           path: '/secrets.oidc.jwk.RS256.crt'
+    #
+    #     clients:
+    #       - client_id: 'argocd'
+    #         client_name: 'Argo CD'
+    #         client_secret:
+    #           value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
+    #           path: /secret/oidc.client.argocd.value
+    #         public: false
+    #         authorization_policy: 'one_factor'
+    #         redirect_uris:
+    #           - https://argocd.intropin.be/auth/callback
+    #         scopes:
+    #           - openid
+    #           - groups
+    #           - email
+    #           - profile
+    #         userinfo_signed_response_alg: 'none'
         # clients:
           # -
             ## The ID is the OpenID Connect ClientID which is used to link an application to a configuration.
