@@ -29,7 +29,7 @@ metadata:
   name: home-assistant-service
 spec:
   type: ExternalName
-  externalName: 192.168.0.146
+  externalName: ha.intropin.be
   ports:
   - port: 80
     targetPort: 8123
