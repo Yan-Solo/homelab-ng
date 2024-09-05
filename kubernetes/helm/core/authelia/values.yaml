@@ -94,17 +94,24 @@ authelia:
     identity_providers:
       oidc:
         enabled: true
-        jwks:
-          - key_id: ''
-            algorithm: 'RS256'
-            use: 'sig'
-            key:
-              value: |
-                abc
-                123
-              path: '/secrets/oidc.jwk.RS256.pem'
-            certificate_chain:
-              path: '/secrets.oidc.jwk.RS256.crt'
+
+      jwks:
+        - key_id: 'my-rsa-key'
+          algorithm: 'RS256'
+          use: 'sig'
+          key:
+            value: |
+              {
+                "kty": "RSA",
+                "kid": "my-rsa-key",
+                "use": "sig",
+                "alg": "RS256",
+                "n": "vGOJwGtGfKvQ2vZZN8FiG8nFcd9BdG_Au3q9oDlOjeuvxlqx4XW_fQ5fybz1sUOYvqDUSqD_Vq3J8Tkp8Ed0ZKz-QpWxXWzjtZHwlgJSgLx92elZzDZsxRYVRksXthFoFh9E_NYTLwB_gBYFhlRtjlzpGQfO5bRbGFrTYNk-FeHBbk0MuFJZR96SB8vQXsTBYUOzK0svOivhnRQFQ4oTQ9x3TuBPYr_oGLyFaOUtWmXwxpBCsxb-GlCtnT1CmO-JceRQzQ9wOs7xjjZdyopbUWeJgtzFLEsHoFft1ECmzkKpKiTcEQwzU9ST6_dTnkgPumV8WiORCJHgxbAy_ZVe-Yrj6MIxbJzsyYzAbUftPU88YHBHzgHd0OMYPfyDRMXbbbgsyScitvMBzI_Mq7RCQXBLoYXW8w3lHY0HHrUirFJ5xPyN8nMI3ZikglgKRs9vbnokyxnZDr6PGl56ftM9FtwfRcFtWwP2tks-MVbm19HJAWXzRm-Z9FZdVn_Of38Gk",
+                "e": "AQAB"
+              }
+            path: '/secrets/oidc.jwk.RS256.pem'
+          certificate_chain:
+            path: '/secrets/oidc.jwk.RS256.crt'
 
         clients:
           - client_id: 'argocd'
