@@ -91,9 +91,9 @@ authelia:
         enabled: true
         path: /config/db.sqlite3
   
-    # identity_providers:
-    #   oidc:
-    #     enabled: true
+    identity_providers:
+      oidc:
+        enabled: true
     #
     #     jwks:
     #       - key_id: ''
@@ -107,133 +107,19 @@ authelia:
     #         certificate_chain:
     #           path: '/secrets.oidc.jwk.RS256.crt'
     #
-    #     clients:
-    #       - client_id: 'argocd'
-    #         client_name: 'Argo CD'
-    #         client_secret:
-    #           value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
-    #           path: /secret/oidc.client.argocd.value
-    #         public: false
-    #         authorization_policy: 'one_factor'
-    #         redirect_uris:
-    #           - https://argocd.intropin.be/auth/callback
-    #         scopes:
-    #           - openid
-    #           - groups
-    #           - email
-    #           - profile
-    #         userinfo_signed_response_alg: 'none'
-        # clients:
-          # -
-            ## The ID is the OpenID Connect ClientID which is used to link an application to a configuration.
-            # client_id: 'myapp'
-  
-            ## The client secret is a shared secret between Authelia and the consumer of this client.
-            # client_secret:
-              # value: '$plaintext$apple123'
-              # path: '/secrets/oidc.client.myapp.value'
-  
-            ## The description to show to users when they end up on the consent screen. Defaults to the ID above.
-            # client_name: 'My Application'
-  
-            ## Sector Identifiers are occasionally used to generate pairwise subject identifiers. In most cases this is not
-            ## necessary. Read the documentation for more information.
-            ## The subject identifier must be the host component of a URL, which is a domain name with an optional port.
-            # sector_identifier_uri: 'example.com'
-  
-            ## Sets the client to public. This should typically not be set, please see the documentation for usage.
-            # public: false
-  
-            ## The policy to require for this client; one_factor or two_factor.
-            # authorization_policy: 'two_factor'
-  
-            ## The consent mode controls how consent is obtained.
-            # consent_mode: 'auto'
-  
-            ## This value controls the duration a consent on this client remains remembered when the consent mode is
-            ## configured as 'auto' or 'pre-configured'.
-            # pre_configured_consent_duration: '30 days'
-  
-            ## Audience this client is allowed to request.
-            # audience: []
-  
-            ## Scopes this client is allowed to request.
-            # scopes:
-            #   - 'openid'
-            #   - 'profile'
-            #   - 'email'
-            #   - 'groups'
-  
-            ## Redirect URI's specifies a list of valid case-sensitive callbacks for this client.
-            # redirect_uris:
-            #   - 'https://oidc.example.com/oauth2/callback'
-  
-            ## Request URI's specifies a list of valid case-sensitive URIs this client can ask Authelia to obtain a
-            ## Request Object from.
-            # request_uris:
-            #   - 'https://oidc.example.com/oauth2/request-object/authelia.jwk'
-  
-            ## Grant Types configures which grants this client can obtain.
-            ## It's not recommended to configure this unless you know what you're doing.
-            # grant_types:
-            #   - 'refresh_token'
-            #   - 'authorization_code'
-  
-            ## Response Types configures which responses this client can be sent.
-            ## It's not recommended to configure this unless you know what you're doing.
-            # response_types:
-            #   - 'code'
-  
-            ## Response Modes configures which response modes this client supports.
-            ## It's not recommended to configure this unless you know what you're doing.
-            # response_modes:
-            #   - 'form_post'
-            #   - 'query'
-            #   - 'fragment'
-  
-            # enforce_par: false
-            # enforce_pkce: false
-            # pkce_challenge_method: 'S256'
-            # authorization_signed_response_alg: 'RS256'
-            # authorization_signed_response_key_id: ''
-  
-            ## The algorithm of the issuer key used to sign ID Tokens for this client, must be one of the
-            ## registered issuer key algorithms.
-            # id_token_signed_response_alg: 'RS256'
-  
-            ## The key id of the issuer key used to sign ID Tokens for this client.
-            # id_token_signed_response_key_id: ''
-  
-            ## The algorithm of the issuer key used to sign Access Tokens for this client, must be either none or one of
-            ## the registered issuer key algorithms.
-            # access_token_signed_response_alg: 'none'
-  
-            ## The key id of the issuer key used to sign Access Tokens for this client.
-            # access_token_signed_response_key_id: ''
-  
-            ## The algorithm of the issuer key used to sign User Info Responses for this client, must be either none or
-            ## one of the registered issuer key algorithms.
-            # userinfo_signed_response_alg: 'none'
-  
-            ## The key id of the issuer key used to sign User Info Responses for this client.
-            # userinfo_signed_response_key_id: ''
-  
-            ## The signing algorithm used for Introspection responses. An issuer JWK with a matching algorithm must be
-            ## available when configured. Has no effect if introspection_signed_response_key_id is configured.
-            # introspection_signed_response_alg: 'none'
-  
-            ## The signing key id used for Introspection responses. An issuer JWK with a matching key id must be available
-            ## when configured.
-            # introspection_signed_response_key_id: ''
-  
-            ## The algorithm the client must sign their request objects with, must either be empty or one of the
-            ## registered client key algorithms.
-            # request_object_signing_alg: ''
-  
-            ## The algorithm the client must sign the object when using the 'private_key_jwt' auth method, must either be
-            ## empty or one of the registered client key algorithms.
-            # token_endpoint_auth_signing_alg: 'RS256'
-  
-            ## The authentication method the client must use to authenticate.
-            # token_endpoint_auth_method: 'client_secret_post'
-  
+        clients:
+          - client_id: 'argocd'
+            client_name: 'Argo CD'
+            client_secret:
+              value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
+              path: /secret/oidc.client.argocd.value
+            public: false
+            authorization_policy: 'one_factor'
+            redirect_uris:
+              - https://argocd.intropin.be/auth/callback
+            scopes:
+              - openid
+              - groups
+              - email
+              - profile
+            userinfo_signed_response_alg: 'none'
