@@ -164,3 +164,17 @@ authelia:
               - email
               - profile
             userinfo_signed_response_alg: 'none'
+          - client_id: 'outline'
+            client_name: 'Outline'
+            client_secret:
+              value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
+            public: false
+            authorization_policy: 'one_factor'
+            redirect_uris:
+              - https://outline.intropin.be/auth/oidc.callback
+            scopes:
+              - openid
+              - offline_access
+              - profile
+              - email
+            userinfo_signing_algorithm: none
