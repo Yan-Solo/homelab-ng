@@ -54,7 +54,7 @@ authelia:
       file:
         enabled: true
 
-    notificatier:
+    notifier:
       filesystem:
         enabled: false
         filename: '/config/notification.txt'
