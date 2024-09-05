@@ -24,7 +24,6 @@ kube-prometheus-stack:
         scopes:
           - openid
           - profile
-          - email
           - groups
         empty_scopes: false
         auth_url: 'https://auth.intropin.be/api/oidc/authorization'
