@@ -186,11 +186,11 @@ authelia:
             authorization_policy: 'one_factor'
             require_pkce: false
             redirect_uris:
-              - 'https://grafana.intropin.be/login/generic_oauth'
+              - https://grafana.intropin.be/login/generic_oauth
             scopes:
-              - 'openid'
-              - 'profile'
-              - 'groups'
-              - 'email'
+              - openid
+              - profile
+              - groups
+              - email
             userinfo_signed_response_alg: 'none'
             token_endpoint_auth_method: 'client_secret_basic'
