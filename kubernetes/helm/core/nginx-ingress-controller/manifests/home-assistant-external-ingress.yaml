@@ -2,20 +2,34 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: home-assistant-ingress
-  namespace: default
+  name: home-assistant-external-ingress
   annotations:
-    nginx.ingress.kubernetes.io/upstream-vhost: 192.168.0.146
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP" # Set this if your Home Assistant is using HTTP
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "issuer"
 spec:
   rules:
-  - host: ha.intropin.be
+  - host: ha.intropin.be 
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: home-assistant-dummy
+            name: home-assistant-service
             port:
-              number: 8123
+              number: 80
+  tls:
+  - hosts:
+    - ha.intropin.be
+    secretName: home-assistant-tls-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-assistant-service
+spec:
+  type: ExternalName
+  externalName: 192.168.0.146
+  ports:
+  - port: 80
+    targetPort: 8123
