@@ -51,6 +51,8 @@ authelia:
     authentication_backend:
       password_reset:
         disable: true
+      file:
+        enabled: true
   
     ##
     ## Access Control Configuration
