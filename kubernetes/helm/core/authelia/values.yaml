@@ -39,15 +39,16 @@ authelia:
 
   configMap:
     key: 'configuration.yaml'
-    log:
-      level: 'debug'
-      format: 'text'
-  
-    theme: 'dark'
 
     server:
       disable_healthcheck: true
   
+    log:
+      level: 'debug'
+      format: 'text'
+  
+    theme: 'auto'
+
     identity_validation:
       reset_password:
         jwt_lifespan: '5 minutes'
@@ -108,7 +109,6 @@ authelia:
             client_name: 'Argo CD'
             client_secret:
               value: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'
-              path: /secret/oidc.client.argocd.value
             public: false
             authorization_policy: 'one_factor'
             redirect_uris:
