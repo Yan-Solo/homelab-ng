@@ -165,8 +165,8 @@ authelia:
       remember_me: '1 month'
   
       cookies: 
-        subdomain: 'auth'
-        domain: 'intropin.be'
+        - subdomain: 'auth'
+          domain: 'intropin.be'
   
     storage:
       local:
