@@ -177,4 +177,4 @@ authelia:
               - offline_access
               - profile
               - email
-            userinfo_signing_algorithm: none
+            userinfo_signed_response_alg: 'none'
