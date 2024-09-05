@@ -13,13 +13,21 @@ authelia:
   #
   #     hostNameOverride: 'auth.intropin.be'
   #
-  #   env:
-  #   - name: 'TZ'
-  #     value: 'Europe/Brussels'
-  #
-  #   extraVolumeMounts: []
-  #   extraVolumes: []
-  #
+  env:
+    - name: 'TZ'
+      value: 'Europe/Brussels'
+
+  extraVolumes:
+    - name: users_database
+      configMap: authelia-userdb
+      items:
+        - key: authelia-userdb
+          path: users_database.yml
+    
+  extraVolumeMounts:
+    - name: users_database
+      mountPath: /config
+
   configMap:
     disabled: false
   

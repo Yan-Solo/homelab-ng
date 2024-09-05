@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: authelia-userdb
 data:
-  users_database.yaml: |
+  users_database.yml: |
     users:
       jan:
         disabled: false
