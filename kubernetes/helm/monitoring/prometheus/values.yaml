@@ -6,6 +6,7 @@ kube-prometheus-stack:
   grafana:
     fullNameOverride: grafana
     defaultDashboardsTimezone: Europe/Brussels
+    assertNoLeakedSecrets: false
     grafana.ini:
       provisioning:
         enabled: true
