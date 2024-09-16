@@ -54,4 +54,5 @@ postgresql:
       username: docmost
       password: password
       databse: docmost
-redis: {}
+redis:
+  architecture: standalone
