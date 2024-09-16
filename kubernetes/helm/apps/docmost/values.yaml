@@ -9,7 +9,7 @@ app-template:
           env:
             APP_URL: "http://docmost.intropin.be"
             APP_SECRET: "if8Ieveobochoo0queid3bunaehaiZ"
-            DATABASE_URL: "postgresql://docmost:password@docmost-postgresql:5432/docmost?schema=public"
+            DATABASE_URL: "postgresql://docmost:testpass@docmost-postgresql:5432/docmost?schema=public"
             REDIS_URL: "redis://docmost-redis-master:6379"
   service:
     main:
