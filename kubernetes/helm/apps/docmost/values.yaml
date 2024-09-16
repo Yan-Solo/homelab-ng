@@ -47,8 +47,9 @@ app-template:
 postgresql:
   global:
     postgresql:
-      postgresqlUsername: docmost
-      postgresqlPassword: password
-      postgresqlDatabse: docmost
+      auth:
+        username: docmost
+        password: password
+        databse: docmost
 redis:
   architecture: standalone
