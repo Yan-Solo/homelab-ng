@@ -6,6 +6,11 @@ app-template:
           image:
             repository: registry.hub.docker.com/docmost/docmost
             tag: 0.3.1
+          env:
+            APP_URL: "http://docmost.intropin.be"
+            APP_SECRET: "REPLACE_WITH_LONG_SECRET"
+            DATABASE_URL: "postgresql://docmost:password@docmost-postgresql:5432/docmost?schema=public"
+            REDIS_URL: "redis://docmost-redis:6379"
   service:
     main:
       controller: main
@@ -38,15 +43,6 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /app/data/storage
-  env:
-    - name: APP_URL
-      value: "http://docmost.intropin.be"
-    - name: APP_SECRET
-      value: "REPLACE_WITH_LONG_SECRET"
-    - name: DATABASE_URL
-      value: "postgresql://docmost:password@docmost-postgresql:5432/docmost?schema=public"
-    - name: REDIS_URL
-      value: "redis://docmost-redis:6379"
 
 postgresql:
   global:
