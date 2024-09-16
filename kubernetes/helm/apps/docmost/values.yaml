@@ -48,7 +48,7 @@ postgresql:
   auth:
     username: docmost
     password: testpass
-    databse: docmost
+    database: docmost
   volumePermission:
     enabled: true
 redis:
