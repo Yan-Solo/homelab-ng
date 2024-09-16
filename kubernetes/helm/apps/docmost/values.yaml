@@ -44,7 +44,9 @@ app-template:
     - name: APP_SECRET
       value: "REPLACE_WITH_LONG_SECRET"
     - name: DATABASE_URL
-      value: "postgresql://docmost:password@db:5432/docmost?schema=public"
+      value: "postgresql://docmost:password@docmost-postgresql:5432/docmost?schema=public"
+    - name: REDIS_URL
+      value: "redis://docmost-redis:6379"
 
 postgresql:
   global:
