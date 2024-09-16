@@ -53,3 +53,5 @@ postgresql:
     enabled: true
 redis:
   architecture: standalone
+  auth:
+    enabled: false
