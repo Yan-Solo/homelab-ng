@@ -47,7 +47,7 @@ app-template:
 postgresql:
   auth:
     username: docmost
-    password: password
+    password: testpass
     databse: docmost
 redis:
   architecture: standalone
