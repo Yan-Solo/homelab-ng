@@ -45,11 +45,9 @@ app-template:
         - path: /app/data/storage
 
 postgresql:
-  global:
-    postgresql:
-      auth:
-        username: docmost
-        password: password
-        databse: docmost
+  auth:
+    username: docmost
+    password: password
+    databse: docmost
 redis:
   architecture: standalone
