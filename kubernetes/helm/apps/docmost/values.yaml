@@ -44,6 +44,12 @@ app-template:
       globalMounts:
         - path: /app/data/storage
 
-postgresql: {}
+postgresql:
+  auth:
+    username: docmost
+    password: testpass
+    databse: docmost
+  volumePermission:
+    enabled: true
 redis:
   architecture: standalone
