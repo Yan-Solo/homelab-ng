@@ -17,11 +17,6 @@ app-template:
       enabled: true
       annotations:
         nginx.org/websocket-services: "docmost"
-        # nginx.ingress.kubernetes.io/auth-method: GET
-        # nginx.ingress.kubernetes.io/auth-url: http://authelia.core.svc.cluster.local/api/authz/auth-request
-        # nginx.ingress.kubernetes.io/auth-signin: https://auth.intropin.be?rm=$request_method
-        # nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-        # nginx.ingress.kubernetes.io/auth-snippet: "proxy_set_header X-Forwarded-Method $request_method;       \n"
         cert-manager.io/cluster-issuer: "issuer"
       hosts:
         - host: &host docmost.intropin.be
@@ -43,3 +38,18 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /app/data/storage
+  env:
+    - name: APP_URL
+      value: "http://docmost.intropin.be"
+    - name: APP_SECRET
+      value: "REPLACE_WITH_LONG_SECRET"
+    - name: DATABASE_URL
+      value: "postgresql://docmost:password@db:5432/docmost?schema=public"
+
+postgresql:
+  global:
+    postgresql:
+      username: docmost
+      password: password
+      databse: docmost
+redis: []
