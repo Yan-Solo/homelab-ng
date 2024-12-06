@@ -1,4 +1,4 @@
-grafana-k8s-monitoring grafana/k8s-monitoring:
+k8s-monitoring:
   cluster:
     name: echel
   externalServices:
