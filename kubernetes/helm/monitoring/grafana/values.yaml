@@ -60,7 +60,7 @@ k8s-monitoring:
   prometheus-operator-crds:
     enabled: true
   kepler:
-    enabled: true
+    enabled: false
   alloy: {}
   alloy-events: {}
   alloy-logs: {}
