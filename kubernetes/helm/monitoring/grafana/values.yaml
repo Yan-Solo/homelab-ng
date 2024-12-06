@@ -1,0 +1,67 @@
+grafana-k8s-monitoring grafana/k8s-monitoring:
+  cluster:
+    name: echel
+  externalServices:
+    prometheus:
+      host: https://prometheus-prod-24-prod-eu-west-2.grafana.net
+      basicAuth:
+        username: "1934772"
+        password: glc_eyJvIjoiMTI4ODk1NCIsIm4iOiJzdGFjay0xMTA4ODg0LWludGVncmF0aW9uLWt1YmUtZWNodGVsLWt1YmUtZWNodGVsIiwiayI6ImU1NnNOODE4bURYUjYxdm0zYVNMOU1jMyIsIm0iOnsiciI6InByb2QtZXUtd2VzdC0yIn19
+    loki:
+      host: https://logs-prod-012.grafana.net
+      basicAuth:
+        username: "1066663"
+        password: glc_eyJvIjoiMTI4ODk1NCIsIm4iOiJzdGFjay0xMTA4ODg0LWludGVncmF0aW9uLWt1YmUtZWNodGVsLWt1YmUtZWNodGVsIiwiayI6ImU1NnNOODE4bURYUjYxdm0zYVNMOU1jMyIsIm0iOnsiciI6InByb2QtZXUtd2VzdC0yIn19
+    tempo:
+      host: https://tempo-prod-10-prod-eu-west-2.grafana.net:443
+      basicAuth:
+        username: "1060978"
+        password: glc_eyJvIjoiMTI4ODk1NCIsIm4iOiJzdGFjay0xMTA4ODg0LWludGVncmF0aW9uLWt1YmUtZWNodGVsLWt1YmUtZWNodGVsIiwiayI6ImU1NnNOODE4bURYUjYxdm0zYVNMOU1jMyIsIm0iOnsiciI6InByb2QtZXUtd2VzdC0yIn19
+  metrics:
+    enabled: true
+    alloy:
+      metricsTuning:
+        useIntegrationAllowList: true
+    cost:
+      enabled: true
+    kepler:
+      enabled: true
+    node-exporter:
+      enabled: true
+  logs:
+    enabled: true
+    pod_logs:
+      enabled: true
+    cluster_events:
+      enabled: true
+  traces:
+    enabled: true
+  receivers:
+    grpc:
+      enabled: true
+    http:
+      enabled: true
+    zipkin:
+      enabled: true
+    grafanaCloudMetrics:
+      enabled: false
+  opencost:
+    enabled: true
+    opencost:
+      exporter:
+        defaultClusterId: echel
+      prometheus:
+        external:
+          url: https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom
+  kube-state-metrics:
+    enabled: true
+  prometheus-node-exporter:
+    enabled: true
+  prometheus-operator-crds:
+    enabled: true
+  kepler:
+    enabled: true
+  alloy: {}
+  alloy-events: {}
+  alloy-logs: {}
+  
