@@ -25,7 +25,7 @@ k8s-monitoring:
     cost:
       enabled: true
     kepler:
-      enabled: true
+      enabled: false
     node-exporter:
       enabled: true
   logs:
