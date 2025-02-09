@@ -19,7 +19,8 @@ app-template:
         tailscale.com/expose: "true"
       ports:
         http:
-          port: &port 8787
+          port: 80
+          targetPort: &port 8787
   # ingress:
   #   main:
   #     enabled: true
