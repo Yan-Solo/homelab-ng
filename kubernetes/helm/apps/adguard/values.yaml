@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: adguard/adguardhome
-            tag: v.0.107.56
+            tag: latest
   service:
     main:
       controller: main
