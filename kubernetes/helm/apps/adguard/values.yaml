@@ -14,7 +14,10 @@ app-template:
       ports:
         http:
           port: 80
-          targetPort: 3000
+          targetPort: 80
+        dns:
+          port: 53
+          targetPort: 53
   persistence:
     config:
       enabled: true
