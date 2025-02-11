@@ -1,0 +1,34 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: adguard/adguardhome
+            tag: v.0.107.56
+  service:
+    main:
+      controller: main
+      annotations:
+        tailscale.com/expose: "true"
+      ports:
+        http:
+          port: 80
+          targetPort: &port 8089
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /opt/adguardhome/conf
+    work:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /opt/adguardhome/work
