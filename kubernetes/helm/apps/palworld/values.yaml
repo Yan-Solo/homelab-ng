@@ -72,9 +72,6 @@ app-template:
             # BAN_LIST_URL: 
             ENABLE_RCON: true
             RCON_PORT: 25575
-          envFrom:
-            - secretRef:
-                name: discord-webhook-secret
 
           resources:
             limits:
