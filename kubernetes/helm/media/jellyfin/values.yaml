@@ -12,6 +12,9 @@ app-template:
       ports:
         http:
           port: 8096
+        tailscale:
+          port: 80
+          targetPort: 8096
       type: LoadBalancer
       loadBalancerIP: 192.168.0.61
       annotations:
