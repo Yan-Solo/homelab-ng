@@ -12,6 +12,7 @@ I use the following tools in creating, managing and using my homelab
 
 ### Hardware
 I only have one machine as a hypervisor, this is more than enough for my needs.
+|        |               |
 |--------|---------------|
 | CPU    | Intel i7-8700 |
 | RAM    | 24Gb DDR4     |
