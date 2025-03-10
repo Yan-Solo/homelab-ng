@@ -15,4 +15,4 @@ spec:
           email: jan.peters1995@gmail.com
           apiKeySecretRef:
             name: cloudflare-secret
-            key: api-key
+            key: API_KEY
