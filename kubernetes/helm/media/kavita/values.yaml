@@ -24,11 +24,9 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
-    data:
+    media:
       enabled: true
       type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
-      size: 5Gi
-      storageClass: local-path-ssd
+      existingClaim: "media"
       globalMounts:
-        - path: /data
+        - path: /media
