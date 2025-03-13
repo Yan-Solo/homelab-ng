@@ -1,0 +1,32 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: aaronleopold/stump
+            tag: latest
+  service:
+    main:
+      annotations:
+        tailscale.com/expose: "true"
+      controller: main
+      ports:
+        http:
+          port: 80
+          targetPort: &port 10801
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+    media:
+      enabled: true
+      type: persistentVolumeClaim
+      existingClaim: "media"
+      globalMounts:
+        - path: /data
