@@ -1,0 +1,34 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: lscr.io/linuxserver/kavita
+            tag: latest
+  service:
+    main:
+      annotations:
+        tailscale.com/expose: "true"
+      controller: main
+      ports:
+        http:
+          port: 80
+          targetPort: &port 5000
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+    data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /data
