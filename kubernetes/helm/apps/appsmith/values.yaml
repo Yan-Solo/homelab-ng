@@ -1,5 +1,4 @@
 appsmith:
-	## Redis parameters
 	redis:
 	  enabled: true
 	  auth:
