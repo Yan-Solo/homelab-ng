@@ -10,7 +10,7 @@ app-template:
             SERVER_NAME: bambi 
             WORLD_NAME: bambi
             SERVER_PASS: ABSOunited
-            VALHEIM_PLUS: true
+            VALHEIM_PLUS: false
   service:
     main:
       controller: main
