@@ -6,6 +6,11 @@ app-template:
           image:
             repository: ghcr.io/lloesche/valheim-server
             tag: latest
+          env:
+            SERVER_NAME: bambi 
+            WORLD_NAME: bambi
+            SERVER_PASS: ABSOunited
+            VALHEIM_PLUS: true
   service:
     main:
       controller: main
