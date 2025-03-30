@@ -21,12 +21,15 @@ app-template:
         game1:
           port: 2456
           targetPort: 2456
+          protocol: UDP
         game2:
           port: 2457
           targetPort: 2457
+          protocol: UDP
         game3:
           port: 2458
           targetPort: 2458
+          protocol: UDP
       type: LoadBalancer
       loadBalancerIP: 192.168.0.70
   persistence:
