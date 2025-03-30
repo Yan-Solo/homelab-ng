@@ -22,6 +22,8 @@ app-template:
         game3:
           port: 2458
           targetPort: 2458
+      type: LoadBalancer
+      loadBalancerIP: 192.168.0.70
   persistence:
     config:
       enabled: true
