@@ -1,0 +1,41 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/lloesche/valheim-server
+            tag: latest
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 9001
+          targetPort: 9001
+        game1:
+          port: 2456
+          targetPort: 2456
+        game2:
+          port: 2457
+          targetPort: 2457
+        game3:
+          port: 2458
+          targetPort: 2458
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+    data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /opt/valheim
