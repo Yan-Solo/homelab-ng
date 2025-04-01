@@ -6,6 +6,8 @@ app-template:
           image:
             repository: lscr.io/linuxserver/plex
             tag: 1.41.5
+          env:
+            PLEX_CLAIM=claim-Q2okgn8D-bAkwKgfuCFy
   service:
     main:
       annotations:
