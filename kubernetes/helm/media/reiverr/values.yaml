@@ -1,0 +1,48 @@
+app-template:
+   controllers:
+     main:
+       containers:
+         main:
+           image:
+             repository: ghcr.io/aleksilassila/reiverr
+             tag: latest-v1
+   service:
+     main:
+       controller: main
+       ports:
+         http:
+           port: &port 9494
+   ingress:
+     main:
+       enabled: true
+       annotations:
+         nginx.org/websocket-services: "jellyseerr"
+         cert-manager.io/cluster-issuer: "issuer"
+       hosts:
+         - host: &host reiverr.intropin.be
+           paths:
+             - path: /
+               pathType: Prefix
+               service:
+                 identifier: main
+                 port: *port
+       tls:
+         - secretName: reiverr-letsencrypt-certificate
+           hosts: [*host]
+   persistence:
+     config:
+       enabled: true
+       type: persistentVolumeClaim
+       accessMode: ReadWriteOnce
+       size: 1Gi
+       storageClass: local-path-ssd
+       globalMounts:
+         - path: /config
+     plugins:
+       enabled: true
+       type: persistentVolumeClaim
+       accessMode: ReadWriteOnce
+       size: 1Gi
+       storageClass: local-path-ssd
+       globalMounts:
+         - path: /plugins
