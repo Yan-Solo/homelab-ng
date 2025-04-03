@@ -19,23 +19,23 @@ app-template:
       loadBalancerIP: 192.168.0.61
       annotations:
         tailscale.com/expose: "true"
-  # ingress:
-  #   main:
-  #     enabled: true
-  #     annotations:
-  #       nginx.org/websocket-services: "jellyfin"
-  #       cert-manager.io/cluster-issuer: "issuer"
-  #     hosts:
-  #       - host: &host jellyfin.intropin.be
-  #         paths:
-  #           - path: /
-  #             pathType: Prefix
-  #             service:
-  #               identifier: main
-  #               port: 8096
-  #     tls:
-  #       - secretName: jellyfin-letsencrypt-certificate
-  #         hosts: [*host]
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        nginx.org/websocket-services: "jellyfin"
+        cert-manager.io/cluster-issuer: "issuer"
+      hosts:
+        - host: &host jellyfin.intropin.be
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: main
+                port: 8096
+      tls:
+        - secretName: jellyfin-letsencrypt-certificate
+          hosts: [*host]
   persistence:
     config:
       enabled: true
