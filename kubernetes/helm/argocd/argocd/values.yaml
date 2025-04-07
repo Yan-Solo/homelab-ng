@@ -35,6 +35,9 @@ argo-cd:
       resource.compareoptions: |
         ignoreAggregatedRoles: true
         ignoreResourceStatusField: crd
+      admin.enabled: true
+      exec.enabled: true
+      server.insecure: true
     rbac:
       policy.csv: |
         g, argo-admin, role:admin
