@@ -12,9 +12,8 @@ argo-cd:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         nginx.org/websocket-services: "argocd-server"
         cert-manager.io/cluster-issuer: "issuer"
-    extraArgs: [
+    extraArgs: 
       - "--insecure"
-    ]
   configs:
     params:
       applicationsetcontroller.policy: "create-only"
