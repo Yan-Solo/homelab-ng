@@ -13,7 +13,7 @@ argo-cd:
         nginx.org/websocket-services: "argocd-server"
         cert-manager.io/cluster-issuer: "issuer"
     extraArgs: [
-      - --insecure
+      - "--insecure"
     ]
   configs:
     params:
