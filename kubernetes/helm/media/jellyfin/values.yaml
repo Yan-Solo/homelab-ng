@@ -11,8 +11,6 @@ app-template:
       controller: main
       ports:
         http:
-          port: 8096
-        tailscale:
           port: 80
           targetPort: 8096
       type: LoadBalancer
