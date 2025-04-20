@@ -1,8 +1,0 @@
----
-- name: Copy over noturbo file
-  copy:
-    src: noturbo.conf
-    dest: /etc/tmpfiles.d/noturbo.confg
-    owner: "root"
-    group: "root"
-    mode: '0644'
