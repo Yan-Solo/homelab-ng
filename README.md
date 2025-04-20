@@ -5,7 +5,6 @@ I use the following tools in creating, managing and using my homelab
 
 * [kubectl](https://kubernetes.io/docs/tasks/tools/) on your workstation
 * [helm](https://helm.sh/docs/intro/install/) on your workstation (optional)
-* [ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html) on your workstation
 
 ## Overiew
 
