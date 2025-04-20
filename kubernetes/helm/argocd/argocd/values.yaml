@@ -7,45 +7,20 @@ argo-cd:
     pdb:
       enabled: true
       minAvailable: 1
-    ingress:
-      enabled: true
-      hostname: argocd.intropin.be
-      tls: true
-      annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        nginx.org/websocket-services: "argocd-server"
-        cert-manager.io/cluster-issuer: "issuer"
     extraArgs: 
       - "--insecure"
   configs:
     params:
       applicationsetcontroller.policy: "create-only"
+      server.disable.auth: true
     cm:
-      oidc.config: |
-        name: Authelia
-        issuer: https://auth.intropin.be
-        clientID: argocd
-        clientSecret: insecure_secret
-        cliClientID: argocd-cli
-        requestedScopes:
-          - openid
-          - profile
-          - email
-          - groups
       admin.enabled: "true"
       url: https://argocd.intropin.be
       exec.enabled: "true"
       resource.compareoptions: |
         ignoreAggregatedRoles: true
         ignoreResourceStatusField: crd
-      admin.enabled: true
-      exec.enabled: true
       server.insecure: true
-    rbac:
-      policy.csv: |
-        g, argo-admin, role:admin
-        g, admins, role:admin
-        g, ArgoCD Admins, role:admin
   controller:
     replicas: 1
     pdb:
