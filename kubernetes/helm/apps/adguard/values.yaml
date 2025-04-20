@@ -14,7 +14,7 @@ app-template:
       ports:
         http:
           port: 80
-          targetPort: 80
+          targetPort: 3000
         dns-tcp:
           port: 53
           targetPort: 53
