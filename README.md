@@ -6,7 +6,7 @@ I use the following tools in creating, managing and using my homelab
 * [kubectl](https://kubernetes.io/docs/tasks/tools/) on your workstation
 * [helm](https://helm.sh/docs/intro/install/) on your workstation (optional)
 
-## Overiew
+## Setting up
 
 ### Creating a microk8s cluster
 If you did not enable microk8s during the server setup you can ofcourse still do this 
