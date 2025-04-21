@@ -1,0 +1,48 @@
+app-template:
+  defaultPodOptions:
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "Always"
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: registry.hub.docker.com/linuxserver/qbittorrent
+            tag: 5.0.4
+  service:
+    main:
+      annotations:
+        tailscale.com/expose: "true"
+      controller: main
+      ports:
+        http:
+          port: 80
+          targetPort: 8080
+        trnt-tcp:
+          port: 6881
+          targetPort: 6881
+          protocol: TCP
+        trnt-udp:
+          port: 6881
+          targetPort: 6881
+          protocol: udp
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+    qbittorrent-downloads:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 100Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /downloads
