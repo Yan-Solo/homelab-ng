@@ -41,8 +41,6 @@ app-template:
     qbittorrent-downloads:
       enabled: true
       type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
-      size: 100Gi
-      storageClass: local-path-ssd
+      existingClaim: "qbittorrent-downloads"
       globalMounts:
         - path: /downloads

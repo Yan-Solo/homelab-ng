@@ -35,12 +35,18 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
-    downloads:
+    sab-downloads:
       enabled: true
       type: persistentVolumeClaim
       existingClaim: "sab-downloads"
       globalMounts:
-        - path: /downloads
+        - path: /sab-downloads
+    qbittorrent-downloads:
+      enabled: true
+      type: persistentVolumeClaim
+      existingClaim: "qbitorrent-downloads"
+      globalMounts:
+        - path: /qbittorrent-downloads
     media:
       enabled: true
       type: persistentVolumeClaim
