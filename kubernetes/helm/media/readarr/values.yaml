@@ -44,7 +44,7 @@ app-template:
     qbittorrent-downloads:
       enabled: true
       type: persistentVolumeClaim
-      existingClaim: "qbitorrent-downloads"
+      existingClaim: "qbittorrent-downloads"
       globalMounts:
         - path: /qbittorrent-downloads
     media:
