@@ -1,0 +1,32 @@
+app-template:
+  defaultPodOptions:
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "Always"
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: registry.hub.docker.com/linuxser/prowlarr
+            tag: 1.34.1
+  service:
+    main:
+      annotations:
+        tailscale.com/expose: "true"
+      controller: main
+      ports:
+        http:
+          port: 80
+          targetPort: 9696
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
