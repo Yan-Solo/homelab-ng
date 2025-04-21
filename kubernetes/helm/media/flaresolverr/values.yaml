@@ -1,0 +1,15 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/flaresolverr/flaresolverr:latest
+            tag: v3.3.21
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 8191
+          targetPort: 8191
