@@ -4,7 +4,7 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/flaresolverr/flaresolverr:latest
+            repository: ghcr.io/flaresolverr/flaresolverr
             tag: v3.3.21
   service:
     main:
