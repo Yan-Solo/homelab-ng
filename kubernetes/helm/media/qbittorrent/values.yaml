@@ -1,9 +1,9 @@
 app-template:
   defaultPodOptions:
     securityContext:
-      runAsUser: 911
-      runAsGroup: 911
-      fsGroup: 911
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
       fsGroupChangePolicy: "Always"
   controllers:
     main:
