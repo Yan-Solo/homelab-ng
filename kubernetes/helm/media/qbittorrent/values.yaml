@@ -28,7 +28,7 @@ app-template:
         trnt-udp:
           port: 6881
           targetPort: 6881
-          protocol: udp
+          protocol: UDP
   persistence:
     config:
       enabled: true
