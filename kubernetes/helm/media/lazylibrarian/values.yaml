@@ -12,6 +12,9 @@ app-template:
           image:
             repository: lscr.io/linuxserver/lazylibrarian
             tag: e65abd21-ls144
+          env:
+            PUID: 568
+            PGID: 568
   service:
     main:
       controller: main
