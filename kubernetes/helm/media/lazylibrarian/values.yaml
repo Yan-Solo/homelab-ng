@@ -1,9 +1,9 @@
 app-template:
   defaultPodOptions:
     securityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
       fsGroupChangePolicy: "Always"
   controllers:
     main:
@@ -22,9 +22,9 @@ app-template:
           port: 80
           targetPort: &port 8787
   podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
     fsGroupChangePolicy: "Always"
   persistence:
     config:
