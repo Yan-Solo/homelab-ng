@@ -1,9 +1,9 @@
 app-template:
   defaultPodOptions:
     securityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
       fsGroupChangePolicy: "Always"
   controllers:
     main:
@@ -22,9 +22,9 @@ app-template:
           port: 80
           targetPort: &port 8787
   podSecurityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    fsGroup: 1000
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
     fsGroupChangePolicy: "Always"
   persistence:
     config:
@@ -40,7 +40,7 @@ app-template:
       type: persistentVolumeClaim
       existingClaim: "qbittorrent-downloads"
       globalMounts:
-        - path: /qbittorrent-downloads
+        - path: /downloads
     media:
       enabled: true
       type: persistentVolumeClaim
