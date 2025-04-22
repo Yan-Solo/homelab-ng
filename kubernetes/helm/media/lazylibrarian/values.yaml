@@ -1,9 +1,9 @@
 app-template:
   defaultPodOptions:
     securityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+      runAsUser: 911
+      runAsGroup: 1001
+      fsGroup: 1001
       fsGroupChangePolicy: "Always"
   controllers:
     main:
@@ -13,8 +13,8 @@ app-template:
             repository: lscr.io/linuxserver/lazylibrarian
             tag: e65abd21-ls144
           env:
-            PUID: 568
-            PGID: 568
+            PUID: 911
+            PGID: 1001
   service:
     main:
       controller: main
@@ -23,11 +23,11 @@ app-template:
       ports:
         http:
           port: 80
-          targetPort: &port 8787
+          targetPort: 5299
   podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
+    runAsUser: 911
+    runAsGroup: 1001
+    fsGroup: 1001
     fsGroupChangePolicy: "Always"
   persistence:
     config:
