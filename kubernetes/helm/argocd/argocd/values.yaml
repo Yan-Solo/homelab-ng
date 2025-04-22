@@ -15,7 +15,7 @@ argo-cd:
       server.disable.auth: true
     cm:
       admin.enabled: "false"
-      url: https://argocd.intropin.be
+      url: http://argocd-argocd-server
       exec.enabled: "true"
       resource.compareoptions: |
         ignoreAggregatedRoles: true
