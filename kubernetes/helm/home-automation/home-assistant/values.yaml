@@ -12,7 +12,7 @@ app-template:
             capabilities:
               add:
                 - NET_RAW
-          privileged: true
+                - CAP_SYS_ADMIN
   service:
     main:
       controller: main
