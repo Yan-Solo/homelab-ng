@@ -1,6 +1,7 @@
 app-template:
   defaultPodOptions:
     hostNetwork: true
+    privileged: true
   controllers:
     main:
       containers:
