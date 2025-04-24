@@ -27,7 +27,7 @@ app-template:
         - path: /data
     config:
       enabled: true
-      type: configmap
+      type: configMap
       name: mosquitto-config
       globalMounts:
         - path: /mosquitto/config/mosquitto.conf
