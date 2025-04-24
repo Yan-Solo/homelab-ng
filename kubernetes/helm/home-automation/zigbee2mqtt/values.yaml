@@ -1,0 +1,30 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/koenkk/zigbee2mqtt
+            tag: 2.2.1
+          securityContext:
+            capabilities:
+              add:
+                - CAP_SYS_ADMIN
+  service:
+    main:
+      controller: main
+      annotations:
+        tailscale.com/expose: "true"
+      ports:
+        http:
+          port: 80
+          targetPort: 8000
+  persistence:
+    data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /data
