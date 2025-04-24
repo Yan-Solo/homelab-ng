@@ -32,4 +32,4 @@ app-template:
       size: 1Gi
       storageClass: local-path-ssd
       globalMounts:
-        - path: /config
+        - path: /mosquitto/config
