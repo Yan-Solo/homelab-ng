@@ -10,3 +10,4 @@ data:
     persistence_location /data/mosquitto
     autosave_interval 1800
     connection_messages true
+    allow_anonymous true
