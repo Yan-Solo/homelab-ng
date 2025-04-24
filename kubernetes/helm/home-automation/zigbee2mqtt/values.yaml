@@ -27,4 +27,4 @@ app-template:
       size: 1Gi
       storageClass: local-path-ssd
       globalMounts:
-        - path: /data
+        - path: /app/data
