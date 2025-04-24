@@ -58,4 +58,5 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230829184048-if00
-      mountPath: /dev/ttyACM0
+      globalMounts:
+        - paht: /dev/ttyACM0
