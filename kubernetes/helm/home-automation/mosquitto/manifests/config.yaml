@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+data:
+  mosquitto.conf: |
+    per_listener_settings false
+    listener 1883
+    persistence true
+    persistence_location /data/mosquitto
+    autosave_interval 1800
+    connection_messages true

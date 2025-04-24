@@ -27,9 +27,8 @@ app-template:
         - path: /data
     config:
       enabled: true
-      type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      storageClass: local-path-ssd
+      type: configmap
+      name: mosquitto-config
       globalMounts:
-        - path: /mosquitto/config
+        - path: /mosquitto/config/mosquitto.conf
+          subPath: mosquitto.conf
