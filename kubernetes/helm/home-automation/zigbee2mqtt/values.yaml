@@ -15,7 +15,7 @@ app-template:
                 - CAP_SYS_ADMIN
                 - SYS_RAWIO
             privileged: true
-            runAsUser: true
+            runAsUser: 0
           env:
             ZIGBEE2MQTT_DATA: /app/data
             ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto
