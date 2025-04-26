@@ -50,7 +50,7 @@ app-template:
     data:
       enabled: true
       type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
+      accessMode: ReadWriteMany
       size: 1Gi
       storageClass: local-path-ssd
       globalMounts:
