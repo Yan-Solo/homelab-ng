@@ -25,9 +25,9 @@ k8s-monitoring:
           username: "1191826"
           password: glc_eyJv...
         metrics:
-          enabled: false
+          enabled: true
         logs:
-          enabled: false
+          enabled: true
         traces:
           enabled: true
     clusterMetrics:
