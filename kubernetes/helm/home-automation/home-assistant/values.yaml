@@ -34,3 +34,11 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+    media-dummy:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-hdd
+      globalMounts:
+        - path: /media-dummy
