@@ -11,7 +11,7 @@ app-template:
         main:
           image:
             repository: registry.hub.docker.com/linuxserver/qbittorrent
-            tag: 5.1.0
+            tag: 20.04.1
   service:
     main:
       annotations:
