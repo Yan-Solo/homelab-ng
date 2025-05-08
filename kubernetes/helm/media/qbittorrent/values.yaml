@@ -12,6 +12,11 @@ app-template:
           image:
             repository: registry.hub.docker.com/linuxserver/qbittorrent
             tag: 20.04.1
+          env:
+            DOCKER_MODS: ghcr.io/themepark-dev/theme.park:qbittorrent
+            QBITTORRENT_VERSION: 5.0.0
+            TP_COMMUNITY_THEME: true
+            TP_THEME: catppuccin-mocha
   service:
     main:
       annotations:
