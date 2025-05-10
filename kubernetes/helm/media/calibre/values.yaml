@@ -17,7 +17,7 @@ app-template:
       ports:
         http:
           port: 80
-          targetPort: 8081
+          targetPort: 8080
   persistence:
     config:
       enabled: true
