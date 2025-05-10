@@ -4,10 +4,10 @@ app-template:
       containers:
         main:
           image:
-            repository: lscr.io/linuxserver/calibre-web
+            repository: lscr.io/linuxserver/calibre
             tag: 0.6.24
-          env:
-            DOCKER_MODS: linuxserver/mods:universal-calibre
+          # env:
+          #   DOCKER_MODS: linuxserver/mods:universal-calibre
   service:
     main:
       annotations:
@@ -15,9 +15,10 @@ app-template:
         tailscale.com/hostname: "calibre"
       controller: main
       ports:
-        http:
+        gui:
           port: 80
-          targetPort: 8083
+          targetPort: 8081
+
   persistence:
     config:
       enabled: true
