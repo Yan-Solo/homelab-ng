@@ -1,0 +1,35 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: lscr.io/linuxserver/calibre-web
+            tag: 0.6.24
+          env:
+            DOCKER_MODS: linuxserver/mods:universal-calibre
+  service:
+    main:
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "stump"
+      controller: main
+      ports:
+        http:
+          port: 80
+          targetPort: 8083
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+    media:
+      enabled: true
+      type: persistentVolumeClaim
+      existingClaim: "media"
+      globalMounts:
+        - path: /books
