@@ -14,6 +14,8 @@ app-template:
               add:
                 - NET_RAW
                 - CAP_SYS_ADMIN
+    code:
+      containers:
         code:
           dependsOn: main
           image:
@@ -41,6 +43,7 @@ app-template:
       type: LoadBalancer
       loadBalancerIP: 192.168.0.63
     code:
+      controller: code
       annotations:
         tailscale.com/expose: "true"
         tailscale.com/hostanem: "ha-code"
