@@ -1,0 +1,18 @@
+affine:
+  service:
+    annotations:
+      tailscale.com/expose: true
+      tailscale.com/hostname: affine
+  affine:
+    persistence:
+      storageClassName: local-path-ssd
+    configPersistence:
+      storageClassName: local-path-ssd
+  postgresql:
+    primary:
+      persistence:
+        storageClassName: local-path-ssd
+  redis:
+    master:
+      persistence:
+        storageClassName: local-path-ssd
