@@ -16,6 +16,7 @@ app-template:
     main:
       annotations:
         tailscale.com/expose: "true"
+        tailscale.com/hostname: "sonarr"
       controller: main
       ports:
         http:

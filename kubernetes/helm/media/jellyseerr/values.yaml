@@ -10,6 +10,7 @@ app-template:
     main:
       annotations:
         tailscale.com/expose: "true"
+        tailscale.com/hostname: "jellyseerr"
       controller: main
       ports:
         http:

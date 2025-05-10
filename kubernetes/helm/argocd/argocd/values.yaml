@@ -3,6 +3,7 @@ argo-cd:
     service:
       annotations:
         tailscale.com/expose: "true"
+        tailscale.com/hostname: "argocd"
     replicas: 1
     pdb:
       enabled: true

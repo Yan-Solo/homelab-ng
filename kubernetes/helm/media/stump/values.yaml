@@ -10,6 +10,7 @@ app-template:
     main:
       annotations:
         tailscale.com/expose: "true"
+        tailscale.com/hostname: "stump"
       controller: main
       ports:
         http:
