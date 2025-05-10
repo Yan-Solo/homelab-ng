@@ -35,7 +35,7 @@ app-template:
       controller: main
       annotations:
         tailscale.com/expose: "true"
-        tailsscale.com/hostname: "home-assistant"
+        tailscale.com/hostname: "home-assistant"
       ports:
         http:
           port: 80
