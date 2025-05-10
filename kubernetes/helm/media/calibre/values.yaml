@@ -15,7 +15,7 @@ app-template:
         tailscale.com/hostname: "calibre"
       controller: main
       ports:
-        gui:
+        http:
           port: 80
           targetPort: 8081
   persistence:
