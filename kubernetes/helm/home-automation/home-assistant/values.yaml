@@ -14,9 +14,9 @@ app-template:
               add:
                 - NET_RAW
                 - CAP_SYS_ADMIN
-    code:
+    code-server:
       containers:
-        code:
+        code-server:
           dependsOn: main
           image:
             repository: ghcr.io/coder/code-server
@@ -42,11 +42,10 @@ app-template:
           targetPort: 8123
       type: LoadBalancer
       loadBalancerIP: 192.168.0.63
-    code:
-      controller: code
+    code-server:
+      controller: code-server
       annotations:
         tailscale.com/expose: "true"
-        tailscale.com/hostanem: "ha-code"
       ports:
         http:
           port: 80
