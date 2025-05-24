@@ -27,6 +27,8 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+      annotations:
+        backup: true
     media:
       enabled: true
       type: persistentVolumeClaim
