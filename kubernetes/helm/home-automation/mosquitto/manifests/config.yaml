@@ -8,6 +8,7 @@ data:
     listener 1883
     persistence true
     persistence_location /data/mosquitto
+    persistence_file mosquitto.db
     autosave_interval 1800
     connection_messages true
     allow_anonymous true
