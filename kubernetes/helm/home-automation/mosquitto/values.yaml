@@ -24,7 +24,7 @@ app-template:
       size: 1Gi
       storageClass: local-path-ssd
       globalMounts:
-        - path: /data
+        - path: /mosquitto/data
     config:
       enabled: true
       type: configMap
