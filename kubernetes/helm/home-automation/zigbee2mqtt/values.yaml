@@ -1,5 +1,10 @@
 app-template:
   defaultPodOptions:
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+      fsGroupChangePolicy: "Always"
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
   controllers:
