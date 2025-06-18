@@ -1,0 +1,91 @@
+harbor:
+  # External URL for Harbor
+  externalURL: https://harbor.local
+  
+  # Expose Harbor service
+  expose:
+    type: loadBalancer
+    loadBalancer:
+      name: harbor
+      loadBalancerIP: 192.168.0.71  # Adjust this IP to fit your network
+      ports:
+        httpPort: 80
+        httpsPort: 443
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "harbor"
+    tls:
+      enabled: true
+      certSource: auto
+      auto:
+        commonName: harbor.local
+
+  # Admin password - change this!
+  harborAdminPassword: "Harbor12345"
+  
+  # Persistence configuration
+  persistence:
+    enabled: true
+    resourcePolicy: "keep"
+    persistentVolumeClaim:
+      registry:
+        storageClass: local-path-ssd
+        accessMode: ReadWriteOnce
+        size: 10Gi
+      jobservice:
+        jobLog:
+          storageClass: local-path-ssd
+          accessMode: ReadWriteOnce
+          size: 1Gi
+      database:
+        storageClass: local-path-ssd
+        accessMode: ReadWriteOnce
+        size: 2Gi
+      redis:
+        storageClass: local-path-ssd
+        accessMode: ReadWriteOnce
+        size: 1Gi
+      trivy:
+        storageClass: local-path-ssd
+        accessMode: ReadWriteOnce
+        size: 5Gi
+
+  # Internal database configuration
+  database:
+    type: internal
+    internal:
+      password: "changeit"
+      
+  # Internal Redis configuration  
+  redis:
+    type: internal
+
+  # Core service configuration
+  core:
+    replicas: 1
+    
+  # Registry configuration
+  registry:
+    replicas: 1
+    
+  # Portal configuration
+  portal:
+    replicas: 1
+    
+  # Jobservice configuration
+  jobservice:
+    replicas: 1
+    maxJobWorkers: 10
+    
+  # Trivy scanner configuration
+  trivy:
+    enabled: true
+    replicas: 1
+    
+  # Nginx configuration (not used with LoadBalancer)
+  nginx:
+    replicas: 1
+
+  # Metrics configuration
+  metrics:
+    enabled: false
