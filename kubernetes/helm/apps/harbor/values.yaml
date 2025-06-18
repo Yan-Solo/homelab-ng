@@ -1,7 +1,7 @@
 harbor:
   # External URL for Harbor
-  externalURL: https://harbor.local
-  
+  externalURL: http://harbor.local
+
   # Expose Harbor service
   expose:
     type: loadBalancer
@@ -10,15 +10,11 @@ harbor:
       loadBalancerIP: 192.168.0.71  # Adjust this IP to fit your network
       ports:
         httpPort: 80
-        httpsPort: 443
       annotations:
         tailscale.com/expose: "true"
         tailscale.com/hostname: "harbor"
     tls:
-      enabled: true
-      certSource: auto
-      auto:
-        commonName: harbor.local
+      enabled: false
 
   # Admin password - change this!
   harborAdminPassword: "Harbor12345"
