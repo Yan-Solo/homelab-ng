@@ -59,8 +59,6 @@ app-template:
             SERVER_PORT: "8080"
             CORS_ORIGINS: http://spacecontrol
             JWT_SECRET: dev-jwt-secret-change-in-production
-      dependsOn:
-        - postgres
 
     # Frontend (Next.js)
     frontend:
@@ -73,8 +71,6 @@ app-template:
             NODE_ENV: development
             BASE_URL: http://powerbuilder-api/api
             NEXT_PUBLIC_API_URL: http://powerbuilder-api/api
-      dependsOn:
-        - backend
 
   service:
     # PostgreSQL service
