@@ -1,148 +1,70 @@
-cert-manager:
-  # Global configuration
-  global:
-    priorityClassName: system-cluster-critical
+# Simplified cert-manager configuration that matches the schema
+global:
+  priorityClassName: system-cluster-critical
 
-  # Install CRDs
-  crds:
-    enabled: true
-    keep: true
+# Install CRDs
+crds:
+  enabled: true
+  keep: true
 
-  # Controller configuration
-  controller:
-    replicaCount: 1
-    
-    # Resource limits
-    resources:
-      requests:
-        cpu: 10m
-        memory: 32Mi
-      limits:
-        cpu: 100m
-        memory: 128Mi
+# Resource limits for all components
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
 
-    # Security context
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      readOnlyRootFilesystem: true
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-        - ALL
+# Replica counts
+replicaCount: 1
 
-    # Pod security context
-    podSecurityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
+# Security context (applies to all components)
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
 
-    # Node selector
-    nodeSelector: {}
+# Webhook specific configuration
+webhook:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
 
-    # Tolerations
-    tolerations: []
+# CA Injector specific configuration
+cainjector:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
 
-    # Affinity
-    affinity: {}
+# Startup API check
+startupapicheck:
+  enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
 
-  # Webhook configuration
-  webhook:
-    replicaCount: 1
-    
-    # Resource limits
-    resources:
-      requests:
-        cpu: 10m
-        memory: 32Mi
-      limits:
-        cpu: 100m
-        memory: 128Mi
-
-    # Security context
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      readOnlyRootFilesystem: true
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-        - ALL
-
-    # Pod security context
-    podSecurityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-
-  # CA Injector configuration
-  cainjector:
-    replicaCount: 1
-    
-    # Resource limits
-    resources:
-      requests:
-        cpu: 10m
-        memory: 32Mi
-      limits:
-        cpu: 100m
-        memory: 128Mi
-
-    # Security context
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      readOnlyRootFilesystem: true
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-        - ALL
-
-    # Pod security context
-    podSecurityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-
-  # Startupapicheck configuration
-  startupapicheck:
-    enabled: true
-    
-    # Resource limits
-    resources:
-      requests:
-        cpu: 10m
-        memory: 32Mi
-      limits:
-        cpu: 100m
-        memory: 128Mi
-
-    # Security context
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      readOnlyRootFilesystem: true
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-        - ALL
-
-    # Pod security context
-    podSecurityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-
-  # Prometheus monitoring
-  prometheus:
-    enabled: true
-    servicemonitor:
-      enabled: false  # Set to true if you have Prometheus operator
+# Prometheus monitoring
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: false  # Set to true if you have Prometheus operator
