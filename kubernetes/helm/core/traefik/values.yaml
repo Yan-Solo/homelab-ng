@@ -39,11 +39,7 @@ traefik:
       protocol: TCP
       tls:
         enabled: true
-    traefik:
-      port: 8080
-      expose:
-        default: false
-      protocol: TCP
+
 
   # Ingress configuration
   ingressRoute:
@@ -64,9 +60,10 @@ traefik:
 
   # No certificate resolvers needed - cert-manager handles certificates
 
-  # Security context
+  # Security context - allow binding to privileged ports
   securityContext:
     capabilities:
+      add: [NET_BIND_SERVICE]
       drop: [ALL]
     readOnlyRootFilesystem: true
     runAsGroup: 65532
