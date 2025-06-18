@@ -16,13 +16,8 @@ traefik:
   # Enable ingressRoute CRDs
   ingressRoute:
     dashboard:
-      enabled: true
-      entryPoints: ["websecure"]
-      auth:
-        basic:
-          users:
-            - "admin:$(htpasswd -nb admin yourpassword | sed 's/\$/\$\$/g')"  # Replace or inject secret
-
+      enabled: false
+ 
   # Entrypoints for HTTP and HTTPS
   entryPoints:
     web:
