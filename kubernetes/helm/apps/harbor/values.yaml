@@ -1,13 +1,13 @@
 harbor:
   # External URL for Harbor
-  externalURL: http://harbor.local
+  externalURL: http://192.168.0.60
 
   # Expose Harbor service
   expose:
     type: loadBalancer
     loadBalancer:
       name: harbor
-      loadBalancerIP: 192.168.0.71  # Adjust this IP to fit your network
+      loadBalancerIP: 192.168.0.60  # Current assigned IP
       ports:
         httpPort: 80
       annotations:
