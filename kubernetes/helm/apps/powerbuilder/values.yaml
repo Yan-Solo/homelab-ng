@@ -45,7 +45,7 @@ app-template:
       containers:
         backend:
           image:
-            repository: 192.168.0.60:5000/library/powerbuilder-backend
+            repository: 192.168.0.60/library/powerbuilder-backend
             tag: latest
           env:
             GIN_MODE: debug
@@ -65,7 +65,7 @@ app-template:
       containers:
         frontend:
           image:
-            repository: 192.168.0.60:5000/library/powerbuilder-frontend
+            repository: 192.168.0.60/library/powerbuilder-frontend
             tag: latest
           env:
             NODE_ENV: development
