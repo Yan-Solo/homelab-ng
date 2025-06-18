@@ -50,8 +50,8 @@ app-template:
       containers:
         backend:
           image:
-            repository: 192.168.0.60/library/powerbuilder-backend
-            tag: latest
+            repository: ghcr.io/yan-solo/powerbuilder/backend
+            tag: 0.0.1
             pullPolicy: IfNotPresent
           env:
             GIN_MODE: debug
@@ -71,8 +71,8 @@ app-template:
       containers:
         frontend:
           image:
-            repository: 192.168.0.60/library/powerbuilder-frontend
-            tag: latest
+            repository: ghcr.io/yan-solo/powerbuilder/frontend
+            tag: 0.0.1
             pullPolicy: IfNotPresent
           env:
             NODE_ENV: development
