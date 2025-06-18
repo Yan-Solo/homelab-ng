@@ -1,0 +1,131 @@
+app-template:
+  controllers:
+    # PostgreSQL Database
+    postgres:
+      containers:
+        postgres:
+          image:
+            repository: postgres
+            tag: 16-alpine
+          env:
+            POSTGRES_DB: powerbuilder_dev
+            POSTGRES_USER: powerbuilder
+            POSTGRES_PASSWORD: powerbuilder123
+            POSTGRES_HOST_AUTH_METHOD: trust
+          probes:
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - pg_isready -U powerbuilder -d powerbuilder_dev
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+            liveness:
+              enabled: true
+              custom: true
+              spec:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - pg_isready -U powerbuilder -d powerbuilder_dev
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+
+    # Backend API (Go)
+    backend:
+      containers:
+        backend:
+          image:
+            repository: powerbuilder-backend
+            tag: latest
+          env:
+            GIN_MODE: debug
+            DB_HOST: powerbuilder-postgres
+            DB_PORT: "5432"
+            DB_USER: powerbuilder
+            DB_PASSWORD: powerbuilder123
+            DB_NAME: powerbuilder_dev
+            DB_SSLMODE: disable
+            SERVER_HOST: 0.0.0.0
+            SERVER_PORT: "8080"
+            CORS_ORIGINS: http://spacecontrol
+            JWT_SECRET: dev-jwt-secret-change-in-production
+      dependsOn:
+        - postgres
+
+    # Frontend (Next.js)
+    frontend:
+      containers:
+        frontend:
+          image:
+            repository: powerbuilder-frontend
+            tag: latest
+          env:
+            NODE_ENV: development
+            BASE_URL: http://powerbuilder-api/api
+            NEXT_PUBLIC_API_URL: http://powerbuilder-api/api
+      dependsOn:
+        - backend
+
+  service:
+    # PostgreSQL service
+    postgres:
+      controller: postgres
+      ports:
+        postgres:
+          port: 5432
+          targetPort: 5432
+
+    # Backend service
+    backend:
+      controller: backend
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "powerbuilder-api"
+      ports:
+        http:
+          port: 80
+          targetPort: 8080
+
+    # Frontend service
+    frontend:
+      controller: frontend
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "powerbuilder"
+      ports:
+        http:
+          port: 80
+          targetPort: 3000
+
+  persistence:
+    # PostgreSQL data persistence
+    postgres-data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: local-path-ssd
+      advancedMounts:
+        postgres:
+          postgres:
+            - path: /var/lib/postgresql/data
+
+    # Database initialization scripts (if needed)
+    postgres-init:
+      enabled: false
+      type: configMap
+      name: powerbuilder-postgres-init
+      advancedMounts:
+        postgres:
+          postgres:
+            - path: /docker-entrypoint-initdb.d
