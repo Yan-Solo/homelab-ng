@@ -1,10 +1,10 @@
-traefik: 
+traefik:
   deployment:
     enabled: true
 
   service:
     enabled: true
-    type: LoadBalancer
+    type: LoadBalancer  # Change to NodePort if needed
     ports:
       web:
         port: 80
@@ -13,7 +13,7 @@ traefik:
 
   ingressRoute:
     dashboard:
-      enabled: false  # ensure dashboard is disabled
+      enabled: false
 
   entryPoints:
     web:
@@ -27,16 +27,9 @@ traefik:
       address: ":443"
       http:
         tls:
-          certResolver: letsencrypt
+          enabled: true  # Required for cert-manager to bind TLS routes
 
-  certResolvers:
-    letsencrypt:
-      acme:
-        email: "jan.peters1995@gmail.com"
-        storage: "/data/acme.json"
-        httpChallenge:
-          entryPoint: web
-
+  # Logging
   logs:
     general:
       level: INFO
@@ -44,19 +37,18 @@ traefik:
       enabled: true
       format: json
 
+  # Providers: Ingress + CRDs
   providers:
     kubernetesCRD:
       enabled: true
     kubernetesIngress:
       enabled: true
 
+  # Persistence (optional, can be removed if not used)
   persistence:
-    enabled: true
-    name: data
-    accessMode: ReadWriteOnce
-    size: 128Mi
-    path: /data
+    enabled: false
 
+  # Security best practices
   securityContext:
     capabilities:
       drop: ["ALL"]
