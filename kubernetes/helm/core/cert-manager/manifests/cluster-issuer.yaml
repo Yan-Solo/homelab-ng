@@ -13,6 +13,6 @@ spec:
     - dns01:
         cloudflare:
           email: intropin@gmail.com
-          apiTokenSecretRef:
+          apiKeySecretRef:
             name: cloudflare-secret
             key: API_KEY
