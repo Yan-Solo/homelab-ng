@@ -1,4 +1,9 @@
 app-template:
+  # Use Harbor registry secret for image pulls
+  defaultPodOptions:
+    imagePullSecrets:
+      - name: harbor-registry-secret
+
   controllers:
     # PostgreSQL Database
     postgres:
@@ -47,6 +52,7 @@ app-template:
           image:
             repository: 192.168.0.60/library/powerbuilder-backend
             tag: latest
+            pullPolicy: IfNotPresent
           env:
             GIN_MODE: debug
             DB_HOST: powerbuilder-postgres
@@ -67,6 +73,7 @@ app-template:
           image:
             repository: 192.168.0.60/library/powerbuilder-frontend
             tag: latest
+            pullPolicy: IfNotPresent
           env:
             NODE_ENV: development
             BASE_URL: http://powerbuilder-api/api
