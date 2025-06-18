@@ -58,20 +58,6 @@ traefik:
       publishedService:
         enabled: true
 
-  # No certificate resolvers needed - cert-manager handles certificates
-
-  # Security context - allow binding to privileged ports
-  securityContext:
-    capabilities:
-      add: [NET_BIND_SERVICE]
-      drop: [ALL]
-    readOnlyRootFilesystem: true
-    runAsGroup: 65532
-    runAsNonRoot: true
-    runAsUser: 65532
-
-  podSecurityContext:
-    fsGroup: 65532
 
   # Resource limits
   resources:
