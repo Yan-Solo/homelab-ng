@@ -51,7 +51,7 @@ app-template:
           image:
             repository: ghcr.io/yan-solo/powerbuilder/backend
             tag: 0.0.1
-            pullPolicy: IfNotPresent
+            pullPolicy: Always
           env:
             GIN_MODE: debug
             DB_HOST: powerbuilder-postgres
@@ -72,7 +72,7 @@ app-template:
           image:
             repository: ghcr.io/yan-solo/powerbuilder/frontend
             tag: 0.0.1
-            pullPolicy: IfNotPresent
+            pullPolicy: Always
           env:
             NODE_ENV: development
             BASE_URL: http://powerbuilder-api/api
