@@ -42,7 +42,8 @@ traefik:
   certResolvers:
     letsencrypt:
       acme:
-        email: "jan.peters1995@gmail.com"        storage: /data/acme.json
+        email: "jan.peters1995@gmail.com"        
+        storage: /data/acme.json
         httpChallenge:
           entryPoint: web
 
