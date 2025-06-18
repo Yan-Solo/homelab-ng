@@ -1,8 +1,7 @@
 app-template:
-  # Use Harbor registry secret for image pulls
   defaultPodOptions:
     imagePullSecrets:
-      - name: harbor-registry-secret
+      - name: ghcr-secret
 
   controllers:
     # PostgreSQL Database
