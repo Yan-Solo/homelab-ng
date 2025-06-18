@@ -27,19 +27,22 @@ traefik:
   ports:
     web:
       port: 80
-      expose: true
+      expose:
+        default: true
       exposedPort: 80
       protocol: TCP
     websecure:
       port: 443
-      expose: true
+      expose:
+        default: true
       exposedPort: 443
       protocol: TCP
       tls:
         enabled: true
     traefik:
       port: 8080
-      expose: false
+      expose:
+        default: false
       protocol: TCP
 
   # Ingress configuration
