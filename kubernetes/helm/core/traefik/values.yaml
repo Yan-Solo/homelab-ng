@@ -1,9 +1,7 @@
-traefik:
-  # Enable Traefik ingress controller
+traefik: 
   deployment:
     enabled: true
 
-  # Service exposure - use LoadBalancer or NodePort depending on your setup
   service:
     enabled: true
     type: LoadBalancer
@@ -13,12 +11,10 @@ traefik:
       websecure:
         port: 443
 
-  # Enable ingressRoute CRDs
   ingressRoute:
     dashboard:
-      enabled: false
- 
-  # Entrypoints for HTTP and HTTPS
+      enabled: false  # ensure dashboard is disabled
+
   entryPoints:
     web:
       address: ":80"
@@ -33,16 +29,14 @@ traefik:
         tls:
           certResolver: letsencrypt
 
-  # Use Let's Encrypt with cert-manager (preferred in homelab)
   certResolvers:
     letsencrypt:
       acme:
-        email: "jan.peters1995@gmail.com"        
-        storage: /data/acme.json
+        email: "jan.peters1995@gmail.com"
+        storage: "/data/acme.json"
         httpChallenge:
           entryPoint: web
 
-  # Enable logging
   logs:
     general:
       level: INFO
@@ -50,26 +44,12 @@ traefik:
       enabled: true
       format: json
 
-  # Enable metrics (optional)
-  metrics:
-    prometheus:
-      enabled: true
-
-  # Enable providers
   providers:
     kubernetesCRD:
       enabled: true
     kubernetesIngress:
       enabled: true
-    file:
-      enabled: false
 
-  # Traefik dashboard service
-  dashboard:
-    enabled: true
-    domain: "traefik.intropin.be"  # replace with your subdomain
-
-  # Persistence for ACME data
   persistence:
     enabled: true
     name: data
@@ -77,7 +57,6 @@ traefik:
     size: 128Mi
     path: /data
 
-  # SecurityContext to avoid root
   securityContext:
     capabilities:
       drop: ["ALL"]
