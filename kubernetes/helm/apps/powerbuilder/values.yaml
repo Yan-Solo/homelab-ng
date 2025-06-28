@@ -50,7 +50,7 @@ app-template:
         backend:
           image:
             repository: ghcr.io/yan-solo/powerbuilder/backend
-            tag: 0.0.1
+            tag: 0.0.2
             pullPolicy: Always
           env:
             GIN_MODE: debug
@@ -71,7 +71,7 @@ app-template:
         frontend:
           image:
             repository: ghcr.io/yan-solo/powerbuilder/frontend
-            tag: 0.0.1
+            tag: 0.0.2
             pullPolicy: Always
           env:
             NODE_ENV: development
