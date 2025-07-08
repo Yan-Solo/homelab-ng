@@ -1,5 +1,6 @@
 app-template:
   defaultPodOptions:
+    enableServiceLinks: false
     imagePullSecrets:
       - name: ghcr-secret
 
