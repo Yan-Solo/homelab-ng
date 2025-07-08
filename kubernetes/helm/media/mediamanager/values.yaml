@@ -1,4 +1,6 @@
 app-template:
+  defaultPodOptions:
+    enableServiceLinks: false
   controllers:
     main:
       containers:
@@ -10,14 +12,14 @@ app-template:
           env:
             TZ: Europe/Brussels
             CORS_URLS: "http://mediamanager"
-          ports:
-            - containerPort: 8080
   
   service:
     main:
-      ports:
-        http:
-          port: 8080
+      controller: main
       annotations:
         tailscale.com/expose: "true"
         tailscale.com/hostname: "mediamanager"
+      ports:
+        http:
+          port: 8080
+          targetPort: 8080

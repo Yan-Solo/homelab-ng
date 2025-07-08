@@ -1,4 +1,6 @@
 app-template:
+  defaultPodOptions:
+    enableServiceLinks: false
   controllers:
     main:
       containers:
