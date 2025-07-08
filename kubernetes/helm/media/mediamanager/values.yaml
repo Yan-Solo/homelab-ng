@@ -1,0 +1,23 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/maxdorninger/mediamanager
+            tag: latest
+            pullPolicy: IfNotPresent
+          env:
+            TZ: Europe/Brussels
+            CORS_URLS: "http://mediamanager"
+          ports:
+            - containerPort: 8080
+  
+  service:
+    main:
+      ports:
+        http:
+          port: 8080
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "mediamanager"
