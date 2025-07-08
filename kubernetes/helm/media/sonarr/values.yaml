@@ -1,5 +1,6 @@
 app-template:
   defaultPodOptions:
+    enableServiceLinks: false
     securityContext:
       runAsUser: 568
       runAsGroup: 568
@@ -21,12 +22,7 @@ app-template:
       ports:
         http:
           port: 80
-          targetPort: &port 8989
-  podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
-    fsGroupChangePolicy: "Always"
+          targetPort: 8989
   persistence:
     config:
       enabled: true

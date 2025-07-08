@@ -1,5 +1,6 @@
 app-template:
   defaultPodOptions:
+    enableServiceLinks: false
     securityContext:
       runAsUser: 0
       runAsGroup: 0
