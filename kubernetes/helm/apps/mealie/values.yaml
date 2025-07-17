@@ -1,0 +1,80 @@
+app-template:
+  defaultPodOptions:
+    enableServiceLinks: false
+
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/mealie-recipes/mealie
+            tag: latest
+          env:
+            # Database Configuration (SQLite)
+            DB_ENGINE: sqlite
+            
+            # Base URL Configuration
+            BASE_URL: https://mealie.intropin.be
+            
+            # Security
+            ALLOW_SIGNUP: "false"
+            
+            # API Configuration
+            API_PORT: "9000"
+            API_DOCS: "true"
+            
+            # Default user (change password after first login)
+            DEFAULT_EMAIL: admin@mealie.local
+            DEFAULT_PASSWORD: MyPassword
+            
+            # Timezone
+            TZ: Europe/Brussels
+            
+            # Data directory
+            DATA_DIR: /app/data
+            
+          probes:
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/app/about
+                  port: 9000
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+            liveness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/app/about
+                  port: 9000
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+
+  service:
+    main:
+      controller: main
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "mealie"
+      ports:
+        http:
+          port: 80
+          targetPort: 9000
+
+  persistence:
+    # SQLite database and app data
+    data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /app/data
