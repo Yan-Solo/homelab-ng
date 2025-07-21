@@ -61,6 +61,7 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /app/data
+      forceRename: zigbee2mqtt-data
     zigbee-dongle:
       enabled: true
       type: hostPath
