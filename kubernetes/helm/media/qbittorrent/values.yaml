@@ -44,6 +44,7 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+      forceRename: qbittorrent-config
     qbittorrent-downloads:
       enabled: true
       type: persistentVolumeClaim
