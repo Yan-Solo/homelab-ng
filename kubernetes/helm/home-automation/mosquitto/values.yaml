@@ -25,6 +25,7 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /data
+      forceRename: mosquitto-data
     config:
       enabled: true
       type: configMap
