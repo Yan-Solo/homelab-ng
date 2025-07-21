@@ -60,6 +60,7 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+      forceRename: home-assistant-config
     media-dummy:
       enabled: true
       type: persistentVolumeClaim
