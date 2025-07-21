@@ -36,6 +36,7 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+      forceRename: sonarr-config
     downloads:
       enabled: true
       type: persistentVolumeClaim

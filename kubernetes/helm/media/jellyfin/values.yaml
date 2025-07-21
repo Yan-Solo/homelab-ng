@@ -27,6 +27,7 @@ app-template:
       globalMounts:
         - path: /config
       storageClass: local-path-ssd
+      forceRename: jellyfin-config
     media:
       enabled: true
       type: persistentVolumeClaim

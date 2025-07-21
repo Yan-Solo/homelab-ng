@@ -31,6 +31,7 @@ app-template:
       globalMounts:
         - path: /config
       storageClass: local-path-ssd
+      forceRename: sabnzbd-config
     downloads:
       enabled: true
       type: persistentVolumeClaim

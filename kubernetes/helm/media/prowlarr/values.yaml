@@ -31,3 +31,4 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+      forceRename: prowlarr-config

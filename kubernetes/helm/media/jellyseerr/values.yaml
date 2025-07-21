@@ -25,3 +25,4 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /app/config
+      forceRename: jellyseerr-config

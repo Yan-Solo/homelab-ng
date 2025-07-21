@@ -36,6 +36,7 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
+      forceRename: readarr-config
     sab-downloads:
       enabled: true
       type: persistentVolumeClaim
