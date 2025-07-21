@@ -31,7 +31,8 @@ app-template:
       storageClass: local-path-ssd
       globalMounts:
         - path: /config
-      custom-name: bazarr-config
+      forceRename:
+        custom-name: bazarr-config
     media:
       enabled: true
       type: persistentVolumeClaim
