@@ -164,6 +164,7 @@ app-template:
         postgres:
           postgres:
             - path: /var/lib/postgresql/data
+      forceRename: powerbuilder-postgres-data
 
     # Database initialization scripts (if needed)
     postgres-init:
