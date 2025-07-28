@@ -11,7 +11,7 @@ app-template:
         main:
           image:
             repository: registry.hub.docker.com/linuxserver/prowlarr
-            tag: 1.35.1
+            tag: 1.37.0
   service:
     main:
       annotations:
