@@ -1,10 +1,4 @@
 app-template:
-  defaultPodOptions:
-    securityContext:
-      runAsUser: 568 
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "Always"
   controllers:
     main:
       containers:
@@ -26,7 +20,6 @@ app-template:
     config:
       enabled: true
       type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
       size: 1Gi
       storageClass: local-path-ssd
       globalMounts:
@@ -35,9 +28,11 @@ app-template:
     books:
       enabled: true
       type: persistentVolumeClaim
-      existingClaim: "media"
+      size: 1Gi
+      storageClass: local-path-ssd
       globalMounts:
         - path: /books
+      forceRename: lazylibrarian-books
     downlods:
       enabled: true
       type: persistentVolumeClaim
@@ -45,4 +40,4 @@ app-template:
       size: 1Gi
       globalMounts:
         - path: /downloads
-      forceRename: lazylibrarian-books
+      forceRename: lazylibrarian-downloads
