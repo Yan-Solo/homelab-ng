@@ -22,6 +22,7 @@ app-template:
       type: persistentVolumeClaim
       size: 1Gi
       storageClass: local-path-ssd
+      accessMode: ReadWriteOnce
       globalMounts:
         - path: /config
       forceRename: lazylibrarian-config
@@ -29,6 +30,7 @@ app-template:
       enabled: true
       type: persistentVolumeClaim
       size: 1Gi
+      accessMode: ReadWriteOnce
       storageClass: local-path-ssd
       globalMounts:
         - path: /books
