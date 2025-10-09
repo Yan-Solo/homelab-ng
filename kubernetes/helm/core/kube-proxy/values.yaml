@@ -1,7 +1,7 @@
 # Kube-proxy configuration for MicroK8s
 image:
   repository: registry.k8s.io/kube-proxy
-  tag: v1.32.9
+  tag: v1.34.1
   pullPolicy: IfNotPresent
 
 # Cluster CIDR - adjust based on your cluster configuration
