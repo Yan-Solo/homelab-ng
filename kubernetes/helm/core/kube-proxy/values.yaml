@@ -1,0 +1,38 @@
+# Kube-proxy configuration for MicroK8s
+image:
+  repository: registry.k8s.io/kube-proxy
+  tag: v1.32.9
+  pullPolicy: IfNotPresent
+
+# Cluster CIDR - adjust based on your cluster configuration
+clusterCIDR: "10.1.0.0/16"
+
+# Service subnet - adjust based on your cluster configuration  
+serviceSubnet: "10.152.183.0/24"
+
+# Node selector to ensure it runs on all nodes
+nodeSelector:
+  kubernetes.io/os: linux
+
+# Tolerations to run on control plane nodes
+tolerations:
+  - operator: Exists
+
+# Priority class
+priorityClassName: system-node-critical
+
+# Host network is required for kube-proxy
+hostNetwork: true
+
+# Security context
+securityContext:
+  privileged: true
+
+# Resources
+resources:
+  requests:
+    cpu: 100m
+    memory: 50Mi
+  limits:
+    cpu: 200m
+    memory: 100Mi
