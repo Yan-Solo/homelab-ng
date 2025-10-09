@@ -11,5 +11,3 @@ metallb:
           - NET_ADMIN
         drop:
           - ALL
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
