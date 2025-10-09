@@ -20,7 +20,7 @@ data:
       tcpCloseWaitTimeout: 1h0m0s
       tcpEstablishedTimeout: 24h0m0s
     enableProfiling: false
-    healthzBindAddress: 0.0.0.0:10256
+    healthzBindAddress: 0.0.0.0:10257
     hostnameOverride: ""
     iptables:
       masqueradeAll: false
@@ -36,7 +36,7 @@ data:
       tcpFinTimeout: 0s
       tcpTimeout: 0s
       udpTimeout: 0s
-    metricsBindAddress: 127.0.0.1:10249
+    metricsBindAddress: 127.0.0.1:10250
     mode: "iptables"
     nodePortAddresses: null
     oomScoreAdj: -999
@@ -53,7 +53,7 @@ data:
     clusters:
     - cluster:
         certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        server: https://kubernetes.default.svc.cluster.local
+        server: https://10.152.183.1:443
       name: default
     contexts:
     - context:
