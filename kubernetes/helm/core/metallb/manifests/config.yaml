@@ -12,14 +12,6 @@ apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
   name: default
-spec:
-  ipAddressPools:
-  - default-pool
-  interfaces:
-  - enp0s31f6
-  nodeSelectors:
-  - matchLabels:
-      kubernetes.io/os: linux
 
 ---
 apiVersion: v1
