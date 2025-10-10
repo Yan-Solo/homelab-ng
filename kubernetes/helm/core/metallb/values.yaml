@@ -3,6 +3,11 @@ metallb:
     priorityClassName: system-cluster-critical
   speaker:
     priorityClassName: system-cluster-critical
-    # Fix for MicroK8s - speaker needs privileged access for ARP functionality
+    # Fix for MicroK8s - disable security context to allow raw socket access
     securityContext:
       privileged: true
+      runAsUser: 0
+      runAsGroup: 0
+      allowPrivilegeEscalation: true
+    # Ensure host network access for ARP
+    hostNetwork: true
