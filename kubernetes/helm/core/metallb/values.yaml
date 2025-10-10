@@ -3,3 +3,13 @@ metallb:
     priorityClassName: system-cluster-critical
   speaker:
     priorityClassName: system-cluster-critical
+    # Fix for MicroK8s - speaker container needs NET_ADMIN capability
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        add:
+          - NET_RAW
+          - NET_ADMIN
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
