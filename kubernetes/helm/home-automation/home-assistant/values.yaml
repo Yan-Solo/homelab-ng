@@ -8,7 +8,7 @@ app-template:
         main:
           image:
             repository: registry.hub.docker.com/homeassistant/home-assistant
-            tag: 2025.9
+            tag: 2025.11
           securityContext:
             capabilities:
               add:
