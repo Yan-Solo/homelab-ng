@@ -1,0 +1,27 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/actualbudget/actual
+            tag: v25.12.0
+  service:
+    main:
+      controller: main
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: "actualbudget"
+      ports:
+        http:
+          port: 80
+          targetPort: &port 5006
+  persistence:
+    data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /data
