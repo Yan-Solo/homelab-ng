@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/actualbudget/actual
-            tag: v25.12.0
+            tag: latest
   service:
     main:
       controller: main
