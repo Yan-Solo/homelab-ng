@@ -101,29 +101,29 @@ app-template:
             # OpenAI Configuration (optional - comment out if not needed)
             # OPENAI_ACCESS_TOKEN: ${OPENAI_ACCESS_TOKEN}
 
-          probes:
-            readiness:
-              enabled: true
-              custom: true
-              spec:
-                httpGet:
-                  path: /health
-                  port: 3000
-                initialDelaySeconds: 30
-                periodSeconds: 10
-                timeoutSeconds: 5
-                failureThreshold: 5
-            liveness:
-              enabled: true
-              custom: true
-              spec:
-                httpGet:
-                  path: /health
-                  port: 3000
-                initialDelaySeconds: 30
-                periodSeconds: 10
-                timeoutSeconds: 5
-                failureThreshold: 5
+          # probes:
+          #   readiness:
+          #     enabled: true
+          #     custom: true
+          #     spec:
+          #       httpGet:
+          #         path: /health
+          #         port: 3000
+          #       initialDelaySeconds: 30
+          #       periodSeconds: 10
+          #       timeoutSeconds: 5
+          #       failureThreshold: 5
+          #   liveness:
+          #     enabled: true
+          #     custom: true
+          #     spec:
+          #       httpGet:
+          #         path: /health
+          #         port: 3000
+          #       initialDelaySeconds: 30
+          #       periodSeconds: 10
+          #       timeoutSeconds: 5
+          #       failureThreshold: 5
 
     # Sidekiq Worker
     worker:
