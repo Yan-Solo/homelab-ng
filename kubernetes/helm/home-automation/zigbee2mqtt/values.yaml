@@ -13,7 +13,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/koenkk/zigbee2mqtt
-            tag: 2.7.0
+            tag: 2.7.2
           securityContext:
             capabilities:
               add:
