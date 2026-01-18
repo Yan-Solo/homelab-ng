@@ -2,7 +2,6 @@ app-template:
   defaultPodOptions:
     enableServiceLinks: false
   controllers:
-    # PostgreSQL Database
     db:
       containers:
         db:
@@ -13,68 +12,14 @@ app-template:
             POSTGRES_USER: sure_user
             POSTGRES_PASSWORD: sure_password
             POSTGRES_DB: sure_production
-          probes:
-            readiness:
-              enabled: true
-              custom: true
-              spec:
-                exec:
-                  command:
-                    - /bin/sh
-                    - -c
-                    - pg_isready -U sure_user -d sure_production
-                initialDelaySeconds: 30
-                periodSeconds: 10
-                timeoutSeconds: 5
-                failureThreshold: 5
-            liveness:
-              enabled: true
-              custom: true
-              spec:
-                exec:
-                  command:
-                    - /bin/sh
-                    - -c
-                    - pg_isready -U sure_user -d sure_production
-                initialDelaySeconds: 30
-                periodSeconds: 10
-                timeoutSeconds: 5
-                failureThreshold: 5
 
-    # Redis Cache
     redis:
       containers:
         redis:
           image:
             repository: redis
             tag: latest
-          probes:
-            readiness:
-              enabled: true
-              custom: true
-              spec:
-                exec:
-                  command:
-                    - redis-cli
-                    - ping
-                initialDelaySeconds: 30
-                periodSeconds: 10
-                timeoutSeconds: 5
-                failureThreshold: 5
-            liveness:
-              enabled: true
-              custom: true
-              spec:
-                exec:
-                  command:
-                    - redis-cli
-                    - ping
-                initialDelaySeconds: 30
-                periodSeconds: 10
-                timeoutSeconds: 5
-                failureThreshold: 5
 
-    # Rails Web Application
     web:
       containers:
         web:
@@ -101,31 +46,6 @@ app-template:
             # OpenAI Configuration (optional - comment out if not needed)
             # OPENAI_ACCESS_TOKEN: ${OPENAI_ACCESS_TOKEN}
 
-          # probes:
-          #   readiness:
-          #     enabled: true
-          #     custom: true
-          #     spec:
-          #       httpGet:
-          #         path: /health
-          #         port: 3000
-          #       initialDelaySeconds: 30
-          #       periodSeconds: 10
-          #       timeoutSeconds: 5
-          #       failureThreshold: 5
-          #   liveness:
-          #     enabled: true
-          #     custom: true
-          #     spec:
-          #       httpGet:
-          #         path: /health
-          #         port: 3000
-          #       initialDelaySeconds: 30
-          #       periodSeconds: 10
-          #       timeoutSeconds: 5
-          #       failureThreshold: 5
-
-    # Sidekiq Worker
     worker:
       containers:
         worker:
@@ -137,27 +57,27 @@ app-template:
             - exec
             - sidekiq
           env:
-            # Database Configuration
             POSTGRES_USER: sure_user
             POSTGRES_PASSWORD: sure_password
             POSTGRES_DB: sure_production
             DB_HOST: sure-db
             DB_PORT: "5432"
 
-            # Redis Configuration
             REDIS_URL: redis://sure-redis:6379/1
 
-            # Rails Configuration
             SECRET_KEY_BASE: a7523c3d0ae56415046ad8abae168d71074a79534a7062258f8d1d51ac2f76d3c3bc86d86b6b0b307df30d9a6a90a2066a3fa9e67c5e6f374dbd7dd4e0778e13
             SELF_HOSTED: "true"
             RAILS_FORCE_SSL: "false"
             RAILS_ASSUME_SSL: "false"
 
+            # Debug logging
+            RAILS_LOG_LEVEL: debug
+            SIDEKIQ_LOG_LEVEL: debug
+
             # OpenAI Configuration (optional - comment out if not needed)
             # OPENAI_ACCESS_TOKEN: ${OPENAI_ACCESS_TOKEN}
 
   service:
-    # PostgreSQL service (internal only)
     db:
       controller: db
       ports:
@@ -165,7 +85,6 @@ app-template:
           port: 5432
           targetPort: 5432
 
-    # Redis service (internal only)
     redis:
       controller: redis
       ports:
@@ -173,7 +92,6 @@ app-template:
           port: 6379
           targetPort: 6379
 
-    # Web application service
     web:
       controller: web
       annotations:
@@ -185,7 +103,6 @@ app-template:
           targetPort: 3000
 
   persistence:
-    # PostgreSQL data persistence
     postgres-data:
       enabled: true
       type: persistentVolumeClaim
@@ -198,7 +115,6 @@ app-template:
             - path: /var/lib/postgresql/data
       forceRename: sure-postgres-data
 
-    # Redis data persistence
     redis-data:
       enabled: true
       type: persistentVolumeClaim
@@ -211,7 +127,6 @@ app-template:
             - path: /data
       forceRename: sure-redis-data
 
-    # Rails storage persistence
     app-storage:
       enabled: true
       type: persistentVolumeClaim
