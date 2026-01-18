@@ -44,7 +44,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                identifier: frontend
+                identifier: main
                 port: 3000
       tls:
         - secretName: skybrief-backend-tls
