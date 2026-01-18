@@ -2,10 +2,6 @@ app-template:
   defaultPodOptions:
     enableServiceLinks: false
 
-  env:
-    - name: ALLOWED_ORIGINS
-      value: "https://vcom.dev"
-
   controllers:
     main:
       containers:
@@ -14,6 +10,7 @@ app-template:
             repository: ghcr.io/swatfish/skybrief-backend
             tag: latest
           env:
+            ALLOWED_ORIGINS: "https://vcom.dev"
   service:
     main:
       controller: main
