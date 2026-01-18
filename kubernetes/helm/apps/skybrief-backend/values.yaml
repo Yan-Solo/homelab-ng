@@ -15,7 +15,7 @@ app-template:
     main:
       controller: main
       ports:
-        - name: http
+        http:
           port: 3000
           targetPort: 3000
 
