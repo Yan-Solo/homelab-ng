@@ -19,7 +19,7 @@ app-template:
         code-server:
           image:
             repository: ghcr.io/coder/code-server
-            tag: 4.106.3
+            tag: 4.108.2
           args:
             - --auth
             - "none"
