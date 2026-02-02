@@ -8,7 +8,7 @@ app-template:
         main:
           image:
             repository: hub.docker.com/openproject/openproject
-            tag: 17
+            tag: 17.1-rc
           env:
             SECRET_KEY_BASE: secret
             OPENPROJECT_HOST__NAME: localhost:8080
