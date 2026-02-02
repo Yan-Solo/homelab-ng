@@ -10,10 +10,10 @@ app-template:
             repository: hub.docker.com/openproject/openproject
             tag: 17
           env:
-            - SECRET_KEY_BASE: secret
-            - OPENPROJECT_HOST__NAME: localhost:8080
-            - OPENPROJECT_HTTPS: false
-            - OPENPROJECT_DEFAULT__LANGUAGE: en
+            SECRET_KEY_BASE: secret
+            OPENPROJECT_HOST__NAME: localhost:8080
+            OPENPROJECT_HTTPS: false
+            OPENPROJECT_DEFAULT__LANGUAGE: en
   service:
     main:
       controller: main
