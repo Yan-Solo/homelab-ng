@@ -11,7 +11,7 @@ app-template:
             tag: 17.1-rc
           env:
             SECRET_KEY_BASE: secret
-            OPENPROJECT_HOST__NAME: localhost:8080
+            OPENPROJECT_HOST__NAME: openproject
             OPENPROJECT_HTTPS: false
             OPENPROJECT_DEFAULT__LANGUAGE: en
   service:
