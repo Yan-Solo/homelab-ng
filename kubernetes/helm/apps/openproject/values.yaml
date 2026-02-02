@@ -7,7 +7,7 @@ app-template:
       containers:
         main:
           image:
-            repository: hub.docker.com/openproject/openproject
+            repository: openproject/openproject
             tag: 17.1-rc
           env:
             SECRET_KEY_BASE: secret
