@@ -10,7 +10,7 @@ app-template:
         postgres:
           image:
             repository: postgres
-            tag: 16-alpine
+            tag: 18-alpine
           env:
             POSTGRES_DB: powerbuilder_dev
             POSTGRES_USER: powerbuilder
