@@ -1,16 +1,4 @@
-gateway-crds-helm:
-  crds:
-    gatewayAPI:
-      enabled: true
-      channel: standard
-    envoyGateway:
-      enabled: true
-
 gateway-helm:
-  # Skip CRD installation since we're using gateway-crds-helm
-  crds:
-    install: false
-
   config:
     envoyGateway:
       gateway:
