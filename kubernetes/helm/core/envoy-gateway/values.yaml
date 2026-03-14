@@ -1,57 +1,36 @@
-traefik:
+envoy-gateway:
+  config:
+    envoyGateway:
+      gateway:
+        controllerName: gateway.envoyproxy.io/gatewayclass-controller
+      logging:
+        level:
+          default: info
+      provider:
+        type: Kubernetes
+
+  # Deploy the GatewayClass resource
+  createNamespace: false
+
   deployment:
-    enabled: true
+    envoyGateway:
+      replicas: 1
 
+  # Service configuration for the Envoy Gateway
   service:
-    enabled: true
-    type: LoadBalancer  # Change to NodePort if needed
-    ports:
-      web:
-        port: 80
-      websecure:
-        port: 443
+    type: LoadBalancer
+    annotations: {}
 
-  ingressRoute:
-    dashboard:
-      enabled: false
-
-  entryPoints:
-    web:
-      address: ":80"
-      http:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-    websecure:
-      address: ":443"
-      http:
-        tls:
-          enabled: true  # Required for cert-manager to bind TLS routes
-
-  # Logging
-  logs:
-    general:
-      level: INFO
-    access:
-      enabled: true
-      format: json
-
-  # Providers: Ingress + CRDs
-  providers:
-    kubernetesCRD:
-      enabled: true
-    kubernetesIngress:
-      enabled: true
-
-  # Persistence (optional, can be removed if not used)
-  persistence:
-    enabled: false
-
-  # Security best practices
-  securityContext:
-    capabilities:
-      drop: ["ALL"]
-      add: ["NET_BIND_SERVICE"]
+  # Security context
+  podSecurityContext:
     runAsNonRoot: true
     runAsUser: 65532
+    runAsGroup: 65532
+    fsGroup: 65532
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
