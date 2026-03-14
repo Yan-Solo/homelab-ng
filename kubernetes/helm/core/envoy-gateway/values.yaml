@@ -7,6 +7,10 @@ gateway-crds-helm:
       enabled: true
 
 gateway-helm:
+  # Skip CRD installation since we're using gateway-crds-helm
+  crds:
+    install: false
+
   config:
     envoyGateway:
       gateway:
