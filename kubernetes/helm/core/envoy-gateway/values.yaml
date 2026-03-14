@@ -1,4 +1,4 @@
-envoy-gateway:
+gateway-helm:
   config:
     envoyGateway:
       gateway:
