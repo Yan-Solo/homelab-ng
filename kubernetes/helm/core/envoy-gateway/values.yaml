@@ -1,3 +1,11 @@
+gateway-crds-helm:
+  crds:
+    gatewayAPI:
+      enabled: true
+      channel: standard
+    envoyGateway:
+      enabled: true
+
 gateway-helm:
   config:
     envoyGateway:
