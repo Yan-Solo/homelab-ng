@@ -20,8 +20,8 @@ app-template:
       controller: main
       ports:
         http:
-          port: 80
-          targetPort: &port 8989
+          port: 8989
+          targetPort: 8989
   route:
     main:
       enabled: true
@@ -34,7 +34,6 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
-
   podSecurityContext:
     runAsUser: 568
     runAsGroup: 568
