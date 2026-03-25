@@ -14,9 +14,6 @@ app-template:
             tag: 4.0.14.2938
   service:
     main:
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "sonarr"
       controller: main
       ports:
         http:
