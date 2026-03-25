@@ -4,7 +4,7 @@ metallb:
   speaker:
     priorityClassName: system-cluster-critical
     # Add missing NET_ADMIN capability for ARP functionality
-    securityContext:
+    containerSecurityContext:
       allowPrivilegeEscalation: false
       capabilities:
         add:
