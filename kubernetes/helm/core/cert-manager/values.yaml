@@ -2,6 +2,9 @@
 global:
   priorityClassName: system-cluster-critical
 
+# Enable Gateway API support for automatic certificate generation
+featureGates: "ExperimentalGatewayAPISupport=true"
+
 # Install CRDs
 crds:
   enabled: true
@@ -28,7 +31,7 @@ securityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
-    - ALL
+      - ALL
 
 # Webhook specific configuration
 webhook:
@@ -67,4 +70,4 @@ startupapicheck:
 prometheus:
   enabled: true
   servicemonitor:
-    enabled: false  # Set to true if you have Prometheus operator
+    enabled: false # Set to true if you have Prometheus operator

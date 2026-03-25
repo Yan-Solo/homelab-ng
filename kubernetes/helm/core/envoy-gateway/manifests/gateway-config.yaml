@@ -12,29 +12,27 @@ kind: Gateway
 metadata:
   name: envoy-gateway
   namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: envoy-gateway
   listeners:
-  - name: http
-    protocol: HTTP
-    port: 80
-    hostname: "*.intropin.be"
-    allowedRoutes:
-      namespaces:
-        from: All
-  - name: https
-    protocol: HTTPS
-    port: 443
-    hostname: "*.intropin.be"
-    allowedRoutes:
-      namespaces:
-        from: All
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - kind: Secret
-        name: skybrief-backend-tls
-        namespace: default
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: "*.intropin.be"
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: "*.intropin.be"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
 
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -44,9 +42,9 @@ metadata:
   namespace: default
 spec:
   from:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    namespace: default
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      namespace: default
   to:
-  - group: ""
-    kind: Secret
+    - group: ""
+      kind: Secret
