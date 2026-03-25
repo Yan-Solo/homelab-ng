@@ -12,27 +12,27 @@ app-template:
           env:
             # Database Configuration (SQLite)
             DB_ENGINE: sqlite
-            
+
             # Base URL Configuration
             BASE_URL: https://mealie.intropin.be
-            
+
             # Security
             ALLOW_SIGNUP: "false"
-            
+
             # API Configuration
             API_PORT: "9000"
             API_DOCS: "true"
-            
+
             # Default user (change password after first login)
             DEFAULT_EMAIL: admin@mealie.local
             DEFAULT_PASSWORD: MyPassword
-            
+
             # Timezone
             TZ: Europe/Brussels
-            
+
             # Data directory
             DATA_DIR: /app/data
-            
+
           probes:
             readiness:
               enabled: true
@@ -60,13 +60,23 @@ app-template:
   service:
     main:
       controller: main
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "mealie"
       ports:
         http:
           port: 80
           targetPort: 9000
+
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - mealie.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
 
   persistence:
     # SQLite database and app data

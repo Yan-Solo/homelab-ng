@@ -15,9 +15,18 @@ app-template:
           targetPort: 8096
       type: LoadBalancer
       loadBalancerIP: 192.168.0.61
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
       annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "jellyfin"
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - jellyfin.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   persistence:
     config:
       enabled: true

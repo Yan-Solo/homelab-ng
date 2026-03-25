@@ -14,14 +14,23 @@ app-template:
             tag: 5.20.1.9773
   service:
     main:
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "radarr"
       controller: main
       ports:
         http:
           port: 80
           targetPort: &port 7878
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - radarr.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   persistence:
     config:
       enabled: true

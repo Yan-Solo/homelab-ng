@@ -8,14 +8,23 @@ app-template:
             tag: 2.7.3
   service:
     main:
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "jellyseerr"
       controller: main
       ports:
         http:
           port: 80
           targetPort: 5055
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - jellyseerr.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   persistence:
     config:
       enabled: true

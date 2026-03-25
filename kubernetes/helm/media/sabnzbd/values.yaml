@@ -14,14 +14,23 @@ app-template:
             tag: 4.4.1
   service:
     main:
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "sabnzbd"
       controller: main
       ports:
         http:
           port: 80
-          targetPort: &port 8080
+          targetPort: 8080
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - sabnzbd.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   persistence:
     config:
       enabled: true

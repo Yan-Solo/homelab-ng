@@ -45,9 +45,6 @@ app-template:
   service:
     main:
       controller: main
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "home-assistant-zigbee2mqtt"
       ports:
         http:
           port: 80
