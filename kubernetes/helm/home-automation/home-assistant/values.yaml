@@ -60,9 +60,7 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
-      targetRef:
-        kind: Service
-        name: main
+      serviceName: main
   persistence:
     config:
       enabled: true
