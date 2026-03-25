@@ -22,6 +22,19 @@ app-template:
         http:
           port: 80
           targetPort: &port 8989
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - sonarr.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+
   podSecurityContext:
     runAsUser: 568
     runAsGroup: 568
