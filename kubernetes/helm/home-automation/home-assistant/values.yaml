@@ -14,22 +14,6 @@ app-template:
               add:
                 - NET_RAW
                 - CAP_SYS_ADMIN
-    code-server:
-      containers:
-        code-server:
-          image:
-            repository: ghcr.io/coder/code-server
-            tag: 4.112.0
-          args:
-            - --auth
-            - "none"
-            - --user-data-dir
-            - "/config/.vscode"
-            - extensions-dir
-            - "/config/.vscode"
-            - --port
-            - "8081"
-            - "/config"
   service:
     main:
       controller: main
@@ -39,15 +23,6 @@ app-template:
           targetPort: 8123
       type: LoadBalancer
       loadBalancerIP: 192.168.0.63
-    code-server:
-      controller: code-server
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "home-assistant-code"
-      ports:
-        http:
-          port: 80
-          targetPort: 8081
   route:
     main:
       enabled: true
@@ -60,7 +35,6 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
-      serviceName: main
   persistence:
     config:
       enabled: true
