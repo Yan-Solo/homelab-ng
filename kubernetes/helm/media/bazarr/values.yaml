@@ -15,13 +15,23 @@ app-template:
   service:
     main:
       controller: main
-      annotations:
-        tailscale.com/expose: "true"
-        tailscale.com/hostname: "bazarr"
       ports:
         http:
           port: 80
           targetPort: &port 6767
+
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - bazarr.intropin.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   persistence:
     config:
       enabled: true
