@@ -32,10 +32,6 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
-      rules:
-        - backendRefs:
-            - name: '{{ include "bjw-s.common.lib.chart.names.fullname" $ }}-main'
-              port: 80
   persistence:
     config:
       enabled: true
