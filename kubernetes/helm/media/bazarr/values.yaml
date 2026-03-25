@@ -32,6 +32,10 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
+      rules:
+        - backendRefs:
+            - name: bazarr-main
+              port: 80
   persistence:
     config:
       enabled: true
