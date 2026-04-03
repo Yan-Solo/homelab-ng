@@ -10,7 +10,7 @@ app-template:
       containers:
         main:
           image:
-            repository: lscr.io/linuxserver/radarr:latest
+            repository: lscr.io/linuxserver/radarr
             tag: 6.1.1.10360-ls297
   service:
     main:
