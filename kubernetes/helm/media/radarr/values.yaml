@@ -10,8 +10,8 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/onedr0p/radarr
-            tag: 5.20.1.9773
+            repository: lscr.io/linuxserver/radarr:latest
+            tag: 6.1.1.10360-ls297
   service:
     main:
       controller: main
