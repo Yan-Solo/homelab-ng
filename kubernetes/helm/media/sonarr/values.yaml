@@ -10,8 +10,8 @@ app-template:
       containers:
         main:
           image:
-            repository: ghcr.io/onedr0p/sonarr
-            tag: 4.0.14.2938
+            repository: lscr.io/linuxserver/sonarr
+            tag: 4.0.17.2952-ls305
   service:
     main:
       controller: main
