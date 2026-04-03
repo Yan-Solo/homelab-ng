@@ -37,7 +37,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       hostnames:
-        - skybrief-backend.intropin.be
+        - skybrief-backend.sunnyvale.be
       parentRefs:
         - name: envoy-gateway
           namespace: default

@@ -22,7 +22,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       hostnames:
-        - jellyfin.intropin.be
+        - jellyfin.sunnyvale.be
       parentRefs:
         - name: envoy-gateway
           namespace: default

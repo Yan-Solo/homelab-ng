@@ -20,14 +20,14 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
-      hostname: "*.intropin.be"
+      hostname: "*.sunnyvale.be"
       allowedRoutes:
         namespaces:
           from: All
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: "*.intropin.be"
+      hostname: "*.sunnyvale.be"
       allowedRoutes:
         namespaces:
           from: All
@@ -35,7 +35,7 @@ spec:
         mode: Terminate
         certificateRefs:
           - kind: Secret
-            name: wildcard-intropin-be-tls
+            name: wildcard-sunnyvale-be-tls
             namespace: default
 
 ---

@@ -14,7 +14,7 @@ app-template:
             DB_ENGINE: sqlite
 
             # Base URL Configuration
-            BASE_URL: https://mealie.intropin.be
+            BASE_URL: https://mealie.sunnyvale.be
 
             # Security
             ALLOW_SIGNUP: "false"
@@ -72,7 +72,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       hostnames:
-        - mealie.intropin.be
+        - mealie.sunnyvale.be
       parentRefs:
         - name: envoy-gateway
           namespace: default

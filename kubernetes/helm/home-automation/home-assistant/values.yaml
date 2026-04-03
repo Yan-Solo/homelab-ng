@@ -30,7 +30,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       hostnames:
-        - home-assistant.intropin.be
+        - home-assistant.sunnyvale.be
       parentRefs:
         - name: envoy-gateway
           namespace: default
