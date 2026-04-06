@@ -1,0 +1,81 @@
+app-template:
+    defaultPodOptions:
+        securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "Always"
+    controllers:
+        main:
+            containers:
+                main:
+                    image:
+                        repository: ghcr.io/haveagitgat/tdarr
+                        tag: 2.67.01
+                    env:
+                        TZ: Europe/Brussels
+                        internalNode: true
+                        inContainer: true
+    service:
+        main:
+            controller: main
+            ports:
+                http:
+                    port: 8265
+                    targetPort: 8265
+                server:
+                    port: 8266
+                    targetPort: 8266
+    route:
+        main:
+            enabled: true
+            kind: HTTPRoute
+            annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
+            hostnames:
+                - tdarr.sunnyvale.be
+            parentRefs:
+                - name: envoy-gateway
+                  namespace: default
+                  sectionName: https
+    persistence:
+        config:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            storageClass: local-path-ssd
+            globalMounts:
+                - path: /app/configs
+        server:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            storageClass: local-path-ssd
+            globalMounts:
+                - path: /app/server
+        logs:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            storageClass: local-path-ssd
+            globalMounts:
+                - path: /app/logs
+        temp:
+            enabled: true
+            type: emptyDir
+
+        media:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "media"
+            globalMounts:
+                - path: /media
+        dri:
+            enabled: true
+            type: hostPath
+            hostPath: /dev/dri
+            globalMounts:
+                - path: /dev/dri
