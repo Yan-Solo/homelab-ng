@@ -43,6 +43,12 @@ app-template:
       existingClaim: "media"
       globalMounts:
         - path: /media
+    dri:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/dri
+      globalMounts:
+        - path: /dev/dri
   probes:
     liveness:
       spec:
