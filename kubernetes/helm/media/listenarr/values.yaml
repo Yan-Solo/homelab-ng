@@ -11,7 +11,7 @@ app-template:
                 main:
                     image:
                         repository: ghcr.io/listenarrs/listenarr
-                        tag: 0.2.70
+                        tag: canary-0.2.70
     service:
         main:
             controller: main
