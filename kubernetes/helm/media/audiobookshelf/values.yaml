@@ -11,8 +11,8 @@ app-template:
       controller: main
       ports:
         http:
-          port: 80
-          targetPort: 80
+          port: 13378
+          targetPort: 13378
   route:
     main:
       enabled: true
