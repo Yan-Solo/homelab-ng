@@ -1,0 +1,50 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/advplyr/audiobookshelf
+            tag: 2.33.1
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 13378
+          targetPort: 13378
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - audiobookshelf.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /app/config
+    metadata:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /metadata
+    media:
+      enabled: true
+      type: persistentVolumeClaim
+      existingClaim: "media"
+      globalMounts:
+        - path: /audiobooks
