@@ -25,6 +25,9 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
+      rules:
+        - timeouts:
+            request: 0s
   persistence:
     config:
       enabled: true
