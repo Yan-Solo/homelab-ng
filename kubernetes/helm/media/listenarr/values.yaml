@@ -37,9 +37,7 @@ app-template:
     downloads:
       enabled: true
       type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      storageClass: local-path-ssd
+      existingClaim: "sab-downloads"
       globalMounts:
         - path: /downloads
     audiobooks:
