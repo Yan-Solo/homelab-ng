@@ -1,0 +1,36 @@
+app-template:
+    controllers:
+        main:
+            containers:
+                main:
+                    image:
+                        repository: lscr.io/linuxserver/prolarr
+                        tag: 15.01.26
+    service:
+        main:
+            controller: main
+            ports:
+                http:
+                    port: 9696
+                    targetPort: 9696
+    route:
+        main:
+            enabled: true
+            kind: HTTPRoute
+            annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
+            hostnames:
+                - prowlarr.sunnyvale.be
+            parentRefs:
+                - name: envoy-gateway
+                  namespace: default
+                  sectionName: https
+    persistence:
+        config:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            storageClass: local-path-ssd
+            globalMounts:
+                - path: /config

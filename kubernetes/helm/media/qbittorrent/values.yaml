@@ -1,0 +1,51 @@
+app-template:
+    controllers:
+        main:
+            containers:
+                main:
+                    image:
+                        repository: lscr.io/linuxserver/qbittorrent
+                        tag: 17.07.24
+    service:
+        main:
+            controller: main
+            ports:
+                http:
+                    port: 80
+                    targetPort: 8080
+                qbit:
+                    port: 6881
+                    targetPort: 6881
+    route:
+        main:
+            enabled: true
+            kind: HTTPRoute
+            annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
+            hostnames:
+                - qbit.sunnyvale.be
+            parentRefs:
+                - name: envoy-gateway
+                  namespace: default
+                  sectionName: https
+    persistence:
+        config:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            globalMounts:
+                - path: /config
+            storageClass: local-path-ssd
+        downloads:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "qbittorrents-downloads"
+            globalMounts:
+                - path: /downloads
+        media:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "media"
+            globalMounts:
+                - path: /media
