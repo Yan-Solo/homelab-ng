@@ -1,48 +1,54 @@
 app-template:
-  controllers:
-    main:
-      containers:
+    controllers:
         main:
-          image:
-            repository: ghcr.io/listenarrs/listenarr
-            tag: canary-0.2.70
-  service:
-    main:
-      controller: main
-      ports:
-        http:
-          port: 4545
-          targetPort: 4545
-  route:
-    main:
-      enabled: true
-      kind: HTTPRoute
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hostnames:
-        - listenarr.sunnyvale.be
-      parentRefs:
-        - name: envoy-gateway
-          namespace: default
-          sectionName: https
-  persistence:
-    config:
-      enabled: true
-      type: persistentVolumeClaim
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      storageClass: local-path-ssd
-      globalMounts:
-        - path: /app/config
-    downloads:
-      enabled: true
-      type: persistentVolumeClaim
-      existingClaim: "sab-downloads"
-      globalMounts:
-        - path: /downloads
-    media:
-      enabled: true
-      type: persistentVolumeClaim
-      existingClaim: "media"
-      globalMounts:
-        - path: /audiobooks
+            containers:
+                main:
+                    image:
+                        repository: ghcr.io/listenarrs/listenarr
+                        tag: canary-0.2.70
+    service:
+        main:
+            controller: main
+            ports:
+                http:
+                    port: 4545
+                    targetPort: 4545
+    route:
+        main:
+            enabled: true
+            kind: HTTPRoute
+            annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
+            hostnames:
+                - listenarr.sunnyvale.be
+            parentRefs:
+                - name: envoy-gateway
+                  namespace: default
+                  sectionName: https
+    persistence:
+        config:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            storageClass: local-path-ssd
+            globalMounts:
+                - path: /app/config
+        downloads:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "sab-downloads"
+            globalMounts:
+                - path: /downloads
+        downloads-qbit:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "qbit-downloads"
+            globalMounts:
+                - path: /qbit-downloads
+        media:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "media"
+            globalMounts:
+                - path: /audiobooks
