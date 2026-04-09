@@ -5,7 +5,7 @@ app-template:
                 main:
                     image:
                         repository: lscr.io/linuxserver/qbittorrent
-                        tag: 17.07.24
+                        tag: 5.1.4
     service:
         main:
             controller: main
