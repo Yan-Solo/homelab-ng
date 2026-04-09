@@ -13,7 +13,6 @@ app-template:
         http:
           port: 13378
           targetPort: 13378
-          appProtocol: gateway.envoyproxy.io/wss
   route:
     main:
       enabled: true
@@ -26,9 +25,6 @@ app-template:
         - name: envoy-gateway
           namespace: default
           sectionName: https
-      rules:
-        - timeouts:
-            request: 0s
   persistence:
     config:
       enabled: true
