@@ -4,7 +4,7 @@ app-template:
             containers:
                 main:
                     image:
-                        repository: lscr.io/linuxserver/prolarr
+                        repository: lscr.io/linuxserver/prowlarr
                         tag: 15.01.26
     service:
         main:
