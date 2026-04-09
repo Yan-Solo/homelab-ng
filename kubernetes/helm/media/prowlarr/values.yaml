@@ -5,7 +5,7 @@ app-template:
                 main:
                     image:
                         repository: lscr.io/linuxserver/prowlarr
-                        tag: 15.01.26
+                        tag: 2.3.5.5327-ls141
     service:
         main:
             controller: main
