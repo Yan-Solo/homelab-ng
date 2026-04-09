@@ -11,5 +11,5 @@ app-template:
             controller: main
             ports:
                 http:
-                    port: 4545
-                    targetPort: 4545
+                    port: 8191
+                    targetPort: 8191
