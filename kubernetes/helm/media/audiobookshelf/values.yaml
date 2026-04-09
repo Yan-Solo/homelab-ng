@@ -13,6 +13,7 @@ app-template:
         http:
           port: 13378
           targetPort: 13378
+          appProtocol: gateway.envoyproxy.io/wss
   route:
     main:
       enabled: true
