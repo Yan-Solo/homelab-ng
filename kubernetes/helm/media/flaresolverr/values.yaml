@@ -1,0 +1,15 @@
+app-template:
+    controllers:
+        main:
+            containers:
+                main:
+                    image:
+                        repository: ghcr.io/flaresolverr/flaresolverr
+                        tag: v3.4.6
+    service:
+        main:
+            controller: main
+            ports:
+                http:
+                    port: 4545
+                    targetPort: 4545
