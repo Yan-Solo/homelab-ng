@@ -5,7 +5,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/advplyr/audiobookshelf
-            tag: 2.34.0
+            tag: 2.35.0
   service:
     main:
       controller: main
