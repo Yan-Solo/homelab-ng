@@ -190,51 +190,49 @@ app-template:
           port: 80
           targetPort: 3000
 
-    routes:
-      frontend:
-        enabled: true
-        kind: HTTPRoute
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-        hostnames:
-          - barpath.sunnyvale.be
-        parentRefs:
-          - name: envoy-gateway
-            namespace: default
-            sectionName: https
-        rules:
-          - backendRefs:
-              - group: ""
-                kind: Service
-                name: barpath-frontend
-                port:
-                weight: 3000
-            matches:
-              - path:
-                  type: pathPrefix
-                  value: /
-      backend:
-        enabled: true
-        kind: HTTPRoute
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-        hostnames:
-          - barpath.sunnyvale.be
-        parentRefs:
-          - name: envoy-gateway
-            namespace: default
-            sectionName: https
-        rules:
-          - backendRefs:
-              - group: ""
-                kind: Service
-                name: barpath-backend
-                port:
-                weight: 8080
-            matches:
-              - path:
-                  type: pathPrefix
-                  value: /api
+  route:
+    frontend:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - barpath.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+      rules:
+        - backendRefs:
+            - group: ""
+              kind: Service
+              name: barpath-frontend
+              port: 3000
+          matches:
+            - path:
+                type: PathPrefix
+                value: /
+    backend:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - barpath.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+      rules:
+        - backendRefs:
+            - group: ""
+              kind: Service
+              name: barpath-backend
+              port: 8080
+          matches:
+            - path:
+                type: PathPrefix
+                value: /api
 
   persistence:
     postgres-data:
