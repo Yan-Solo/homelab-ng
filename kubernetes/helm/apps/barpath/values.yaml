@@ -251,6 +251,9 @@ app-template:
   persistence:
     postgres-data:
       enabled: true
-      type: hostPath
-      hostPath: /opt/psqldata
-      hostPathType: "Directory"
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /opt/psqldata
