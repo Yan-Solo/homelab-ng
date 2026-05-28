@@ -191,7 +191,7 @@ app-template:
           targetPort: 3000
 
     route:
-      backend:
+      main:
         enabled: true
         kind: HTTPRoute
         annotations:
