@@ -64,11 +64,7 @@ app-template:
             SERVER_HOST: 0.0.0.0
             SERVER_PORT: "8080"
             CORS_ORIGINS: https://barpath.sunnyvale.be
-            JWT_SECRET:
-              valueFrom:
-                secretKeyRef:
-                  name: barpath-backend-secret
-                  key: jwt-secret
+            JWT_SECRET: barpathjwttoken
             GOOGLE_CLIENT_ID:
               valueFrom:
                 secretKeyRef:
