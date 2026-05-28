@@ -2,7 +2,7 @@ app-template:
   defaultPodOptions:
     imagePullSecrets:
       - name: ghcr-secret
-  
+
   controllers:
     # PostgreSQL Database
     postgres:
@@ -47,7 +47,7 @@ app-template:
                 periodSeconds: 10
                 timeoutSeconds: 5
                 failureThreshold: 5
-  
+
     # Backend API (Go)
     backend:
       containers:
@@ -124,7 +124,7 @@ app-template:
                 timeoutSeconds: 3
                 successThreshold: 1
                 failureThreshold: 3
-  
+
     # Frontend (Next.js)
     frontend:
       containers:
@@ -176,7 +176,7 @@ app-template:
                 timeoutSeconds: 3
                 successThreshold: 1
                 failureThreshold: 3
-  
+
   service:
     # PostgreSQL service
     postgres:
@@ -185,7 +185,7 @@ app-template:
         postgres:
           port: 5432
           targetPort: 5432
-  
+
     # Backend service
     backend:
       controller: backend
@@ -193,7 +193,7 @@ app-template:
         http:
           port: 80
           targetPort: 8080
-  
+
     # Frontend service
     frontend:
       controller: frontend
@@ -201,92 +201,53 @@ app-template:
         http:
           port: 80
           targetPort: 3000
-  
-    # ingress:
-    #   # Frontend ingress with SSL
+
+    # route:
+    #   backend: # /api
+    #     enabled: true
+    #     kind: HTTPRoute
+    #     annotations:
+    #       cert-manager.io/cluster-issuer: letsencrypt
+    #     hostnames:
+    #       - barpath.sunnyvale.be
+    #     parentRefs:
+    #       - name: envoy-gateway
+    #         namespace: default
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - group: ""
+    #             kind: Service
+    #             name: barpath-frontend
+    #             port:
+    #             weight: 3000
+    #         matches:
+    #           - path:
+    #               type: pathPrefix
+    #               value: /
     #   frontend:
     #     enabled: true
-    #     className: nginx
+    #     kind: HTTPRoute
     #     annotations:
     #       cert-manager.io/cluster-issuer: letsencrypt
-    #       nginx.ingress.kubernetes.io/proxy-body-size: "10m"
-    #     hosts:
-    #       - host: app.barpath.coach
-    #         paths:
-    #           - path: /
-    #             pathType: Prefix
-    #             service:
-    #               identifier: frontend
-    #               port: http
-    #     tls:
-    #       - secretName: barpath-frontend-tls
-    #         hosts:
-    #           - app.barpath.coach
-  
-    #   # Backend API ingress with SSL
-    #   backend:
-    #     enabled: true
-    #     className: nginx
-    #     annotations:
-    #       cert-manager.io/cluster-issuer: letsencrypt
-    #     hosts:
-    #       - host: app.barpath.coach
-    #         paths:
-    #           - path: /api
-    #             pathType: Prefix
-    #             service:
-    #               identifier: backend
-    #               port: http
-    #     tls:
-    #       - secretName: barpath-backend-tls
-    #         hosts:
-    #           - app.barpath.coach
-    route:
-      backend: # /api
-        enabled: true
-        kind: HTTPRoute
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-        hostnames:
-          - barpath.sunnyvale.be
-        parentRefs:
-          - name: envoy-gateway
-            namespace: default
-            sectionName: https
-        rules:
-          - backendRefs:
-              - group: ""
-                kind: Service
-                name: barpath-frontend
-                port:
-                weight: 3000
-            matches:
-              - path:
-                  type: pathPrefix
-                  value: /
-      frontend:
-        enabled: true
-        kind: HTTPRoute
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-        hostnames:
-          - barpath.sunnyvale.be
-        parentRefs:
-          - name: envoy-gateway
-            namespace: default
-            sectionName: https
-        rules:
-          - backendRefs:
-              - group: ""
-                kind: Service
-                name: barpath-backend
-                port:
-                weight: 8080
-            matches:
-              - path:
-                  type: pathPrefix
-                  value: /api
-  
+    #     hostnames:
+    #       - barpath.sunnyvale.be
+    #     parentRefs:
+    #       - name: envoy-gateway
+    #         namespace: default
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - group: ""
+    #             kind: Service
+    #             name: barpath-backend
+    #             port:
+    #             weight: 8080
+    #         matches:
+    #           - path:
+    #               type: pathPrefix
+    #               value: /api
+
   persistence:
     postgres-data:
       enabled: true
