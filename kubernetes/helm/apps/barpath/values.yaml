@@ -14,11 +14,7 @@ app-template:
           env:
             POSTGRES_DB: barpath
             POSTGRES_USER: barpath
-            POSTGRES_PASSWORD:
-              valueFrom:
-                secretKeyRef:
-                  name: barpath-postgres-secret
-                  key: password
+            POSTGRES_PASSWORD: barpath
             POSTGRES_HOST_AUTH_METHOD: trust
           probes:
             readiness:
@@ -62,11 +58,7 @@ app-template:
             DB_HOST: barpath-postgres
             DB_PORT: "5432"
             DB_USER: barpath
-            DB_PASSWORD:
-              valueFrom:
-                secretKeyRef:
-                  name: barpath-postgres-secret
-                  key: password
+            DB_PASSWORD: password
             DB_NAME: barpath
             DB_SSLMODE: disable
             SERVER_HOST: 0.0.0.0
