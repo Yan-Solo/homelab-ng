@@ -191,7 +191,7 @@ app-template:
           targetPort: 3000
 
     route:
-      frontend:
+      backend:
         enabled: true
         kind: HTTPRoute
         annotations:
@@ -206,35 +206,13 @@ app-template:
           - backendRefs:
               - group: ""
                 kind: Service
-                name: barpath-frontend
+                name: barpath-backend
                 port:
                 weight: 3000
             matches:
               - path:
                   type: pathPrefix
                   value: /api
-      # backend:
-      #   enabled: true
-      #   kind: HTTPRoute
-      #   annotations:
-      #     cert-manager.io/cluster-issuer: letsencrypt
-      #   hostnames:
-      #     - barpath.sunnyvale.be
-      #   parentRefs:
-      #     - name: envoy-gateway
-      #       namespace: default
-      #       sectionName: https
-      #   rules:
-      #     - backendRefs:
-      #         - group: ""
-      #           kind: Service
-      #           name: barpath-backend
-      #           port:
-      #           weight: 8080
-      #       matches:
-      #         - path:
-      #             type: pathPrefix
-      #             value: /api
 
   persistence:
     postgres-data:
