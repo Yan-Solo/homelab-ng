@@ -207,7 +207,7 @@ app-template:
             - group: ""
               kind: Service
               name: barpath-frontend
-              port: 3000
+              port: 80
           matches:
             - path:
                 type: PathPrefix
@@ -228,7 +228,7 @@ app-template:
             - group: ""
               kind: Service
               name: barpath-backend
-              port: 8080
+              port: 80
           matches:
             - path:
                 type: PathPrefix
