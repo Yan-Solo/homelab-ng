@@ -1,294 +1,295 @@
-defaultPodOptions:
-  imagePullSecrets:
-    - name: ghcr-secret
-
-controllers:
-  # PostgreSQL Database
-  postgres:
-    containers:
-      postgres:
-        image:
-          repository: postgres
-          tag: 16-alpine
-        env:
-          POSTGRES_DB: barpath
-          POSTGRES_USER: barpath
-          POSTGRES_PASSWORD:
-            valueFrom:
-              secretKeyRef:
-                name: barpath-postgres-secret
-                key: password
-          POSTGRES_HOST_AUTH_METHOD: trust
-        probes:
-          readiness:
-            enabled: true
-            custom: true
-            spec:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - pg_isready -U barpath -d barpath
-              initialDelaySeconds: 30
-              periodSeconds: 10
-              timeoutSeconds: 5
-              failureThreshold: 5
-          liveness:
-            enabled: true
-            custom: true
-            spec:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - pg_isready -U barpath -d barpath
-              initialDelaySeconds: 30
-              periodSeconds: 10
-              timeoutSeconds: 5
-              failureThreshold: 5
-
-  # Backend API (Go)
-  backend:
-    containers:
-      backend:
-        image:
-          repository: ghcr.io/barpath-coach/barpath-backend
-          tag: "1.0.6"
-          pullPolicy: IfNotPresent
-        env:
-          FRONTEND_URL: https://app.barpath.coach
-          GIN_MODE: release
-          DB_HOST: barpath-postgres
-          DB_PORT: "5432"
-          DB_USER: barpath
-          DB_PASSWORD:
-            valueFrom:
-              secretKeyRef:
-                name: barpath-postgres-secret
-                key: password
-          DB_NAME: barpath
-          DB_SSLMODE: disable
-          SERVER_HOST: 0.0.0.0
-          SERVER_PORT: "8080"
-          CORS_ORIGINS: https://barpath.sunnyvale.be
-          JWT_SECRET:
-            valueFrom:
-              secretKeyRef:
-                name: barpath-backend-secret
-                key: jwt-secret
-          GOOGLE_CLIENT_ID:
-            valueFrom:
-              secretKeyRef:
-                name: google-auth
-                key: GOOGLE_CLIENT_ID
-          GOOGLE_CLIENT_SECRET:
-            valueFrom:
-              secretKeyRef:
-                name: google-auth
-                key: GOOGLE_CLIENT_SECRET
-          GOOGLE_REDIRECT_URL:
-            valueFrom:
-              secretKeyRef:
-                name: google-auth
-                key: GOOGLE_REDIRECT_URL
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 500m
-            memory: 256Mi
-        probes:
-          liveness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                path: /api/health
-                port: 8080
-              initialDelaySeconds: 30
-              periodSeconds: 10
-              timeoutSeconds: 5
-              successThreshold: 1
-              failureThreshold: 3
-          readiness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                path: /api/health
-                port: 8080
-              initialDelaySeconds: 5
-              periodSeconds: 5
-              timeoutSeconds: 3
-              successThreshold: 1
-              failureThreshold: 3
-
-  # Frontend (Next.js)
-  frontend:
-    containers:
-      frontend:
-        image:
-          repository: ghcr.io/barpath-coach/barpath-frontend
-          tag: "1.0.14"
-          pullPolicy: IfNotPresent
-        env:
-          FRONTEND_URL: https://barpath.sunnyvale.be
-          NODE_ENV: production
-          PORT: "3000"
-          NEXT_PUBLIC_API_URL: https://barpath.sunnyvale.be/api
-          BASE_URL: https://barpath.sunnyvale.be/api
-          GOOGLE_REDIRECT_URL:
-            valueFrom:
-              secretKeyRef:
-                name: google-auth
-                key: GOOGLE_REDIRECT_URL
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 500m
-            memory: 256Mi
-        probes:
-          liveness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                path: /
-                port: 3000
-              initialDelaySeconds: 30
-              periodSeconds: 10
-              timeoutSeconds: 5
-              successThreshold: 1
-              failureThreshold: 3
-          readiness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                path: /
-                port: 3000
-              initialDelaySeconds: 5
-              periodSeconds: 5
-              timeoutSeconds: 3
-              successThreshold: 1
-              failureThreshold: 3
-
-service:
-  # PostgreSQL service
-  postgres:
-    controller: postgres
-    ports:
-      postgres:
-        port: 5432
-        targetPort: 5432
-
-  # Backend service
-  backend:
-    controller: backend
-    ports:
-      http:
-        port: 80
-        targetPort: 8080
-
-  # Frontend service
-  frontend:
-    controller: frontend
-    ports:
-      http:
-        port: 80
-        targetPort: 3000
-
-  # ingress:
-  #   # Frontend ingress with SSL
-  #   frontend:
-  #     enabled: true
-  #     className: nginx
-  #     annotations:
-  #       cert-manager.io/cluster-issuer: letsencrypt
-  #       nginx.ingress.kubernetes.io/proxy-body-size: "10m"
-  #     hosts:
-  #       - host: app.barpath.coach
-  #         paths:
-  #           - path: /
-  #             pathType: Prefix
-  #             service:
-  #               identifier: frontend
-  #               port: http
-  #     tls:
-  #       - secretName: barpath-frontend-tls
-  #         hosts:
-  #           - app.barpath.coach
-
-  #   # Backend API ingress with SSL
-  #   backend:
-  #     enabled: true
-  #     className: nginx
-  #     annotations:
-  #       cert-manager.io/cluster-issuer: letsencrypt
-  #     hosts:
-  #       - host: app.barpath.coach
-  #         paths:
-  #           - path: /api
-  #             pathType: Prefix
-  #             service:
-  #               identifier: backend
-  #               port: http
-  #     tls:
-  #       - secretName: barpath-backend-tls
-  #         hosts:
-  #           - app.barpath.coach
-  route:
-    backend: # /api
-      enabled: true
-      kind: HTTPRoute
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hostnames:
-        - barpath.sunnyvale.be
-      parentRefs:
-        - name: envoy-gateway
-          namespace: default
-          sectionName: https
-      rules:
-        - backendRefs:
-            - group: ""
-              kind: Service
-              name: barpath-frontend
-              port:
-              weight: 3000
-          matches:
-            - path:
-                type: pathPrefix
-                value: /
+app-template:
+  defaultPodOptions:
+    imagePullSecrets:
+      - name: ghcr-secret
+  
+  controllers:
+    # PostgreSQL Database
+    postgres:
+      containers:
+        postgres:
+          image:
+            repository: postgres
+            tag: 16-alpine
+          env:
+            POSTGRES_DB: barpath
+            POSTGRES_USER: barpath
+            POSTGRES_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: barpath-postgres-secret
+                  key: password
+            POSTGRES_HOST_AUTH_METHOD: trust
+          probes:
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - pg_isready -U barpath -d barpath
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+            liveness:
+              enabled: true
+              custom: true
+              spec:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - pg_isready -U barpath -d barpath
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+  
+    # Backend API (Go)
+    backend:
+      containers:
+        backend:
+          image:
+            repository: ghcr.io/barpath-coach/barpath-backend
+            tag: "1.0.6"
+            pullPolicy: IfNotPresent
+          env:
+            FRONTEND_URL: https://app.barpath.coach
+            GIN_MODE: release
+            DB_HOST: barpath-postgres
+            DB_PORT: "5432"
+            DB_USER: barpath
+            DB_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: barpath-postgres-secret
+                  key: password
+            DB_NAME: barpath
+            DB_SSLMODE: disable
+            SERVER_HOST: 0.0.0.0
+            SERVER_PORT: "8080"
+            CORS_ORIGINS: https://barpath.sunnyvale.be
+            JWT_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: barpath-backend-secret
+                  key: jwt-secret
+            GOOGLE_CLIENT_ID:
+              valueFrom:
+                secretKeyRef:
+                  name: google-auth
+                  key: GOOGLE_CLIENT_ID
+            GOOGLE_CLIENT_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: google-auth
+                  key: GOOGLE_CLIENT_SECRET
+            GOOGLE_REDIRECT_URL:
+              valueFrom:
+                secretKeyRef:
+                  name: google-auth
+                  key: GOOGLE_REDIRECT_URL
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          probes:
+            liveness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/health
+                  port: 8080
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                successThreshold: 1
+                failureThreshold: 3
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /api/health
+                  port: 8080
+                initialDelaySeconds: 5
+                periodSeconds: 5
+                timeoutSeconds: 3
+                successThreshold: 1
+                failureThreshold: 3
+  
+    # Frontend (Next.js)
     frontend:
+      containers:
+        frontend:
+          image:
+            repository: ghcr.io/barpath-coach/barpath-frontend
+            tag: "1.0.14"
+            pullPolicy: IfNotPresent
+          env:
+            FRONTEND_URL: https://barpath.sunnyvale.be
+            NODE_ENV: production
+            PORT: "3000"
+            NEXT_PUBLIC_API_URL: https://barpath.sunnyvale.be/api
+            BASE_URL: https://barpath.sunnyvale.be/api
+            GOOGLE_REDIRECT_URL:
+              valueFrom:
+                secretKeyRef:
+                  name: google-auth
+                  key: GOOGLE_REDIRECT_URL
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          probes:
+            liveness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /
+                  port: 3000
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 5
+                successThreshold: 1
+                failureThreshold: 3
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /
+                  port: 3000
+                initialDelaySeconds: 5
+                periodSeconds: 5
+                timeoutSeconds: 3
+                successThreshold: 1
+                failureThreshold: 3
+  
+  service:
+    # PostgreSQL service
+    postgres:
+      controller: postgres
+      ports:
+        postgres:
+          port: 5432
+          targetPort: 5432
+  
+    # Backend service
+    backend:
+      controller: backend
+      ports:
+        http:
+          port: 80
+          targetPort: 8080
+  
+    # Frontend service
+    frontend:
+      controller: frontend
+      ports:
+        http:
+          port: 80
+          targetPort: 3000
+  
+    # ingress:
+    #   # Frontend ingress with SSL
+    #   frontend:
+    #     enabled: true
+    #     className: nginx
+    #     annotations:
+    #       cert-manager.io/cluster-issuer: letsencrypt
+    #       nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    #     hosts:
+    #       - host: app.barpath.coach
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #             service:
+    #               identifier: frontend
+    #               port: http
+    #     tls:
+    #       - secretName: barpath-frontend-tls
+    #         hosts:
+    #           - app.barpath.coach
+  
+    #   # Backend API ingress with SSL
+    #   backend:
+    #     enabled: true
+    #     className: nginx
+    #     annotations:
+    #       cert-manager.io/cluster-issuer: letsencrypt
+    #     hosts:
+    #       - host: app.barpath.coach
+    #         paths:
+    #           - path: /api
+    #             pathType: Prefix
+    #             service:
+    #               identifier: backend
+    #               port: http
+    #     tls:
+    #       - secretName: barpath-backend-tls
+    #         hosts:
+    #           - app.barpath.coach
+    route:
+      backend: # /api
+        enabled: true
+        kind: HTTPRoute
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hostnames:
+          - barpath.sunnyvale.be
+        parentRefs:
+          - name: envoy-gateway
+            namespace: default
+            sectionName: https
+        rules:
+          - backendRefs:
+              - group: ""
+                kind: Service
+                name: barpath-frontend
+                port:
+                weight: 3000
+            matches:
+              - path:
+                  type: pathPrefix
+                  value: /
+      frontend:
+        enabled: true
+        kind: HTTPRoute
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hostnames:
+          - barpath.sunnyvale.be
+        parentRefs:
+          - name: envoy-gateway
+            namespace: default
+            sectionName: https
+        rules:
+          - backendRefs:
+              - group: ""
+                kind: Service
+                name: barpath-backend
+                port:
+                weight: 8080
+            matches:
+              - path:
+                  type: pathPrefix
+                  value: /api
+  
+  persistence:
+    postgres-data:
       enabled: true
-      kind: HTTPRoute
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hostnames:
-        - barpath.sunnyvale.be
-      parentRefs:
-        - name: envoy-gateway
-          namespace: default
-          sectionName: https
-      rules:
-        - backendRefs:
-            - group: ""
-              kind: Service
-              name: barpath-backend
-              port:
-              weight: 8080
-          matches:
-            - path:
-                type: pathPrefix
-                value: /api
-
-persistence:
-  postgres-data:
-    enabled: true
-    type: hostPath
-    hostPath: /opt/psqldata
-    hostPathType: "Directory"
+      type: hostPath
+      hostPath: /opt/psqldata
+      hostPathType: "Directory"
