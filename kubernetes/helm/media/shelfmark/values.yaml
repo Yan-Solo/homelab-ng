@@ -1,0 +1,54 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/calibrain/shelfmark:latest
+            tag: v1.3.0
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 8084
+          targetPort: 8084
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - shelfmark.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+    downloads:
+      enabled: true
+      type: persistentVolumeClaim
+      existingClaim: "sab-downloads"
+      globalMounts:
+        - path: /downloads
+    # downloads-qbit:
+    #   enabled: true
+    #   type: persistentVolumeClaim
+    #   existingClaim: "qbittorrent-downloads"
+    #   globalMounts:
+    #     - path: /qbittorret-downloads
+    books:
+      enabled: true
+      type: persistentVolumeClaim
+      existingClaim: "media"
+      globalMounts:
+        - path: /books
