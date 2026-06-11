@@ -36,6 +36,9 @@ app-template:
                 - path: /config
         downloads:
             enabled: true
+            type: emptyDir
+        downloads-sab:
+            enabled: true
             type: persistentVolumeClaim
             existingClaim: "sab-downloads"
             globalMounts:
