@@ -37,7 +37,6 @@ app-template:
         downloads:
             enabled: true
             type: emptyDir
-            accessMode: ReadWriteMany
         downloads-sab:
             enabled: true
             type: persistentVolumeClaim
