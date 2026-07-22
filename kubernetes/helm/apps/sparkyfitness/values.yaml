@@ -1,1 +1,5 @@
 sparkyfitness:
+  httpRoute:
+    enabled: true
+    hostname: sparkyfitness.sunnyvale.be
+     
