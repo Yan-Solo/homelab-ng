@@ -2,4 +2,7 @@ sparkyfitness:
   httpRoute:
     enabled: true
     hostname: sparkyfitness.sunnyvale.be
-     
+    parentRef:
+      name: envoy-gateway
+      namespace: default
+      sectionName: https
