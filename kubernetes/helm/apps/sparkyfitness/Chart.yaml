@@ -6,4 +6,4 @@ appVersion: "1.0.0"
 dependencies:
 - name: sparkyfitness
   version: 0.3.0
-  repository: oci://ghcr.io/codewithcj/charts/sparkyfitness
+  repository: https://ghcr.io/codewithcj/charts/sparkyfitness
