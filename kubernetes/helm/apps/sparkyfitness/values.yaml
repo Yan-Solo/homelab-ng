@@ -1,4 +1,6 @@
 sparkyfitness:
+  frontend:
+    port: 8080
   httpRoute:
     enabled: true
     hostname: sparkyfitness.sunnyvale.be
