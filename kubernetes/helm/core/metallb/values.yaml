@@ -1,4 +1,5 @@
 metallb:
+  fullnameOverride: "metallb"
   controller:
     priorityClassName: system-cluster-critical
   speaker:
