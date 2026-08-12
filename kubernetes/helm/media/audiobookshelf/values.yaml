@@ -17,15 +17,8 @@ app-template:
         main:
             enabled: true
             kind: HTTPRoute
-            annotations:
-                cert-manager.io/cluster-issuer: letsencrypt
             hostnames:
                 - audiobookshelf.sunnyvale.be
-            parentRefs:
-                - name: envoy-gateway
-                  namespace: default
-                  sectionName: https
-
     persistence:
         config:
             enabled: true
