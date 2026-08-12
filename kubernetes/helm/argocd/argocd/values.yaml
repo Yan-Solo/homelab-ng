@@ -8,7 +8,7 @@ argo-cd:
     pdb:
       enabled: true
       minAvailable: 1
-    extraArgs: 
+    extraArgs:
       - "--insecure"
   configs:
     params:
@@ -20,7 +20,7 @@ argo-cd:
       exec.enabled: "true"
       resource.compareoptions: |
         ignoreAggregatedRoles: true
-        ignoreResourceStatusField: crd
+        ignoreResourceStatusField: all
       server.insecure: true
   controller:
     replicas: 1
