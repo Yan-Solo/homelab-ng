@@ -25,6 +25,11 @@ app-template:
                 - name: envoy-gateway
                   namespace: default
                   sectionName: https
+            rules:
+                  - matches:
+                            - path:
+                                type: PathPrefix
+                                value: /
     persistence:
         config:
             enabled: true
