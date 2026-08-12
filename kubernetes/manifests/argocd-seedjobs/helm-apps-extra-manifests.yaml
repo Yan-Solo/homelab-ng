@@ -31,6 +31,7 @@ spec:
           - RespectIgnoreDifferences=true
           - CreateNamespace=true
           - ServerSideApply=true
+          - ServerSideDiff=true
         automated:
           prune: true
           selfHeal: true
