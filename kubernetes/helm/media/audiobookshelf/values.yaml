@@ -19,6 +19,10 @@ app-template:
             kind: HTTPRoute
             hostnames:
                 - audiobookshelf.sunnyvale.be
+            parentRefs:
+                - name: envoy-gateway
+                  namespace: default
+                  sectionName: https
     persistence:
         config:
             enabled: true
