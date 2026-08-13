@@ -1,4 +1,7 @@
 app-template:
+  defaultPodOptions:
+    securityContext:
+      supplementalGroups: [993]
   controllers:
     main:
       containers:
@@ -6,8 +9,6 @@ app-template:
           image:
             repository: lscr.io/linuxserver/jellyfin
             tag: 10.11.11
-          securityContext:
-            supplementalGroups: [993]
   service:
     main:
       controller: main
