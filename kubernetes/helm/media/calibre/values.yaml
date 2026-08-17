@@ -1,0 +1,40 @@
+app-template:
+    controllers:
+        main:
+            containers:
+                main:
+                    image:
+                        repository: lscr.io/linuxserver/calibre-web
+                        tag: 0.6.27-ls397
+    service:
+        main:
+            controller: main
+            ports:
+                http:
+                    port: 80
+                    targetPort: 8083
+    route:
+        main:
+            enabled: true
+            kind: HTTPRoute
+            hostnames:
+                - calibre.sunnyvale.be
+            parentRefs:
+                - name: envoy-gateway
+                  namespace: default
+                  sectionName: https
+    persistence:
+        config:
+            enabled: true
+            type: persistentVolumeClaim
+            accessMode: ReadWriteOnce
+            size: 1Gi
+            storageClass: local-path-ssd
+            globalMounts:
+                - path: /config
+        media:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: "media"
+            globalMounts:
+                - path: /books
