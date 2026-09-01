@@ -1,0 +1,89 @@
+immich:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            tag: v3.0.0
+          env:
+            REDIS_HOSTNAME: '{{ printf "%s-valkey" .Release.Name }}'
+            IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
+            DB_HOSTNAME: immich-postgresql-rw
+            DB_USERNAME: immich
+            DB_DATABASE_NAME: immich
+            DB_PASSWORD: immich
+
+  immich:
+    metrics:
+      enabled: false
+    persistence:
+      library:
+        existingClaim: media
+    # configuration is immich-config.json converted to yaml. Ignored if existingConfiguration is set.
+    # ref: https://immich.app/docs/install/config-file/
+    #
+    configuration: {}
+      # trash:
+      #   enabled: false
+      #   days: 30
+      # storageTemplate:
+      #   enabled: true
+      #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+    # Sets the resource Kind to store configuration in. Must be either ConfigMap or Secret.
+    configurationKind: ConfigMap
+
+    # Specify existing configuration resource name here to skip creation of a new one
+    # existingConfiguration:
+
+  # Dependencies
+
+  valkey:
+    enabled: false
+
+  # Immich components
+
+  server:
+    enabled: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              pullPolicy: IfNotPresent
+    ingress:
+      main:
+        enabled: false
+        annotations:
+          # proxy-body-size is set to 0 to remove the body limit on file uploads
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        hosts:
+          - host: immich.local
+            paths:
+              - path: "/"
+                service:
+                  identifier: main
+        tls: []
+
+  machine-learning:
+    enabled: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              pullPolicy: IfNotPresent
+            env:
+              TRANSFORMERS_CACHE: /cache
+              HF_XET_CACHE: /cache/huggingface-xet
+              MPLCONFIGDIR: /cache/matplotlib-config
+    persistence:
+      cache:
+        enabled: true
+        type: emptyDir
+        # Optional: to avoid downloading the ML models on every start, replace `type: emptyDir` above with:
+        #   type: persistentVolumeClaim
+        #   size: 10Gi
+        #   accessMode: ReadWriteMany
+        #   # storageClass: your-class
