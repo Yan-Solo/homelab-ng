@@ -41,7 +41,18 @@ immich:
     enabled: false
 
   # Immich components
-
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - immich.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   server:
     enabled: true
     controllers:
@@ -51,19 +62,6 @@ immich:
             image:
               repository: ghcr.io/immich-app/immich-server
               pullPolicy: IfNotPresent
-    ingress:
-      main:
-        enabled: false
-        annotations:
-          # proxy-body-size is set to 0 to remove the body limit on file uploads
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
-        hosts:
-          - host: immich.local
-            paths:
-              - path: "/"
-                service:
-                  identifier: main
-        tls: []
 
   machine-learning:
     enabled: true
