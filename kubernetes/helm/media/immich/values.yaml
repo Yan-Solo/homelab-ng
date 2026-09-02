@@ -44,20 +44,20 @@ immich:
         storageClass: local-path-ssd
 
   # Immich components
-  route:
-    main:
-      enabled: true
-      kind: HTTPRoute
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hostnames:
-        - immich.sunnyvale.be
-      parentRefs:
-        - name: envoy-gateway
-          namespace: default
-          sectionName: https
   server:
     enabled: true
+    route:
+      main:
+        enabled: true
+        kind: HTTPRoute
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hostnames:
+          - immich.sunnyvale.be
+        parentRefs:
+          - name: envoy-gateway
+            namespace: default
+            sectionName: https
     controllers:
       main:
         containers:
