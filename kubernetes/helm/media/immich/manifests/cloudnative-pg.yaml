@@ -1,0 +1,63 @@
+---
+# CloudNativePG PostgreSQL cluster for Immich.
+#
+# Immich v3.x requires the `vectorchord` (pgvecto.rs) extension, which is not
+# available in stock PostgreSQL images. We use the CNPG image with the vchord
+# extension mounted in, matching the upstream Immich Helm chart recommendation.
+#
+# The cluster is named `immich-postgresql` so that CNPG exposes the read-write
+# service as `immich-postgresql-rw` (the value Immich already expects), and it
+# generates the `immich-postgresql-app` Secret that Immich uses to authenticate.
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich-postgresql
+spec:
+  instances: 1
+
+  bootstrap:
+    initdb:
+      # CNPG creates this database/role and generates the `immich-postgresql-app`
+      # Secret with the corresponding credentials.
+      database: immich
+      owner: immich
+
+  storage:
+    storageClass: local-path-ssd
+    size: 10Gi
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:18-standard-trixie
+
+  postgresql:
+    shared_preload_libraries:
+      - "vchord.so"
+
+    extensions:
+      - name: vchord
+        image:
+          reference: ghcr.io/tensorchord/vchord-scratch:pg18-v1.1.1
+        dynamic_library_path:
+          - /usr/lib/postgresql/18/lib
+        extension_control_path:
+          - /usr/share/postgresql/18/
+
+---
+# Ensures the extensions Immich requires are created in the `immich` database.
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: immich-postgresql
+spec:
+  name: immich
+  owner: immich
+  cluster:
+    name: immich-postgresql
+  extensions:
+    - name: vector
+      ensure: present
+    - name: vchord
+      ensure: present
+    - name: earthdistance
+      ensure: present
+    - name: cube
+      ensure: present

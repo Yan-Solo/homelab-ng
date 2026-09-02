@@ -8,10 +8,26 @@ immich:
           env:
             REDIS_HOSTNAME: '{{ printf "%s-valkey" .Release.Name }}'
             IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
-            DB_HOSTNAME: immich-postgresql-rw
-            DB_USERNAME: immich
-            DB_DATABASE_NAME: immich
-            DB_PASSWORD: immich
+            DB_HOSTNAME:
+              valueFrom:
+                secretKeyRef:
+                  name: immich-postgresql-app
+                  key: host
+            DB_USERNAME:
+              valueFrom:
+                secretKeyRef:
+                  name: immich-postgresql-app
+                  key: user
+            DB_DATABASE_NAME:
+              valueFrom:
+                secretKeyRef:
+                  name: immich-postgresql-app
+                  key: dbname
+            DB_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: immich-postgresql-app
+                  key: password
 
   immich:
     metrics:

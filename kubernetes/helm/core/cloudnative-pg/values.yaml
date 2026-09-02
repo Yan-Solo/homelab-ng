@@ -1,0 +1,15 @@
+cloudnative-pg:
+  # Install the CloudNativePG CRDs (Cluster, Database, Backup, etc.)
+  crds:
+    create: true
+
+  # Run the operator as a critical cluster component
+  priorityClassName: system-cluster-critical
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
