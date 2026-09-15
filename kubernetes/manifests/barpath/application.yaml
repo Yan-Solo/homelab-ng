@@ -1,0 +1,34 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: barpath
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # The chart lives in the barpath repo itself, not vendored here.
+    repoURL: https://github.com/Yan-Solo/barpath.git
+    targetRevision: HEAD
+    path: deploy/helm/platform
+    helm:
+      # releaseName "platform" keeps resource names short (platform-auth,
+      # platform-dashboard, ...) via platform.fullname in _helpers.tpl -
+      # otherwise it'd default to the Application name "barpath" and double
+      # up as barpath-platform-auth etc.
+      releaseName: platform
+      valueFiles:
+        - values.yaml
+        - values-prod.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: barpath
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - ServerSideDiff=true
+    automated:
+      prune: true
+      selfHeal: true
