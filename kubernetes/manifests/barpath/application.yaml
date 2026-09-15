@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     # The chart lives in the barpath repo itself, not vendored here.
-    repoURL: https://github.com/Yan-Solo/barpath.git
+    repoURL: https://github.com/barpath-coach/platform.git
     targetRevision: HEAD
     path: deploy/helm/platform
     helm:
