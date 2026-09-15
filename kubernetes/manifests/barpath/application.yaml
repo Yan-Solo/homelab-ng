@@ -2,7 +2,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: barpath
+  # Not "barpath": the manifest-apps ApplicationSet (kubernetes/manifests/*)
+  # already generates its own wrapper Application named after this directory
+  # ("barpath", from path.basename) to apply the raw manifests found here -
+  # including this file. Naming this Application "barpath" too would collide:
+  # same apiVersion/kind/name/namespace as that wrapper, so the ApplicationSet
+  # controller and this Application's own resource sync would fight over the
+  # same object's spec.source, and whichever won at a given moment determined
+  # whether cloudnative-pg.yaml in this same folder ever actually got applied.
+  name: barpath-platform
   namespace: argocd
 spec:
   project: default
@@ -14,8 +22,8 @@ spec:
     helm:
       # releaseName "platform" keeps resource names short (platform-auth,
       # platform-dashboard, ...) via platform.fullname in _helpers.tpl -
-      # otherwise it'd default to the Application name "barpath" and double
-      # up as barpath-platform-auth etc.
+      # otherwise it'd default to the Application name "barpath-platform" and
+      # double up as barpath-platform-platform-auth etc.
       releaseName: platform
       valueFiles:
         - values.yaml
