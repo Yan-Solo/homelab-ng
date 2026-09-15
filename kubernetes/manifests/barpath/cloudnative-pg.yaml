@@ -1,0 +1,25 @@
+---
+# CloudNativePG PostgreSQL cluster for barpath, same pattern as
+# media/immich/manifests/cloudnative-pg.yaml: named so CNPG exposes the
+# read-write Service as `barpath-postgresql-rw` and generates the
+# `barpath-postgresql-app` Secret with the connection credentials.
+#
+# All six barpath services share this one "auth" database (see the platform
+# chart's values.yaml). kubernetes/manifests/barpath/application.yaml points
+# global.database.existingSecret at the generated Secret directly (key `uri`)
+# - there is no separate hand-created database Secret to manage.
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: barpath-postgresql
+spec:
+  instances: 1
+
+  bootstrap:
+    initdb:
+      database: auth
+      owner: barpath
+
+  storage:
+    storageClass: local-path-ssd
+    size: 2Gi
