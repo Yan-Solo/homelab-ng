@@ -1,0 +1,48 @@
+app-template:
+  defaultPodOptions:
+    securityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "Always"
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repostiroy: ciuse99/suggestarr
+            tag: v.2.16.1
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 5000
+          targetPort: 5000
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - suggestarr.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
+    fsGroupChangePolicy: "Always"
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /app/config/config_files
+      forceRename: suggestarr-config
