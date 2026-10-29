@@ -44,7 +44,7 @@ app-template:
           targetPort: 8555
           protocol: UDP
       type: LoadBalancer
-      loadBalancerIP: 192.168.0.64
+      loadBalancerIP: 192.168.0.65
   route:
     main:
       enabled: true
