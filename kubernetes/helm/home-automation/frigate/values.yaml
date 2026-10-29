@@ -1,0 +1,106 @@
+app-template:
+  defaultPodOptions:
+    securityContext:
+      supplementalGroups: [993]
+  controllers:
+    main:
+      initContainers:
+        # Seed the config once; afterwards Frigate owns /config/config.yml so UI edits persist
+        seed-config:
+          image:
+            repository: ghcr.io/blakeblackshear/frigate
+            tag: 0.18.2
+          command:
+            - /bin/sh
+            - -c
+            - test -f /config/config.yml || cp /seed/config.yml /config/config.yml
+      containers:
+        main:
+          image:
+            repository: ghcr.io/blakeblackshear/frigate
+            tag: 0.18.2
+          env:
+            TZ: Europe/Brussels
+          securityContext:
+            privileged: true
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 80
+          targetPort: 8971
+        internal:
+          port: 5000
+          targetPort: 5000
+        rtsp:
+          port: 8554
+          targetPort: 8554
+        webrtc-tcp:
+          port: 8555
+          targetPort: 8555
+        webrtc-udp:
+          port: 8555
+          targetPort: 8555
+          protocol: UDP
+      type: LoadBalancer
+      loadBalancerIP: 192.168.0.64
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - frigate.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /config
+      forceRename: frigate-config
+    media:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 500Gi
+      storageClass: local-path-hdd
+      globalMounts:
+        - path: /media/frigate
+      forceRename: frigate-media
+    seed-config:
+      enabled: true
+      type: configMap
+      name: frigate-config
+      advancedMounts:
+        main:
+          seed-config:
+            - path: /seed
+    cache:
+      enabled: true
+      type: emptyDir
+      medium: Memory
+      sizeLimit: 1Gi
+      globalMounts:
+        - path: /tmp/cache
+    shm:
+      enabled: true
+      type: emptyDir
+      medium: Memory
+      sizeLimit: 512Mi
+      globalMounts:
+        - path: /dev/shm
+    dri:
+      enabled: true
+      type: hostPath
+      hostPath: /dev/dri
+      globalMounts:
+        - path: /dev/dri
