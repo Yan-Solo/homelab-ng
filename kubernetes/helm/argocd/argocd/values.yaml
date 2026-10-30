@@ -10,13 +10,38 @@ argo-cd:
       minAvailable: 1
     extraArgs:
       - "--insecure"
+    httproute:
+      enabled: true
+      annotations:
+        # Only expose the route once the server has restarted with auth enabled
+        argocd.argoproj.io/sync-wave: "1"
+      hostnames:
+        - argocd.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
   configs:
     params:
       applicationsetcontroller.policy: "create-only"
-      server.disable.auth: true
+      server.disable.auth: false
+      server.insecure: true
+    rbac:
+      policy.csv: |
+        g, argocd-admins, role:admin
     cm:
       admin.enabled: "false"
-      url: http://argocd-argocd-server
+      url: https://argocd.sunnyvale.be
+      oidc.config: |
+        name: Pocket ID
+        issuer: https://id.sunnyvale.be
+        clientID: argocd
+        clientSecret: $argocd-oidc:clientSecret
+        requestedScopes:
+          - openid
+          - profile
+          - email
+          - groups
       exec.enabled: "true"
       resource.compareoptions: |
         ignoreAggregatedRoles: true

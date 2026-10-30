@@ -41,4 +41,10 @@ A couple of services I run require some secrets to be set, I do this manually, a
 ```
 kubectl create secret generic pocket-id -n apps --from-literal=ENCRYPTION_KEY="$(openssl rand -base64 32)"
 ```
+* argocd: requires a secret holding the client secret of the `argocd` OIDC client in Pocket ID. Argo CD only reads it with the label set
+```
+read -rs CLIENT_SECRET
+kubectl create secret generic argocd-oidc -n argocd --from-literal=clientSecret="$CLIENT_SECRET"
+kubectl label secret argocd-oidc -n argocd app.kubernetes.io/part-of=argocd
+```
 * lolbot: this requires a configmap that holds an API key. Again, I know that the configmap shouldn't hold the secret and that it should be in a secret mounted sepratly, but I am fine with not having the rest of the configmap in git
