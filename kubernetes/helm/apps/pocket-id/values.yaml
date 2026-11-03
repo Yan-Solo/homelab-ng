@@ -12,7 +12,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/pocket-id/pocket-id
-            tag: v2.19.1
+            tag: v2.19.2
           env:
             TZ: Europe/Brussels
 
