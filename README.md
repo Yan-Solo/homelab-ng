@@ -52,4 +52,9 @@ kubectl label secret argocd-oidc -n argocd app.kubernetes.io/part-of=argocd
 read -rs CLIENT_SECRET
 kubectl create secret generic sonarr-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
 ```
+* radarr: same as sonarr, with a `radarr` OIDC client (callback URL `https://radarr.sunnyvale.be/oauth2/callback`)
+```
+read -rs CLIENT_SECRET
+kubectl create secret generic radarr-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
+```
 * lolbot: this requires a configmap that holds an API key. Again, I know that the configmap shouldn't hold the secret and that it should be in a secret mounted sepratly, but I am fine with not having the rest of the configmap in git

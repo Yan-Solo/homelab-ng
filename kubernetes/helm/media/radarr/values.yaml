@@ -12,6 +12,9 @@ app-template:
           image:
             repository: lscr.io/linuxserver/radarr
             tag: 6.1.1.10360-ls297
+          env:
+            # Pocket ID in front of the route handles authentication
+            RADARR__AUTH__METHOD: External
   service:
     main:
       controller: main
