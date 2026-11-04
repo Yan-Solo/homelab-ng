@@ -67,4 +67,9 @@ kubectl create secret generic prowlarr-oidc -n media --from-literal=client-secre
 read -rs CLIENT_SECRET
 kubectl create secret generic bazarr-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
 ```
+* sabnzbd: same as sonarr, with a `sabnzbd` OIDC client (callback URL `https://sabnzbd.sunnyvale.be/oauth2/callback`). SABnzbd's own web login is left empty in its settings
+```
+read -rs CLIENT_SECRET
+kubectl create secret generic sabnzbd-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
+```
 * lolbot: this requires a configmap that holds an API key. Again, I know that the configmap shouldn't hold the secret and that it should be in a secret mounted sepratly, but I am fine with not having the rest of the configmap in git

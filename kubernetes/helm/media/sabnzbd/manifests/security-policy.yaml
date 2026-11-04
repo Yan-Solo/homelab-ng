@@ -1,0 +1,21 @@
+---
+# Pocket ID handles authentication, SABnzbd's own auth is disabled
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: sabnzbd-oidc
+  namespace: media
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sabnzbd
+  oidc:
+    provider:
+      issuer: https://id.sunnyvale.be
+    clientID: sabnzbd
+    # Created manually, see the README
+    clientSecret:
+      name: sabnzbd-oidc
+    redirectURL: https://sabnzbd.sunnyvale.be/oauth2/callback
+    logoutPath: /oauth2/logout
