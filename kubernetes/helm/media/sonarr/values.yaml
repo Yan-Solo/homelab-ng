@@ -12,6 +12,9 @@ app-template:
           image:
             repository: lscr.io/linuxserver/sonarr
             tag: 4.0.17.2952-ls305
+          env:
+            # Pocket ID in front of the route handles authentication
+            SONARR__AUTH__METHOD: External
   service:
     main:
       controller: main

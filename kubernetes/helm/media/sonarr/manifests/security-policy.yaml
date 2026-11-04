@@ -1,0 +1,21 @@
+---
+# Pocket ID handles authentication, Sonarr's own auth is disabled
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: sonarr-oidc
+  namespace: media
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sonarr
+  oidc:
+    provider:
+      issuer: https://id.sunnyvale.be
+    clientID: sonarr
+    # Created manually, see the README
+    clientSecret:
+      name: sonarr-oidc
+    redirectURL: https://sonarr.sunnyvale.be/oauth2/callback
+    logoutPath: /oauth2/logout
