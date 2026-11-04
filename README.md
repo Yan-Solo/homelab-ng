@@ -72,4 +72,9 @@ kubectl create secret generic bazarr-oidc -n media --from-literal=client-secret=
 read -rs CLIENT_SECRET
 kubectl create secret generic sabnzbd-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
 ```
+* qbittorrent: same as sonarr, with a `qbittorrent` OIDC client (callback URL `https://qbit.sunnyvale.be/oauth2/callback`). qBittorrent's own login is bypassed for the pod network `10.1.0.0/16` in its Web UI settings
+```
+read -rs CLIENT_SECRET
+kubectl create secret generic qbittorrent-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
+```
 * lolbot: this requires a configmap that holds an API key. Again, I know that the configmap shouldn't hold the secret and that it should be in a secret mounted sepratly, but I am fine with not having the rest of the configmap in git
