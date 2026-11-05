@@ -1,0 +1,21 @@
+---
+# Pocket ID guards the dashboard, OmniRoute's own password login stays on
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: omniroute-oidc
+  namespace: ai
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: omniroute
+  oidc:
+    provider:
+      issuer: https://id.sunnyvale.be
+    clientID: omniroute
+    # Created manually, see the README
+    clientSecret:
+      name: omniroute-oidc
+    redirectURL: https://omniroute.sunnyvale.be/oauth2/callback
+    logoutPath: /oauth2/logout

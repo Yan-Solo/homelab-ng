@@ -1,0 +1,95 @@
+app-template:
+  defaultPodOptions:
+    enableServiceLinks: false
+    securityContext:
+      # Image runs as the node user
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
+
+  controllers:
+    main:
+      # SQLite state, never run more than one replica
+      replicas: 1
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            repository: diegosouzapw/omniroute
+            tag: 3.8.52
+          env:
+            TZ: Europe/Brussels
+            DATA_DIR: /app/data
+
+            # Every /v1 call needs a gateway key
+            REQUIRE_API_KEY: "true"
+
+            # Dashboard is served over HTTPS behind Pocket ID
+            AUTH_COOKIE_SECURE: "true"
+            NEXT_PUBLIC_BASE_URL: https://omniroute.sunnyvale.be
+
+          # Created manually, see the README. Changing these values breaks the
+          # stored provider keys, issued gateway keys and sessions
+          envFrom:
+            - secretRef:
+                name: omniroute
+
+          probes:
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /healthz
+                  port: 20128
+                initialDelaySeconds: 15
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+            liveness:
+              enabled: true
+              custom: true
+              spec:
+                httpGet:
+                  path: /livez
+                  port: 20128
+                initialDelaySeconds: 15
+                periodSeconds: 10
+                timeoutSeconds: 5
+                failureThreshold: 5
+
+  # In-cluster clients such as barpath call http://omniroute.ai.svc:20128/v1
+  # directly with their own gateway key, without Pocket ID
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 20128
+          targetPort: 20128
+
+  # Dashboard only, Pocket ID in front of it blocks /v1 from outside the cluster
+  route:
+    main:
+      enabled: true
+      kind: HTTPRoute
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostnames:
+        - omniroute.sunnyvale.be
+      parentRefs:
+        - name: envoy-gateway
+          namespace: default
+          sectionName: https
+
+  persistence:
+    # SQLite database with providers, combos and gateway keys
+    data:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 2Gi
+      storageClass: local-path-ssd
+      globalMounts:
+        - path: /app/data

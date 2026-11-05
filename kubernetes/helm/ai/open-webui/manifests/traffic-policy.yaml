@@ -1,0 +1,17 @@
+---
+# Chat responses stream for minutes and websockets stay open, so lift Envoy's
+# default 15s request timeout for this route
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: open-webui
+  namespace: ai
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: open-webui
+  timeout:
+    http:
+      requestTimeout: 0s
+      streamIdleTimeout: 10m

@@ -77,4 +77,28 @@ kubectl create secret generic sabnzbd-oidc -n media --from-literal=client-secret
 read -rs CLIENT_SECRET
 kubectl create secret generic qbittorrent-oidc -n media --from-literal=client-secret="$CLIENT_SECRET"
 ```
+* omniroute: requires a secret with its encryption keys and the dashboard password. Keep a copy of all values, changing them later makes the stored provider keys, the issued gateway keys and the sessions unusable. In-cluster apps such as barpath call `http://omniroute.ai.svc:20128/v1` with their own gateway key
+```
+read -rs DASHBOARD_PASSWORD
+kubectl create secret generic omniroute -n ai \
+  --from-literal=STORAGE_ENCRYPTION_KEY="$(openssl rand -hex 32)" \
+  --from-literal=API_KEY_SECRET="$(openssl rand -hex 32)" \
+  --from-literal=JWT_SECRET="$(openssl rand -base64 48)" \
+  --from-literal=INITIAL_PASSWORD="$DASHBOARD_PASSWORD"
+```
+
+  The dashboard additionally requires a secret holding the client secret of the `omniroute` OIDC client in Pocket ID (callback URL `https://omniroute.sunnyvale.be/oauth2/callback`). Envoy Gateway uses it to authenticate requests before they reach OmniRoute, which also keeps `/v1` closed from outside the cluster. Limit the client to an admin group in Pocket ID
+```
+read -rs CLIENT_SECRET
+kubectl create secret generic omniroute-oidc -n ai --from-literal=client-secret="$CLIENT_SECRET"
+```
+* open-webui: requires a secret holding the client secret of the `open-webui` OIDC client in Pocket ID (callback URL `https://chat.sunnyvale.be/oauth/oidc/callback`), the OmniRoute gateway key issued for Open WebUI, and a session key. Limit the client to a group in Pocket ID, everyone in that group can use the chatbot. Sign in yourself first, the first account becomes the admin
+```
+read -rs CLIENT_SECRET
+read -rs GATEWAY_KEY
+kubectl create secret generic open-webui -n ai \
+  --from-literal=OAUTH_CLIENT_SECRET="$CLIENT_SECRET" \
+  --from-literal=OPENAI_API_KEY="$GATEWAY_KEY" \
+  --from-literal=WEBUI_SECRET_KEY="$(openssl rand -hex 32)"
+```
 * lolbot: this requires a configmap that holds an API key. Again, I know that the configmap shouldn't hold the secret and that it should be in a secret mounted sepratly, but I am fine with not having the rest of the configmap in git
