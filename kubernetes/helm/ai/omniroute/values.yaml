@@ -17,7 +17,7 @@ app-template:
         main:
           image:
             repository: diegosouzapw/omniroute
-            tag: 3.8.52
+            tag: 3.8.53
           env:
             TZ: Europe/Brussels
             DATA_DIR: /app/data
